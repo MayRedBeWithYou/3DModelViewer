@@ -6,6 +6,37 @@ using System.Threading.Tasks;
 
 namespace _3DModelViewer
 {
+    public class PointD
+    {
+        public double X;
+        public double Y;
+        public double Z;
+
+        public Vector Normal = new Vector();
+        public Vector Binormal = new Vector();
+        public Vector Tangent = new Vector();
+
+        public Vector V => new Vector(X, Y, Z, 1);
+
+        public PointD(double x = 0, double y = 0, double z = 0)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+
+        public PointD(Point A)
+        {
+            X = A.X;
+            Y = A.Y;
+            Z = A.Z;
+            Normal = new Vector(A.Normal);
+            Binormal = new Vector(A.Binormal);
+            Tangent = new Vector(A.Tangent);
+        }
+    }
+
+
     public class Point
     {
         public int X;
@@ -23,6 +54,16 @@ namespace _3DModelViewer
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public Point(Point A)
+        {
+            X = A.X;
+            Y = A.Y;
+            Z = A.Z;
+            Normal = new Vector(A.Normal);
+            Binormal = new Vector(A.Binormal);
+            Tangent = new Vector(A.Tangent);
         }
     }
 

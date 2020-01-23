@@ -12,9 +12,14 @@ namespace _3DModelViewer
 {
     public partial class Form1 : Form
     {
+        Bitmap bitmap;
+
         public Form1()
         {
             InitializeComponent();
+            bitmap = new Bitmap(Canvas.Width, Canvas.Height);
+            Render.Clear(bitmap);
+            Canvas.Image = bitmap;
         }
     }
 }
