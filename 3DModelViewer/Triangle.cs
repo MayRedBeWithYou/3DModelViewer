@@ -25,7 +25,7 @@ namespace _3DModelViewer
             Z = z;
         }
 
-        public PointD(Point A)
+        public PointD(Point3 A)
         {
             X = A.X;
             Y = A.Y;
@@ -37,7 +37,7 @@ namespace _3DModelViewer
     }
 
 
-    public class Point
+    public class Point3
     {
         public int X;
         public int Y;
@@ -49,14 +49,19 @@ namespace _3DModelViewer
 
         public Vector V => new Vector(X, Y, Z, 1);
 
-        public Point(int x = 0, int y = 0, int z = 0)
+        public Point3(int x = 0, int y = 0, int z = 0)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public Point(Point A)
+        public static implicit operator System.Drawing.Point(Point3 p)
+        {
+            return new System.Drawing.Point(p.X, p.Y);
+        }
+
+        public Point3(Point3 A)
         {
             X = A.X;
             Y = A.Y;
@@ -69,16 +74,18 @@ namespace _3DModelViewer
 
     public class Triangle
     {
-        private Point[] points = new Point[3];
+        private Point3[] points = new Point3[3];
 
-        public Triangle(Point p1, Point p2, Point p3)
+        public Point3[] Points => points;
+
+        public Triangle(Point3 p1, Point3 p2, Point3 p3)
         {
             points[0] = p1;
             points[1] = p2;
             points[2] = p3;
         }
 
-        public Point this[int i]
+        public Point3 this[int i]
         {
             get => points[i];
             set

@@ -18,6 +18,11 @@ namespace _3DModelViewer
             }
         }
 
+        public double X => fields[0]; 
+        public double Y => fields[1];
+        public double Z => fields[2]; 
+        public double W => fields[3];
+
         public Vector(Vector m)
         {
             fields = m.fields;
@@ -31,6 +36,23 @@ namespace _3DModelViewer
             fields[3] = w;
         }
 
+        public static Vector operator -(Vector v, Vector u)
+        {
+            Vector r = new Vector(v);
+            for (int i = 0; i < 4; i++) r[i] -= u[i];
+            return r;
+        }
+        public static Vector operator +(Vector v, Vector u)
+        {
+            Vector r = new Vector(v);
+            for (int i = 0; i < 4; i++) r[i] += u[i];
+            return r;
+        }
+
+        public static Vector Cross(Vector v, Vector u)
+        {
+            return new Vector(u.Y * v.Z - u.Z * v.Y, u.Z * v.X - u.X * v.Z, u.X * v.Y - u.Y * v.X);
+        }
     }
 
 
@@ -73,7 +95,16 @@ namespace _3DModelViewer
             return N;
         }
 
-        public static Matrix RotateX(int deg)
+        public static Matrix Translate(Vector v)
+        {
+            Matrix N = new Matrix(1, 1, 1, 1);
+            N[0, 3] = v.X;
+            N[1, 3] = v.Y;
+            N[2, 3] = v.Z;
+            return N;
+        }
+
+        public static Matrix RotateX(double deg)
         {
             Matrix N = new Matrix(1, Math.Cos(deg), Math.Cos(deg), 1);
             N[1, 2] = -Math.Sin(deg);
@@ -81,7 +112,7 @@ namespace _3DModelViewer
             return N;
         }
 
-        public static Matrix RotateY(int deg)
+        public static Matrix RotateY(double deg)
         {
             Matrix N = new Matrix(Math.Cos(deg), 1, Math.Cos(deg), 1);
             N[0, 2] = -Math.Sin(deg);
@@ -89,7 +120,7 @@ namespace _3DModelViewer
             return N;
         }
 
-        public static Matrix RotateZ(int deg)
+        public static Matrix RotateZ(double deg)
         {
             Matrix N = new Matrix(Math.Cos(deg), Math.Cos(deg), 1, 1);
             N[0, 1] = -Math.Sin(deg);
@@ -144,12 +175,12 @@ namespace _3DModelViewer
             return result;
         }
 
-        public static Vector operator *(Vector v, Matrix N)
+        public static Vector operator *(Matrix N, Vector v)
         {
             Vector result = new Vector();
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
-                        result[i] = result[i] + v[j] * N[i, j];
+                    result[i] = result[i] + v[j] * N[i, j];
             return result;
         }
     }
