@@ -1,64 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _3DModelViewer
 {
-    public class PointD
-    {
-        public double X;
-        public double Y;
-        public double Z;
-
-        public Vector Normal = new Vector();
-        public Vector Binormal = new Vector();
-        public Vector Tangent = new Vector();
-
-        public Vector V => new Vector(X, Y, Z, 1);
-
-        public PointD(double x = 0, double y = 0, double z = 0)
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
-
-        public PointD(Point3 A)
-        {
-            X = A.X;
-            Y = A.Y;
-            Z = A.Z;
-            Normal = new Vector(A.Normal);
-            Binormal = new Vector(A.Binormal);
-            Tangent = new Vector(A.Tangent);
-        }
-    }
-
-
     public class Point3
     {
-        public int X;
-        public int Y;
-        public int Z;
+        public float X;
+        public float Y;
+        public float Z;
 
-        public Vector Normal = new Vector();
-        public Vector Binormal = new Vector();
-        public Vector Tangent = new Vector();
+        public Vector4 Normal = new Vector4();
+        public Vector4 Binormal = new Vector4();
+        public Vector4 Tangent = new Vector4();
 
-        public Vector V => new Vector(X, Y, Z, 1);
+        public Vector4 V => new Vector4(X, Y, Z, 1);
 
-        public Point3(int x = 0, int y = 0, int z = 0)
+        public Point3(float x = 0, float y = 0, float z = 0)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public static implicit operator System.Drawing.Point(Point3 p)
+        public static implicit operator Point(Point3 p)
         {
-            return new System.Drawing.Point(p.X, p.Y);
+            return new Point((int)p.X, (int)p.Y);
         }
 
         public Point3(Point3 A)
@@ -66,9 +37,9 @@ namespace _3DModelViewer
             X = A.X;
             Y = A.Y;
             Z = A.Z;
-            Normal = new Vector(A.Normal);
-            Binormal = new Vector(A.Binormal);
-            Tangent = new Vector(A.Tangent);
+            Normal = new Vector4(A.Normal.X, A.Normal.Y, A.Normal.Z, A.Normal.W);
+            Binormal = new Vector4(A.Binormal.X, A.Binormal.Y, A.Binormal.Z, A.Binormal.W);
+            Tangent = new Vector4(A.Tangent.X, A.Tangent.Y, A.Tangent.Z, A.Tangent.W);
         }
     }
 

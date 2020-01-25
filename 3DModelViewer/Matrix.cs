@@ -1,65 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _3DModelViewer
 {
-    public class Vector
+    public static class Vector
     {
-        private double[] fields = new double[4];
-        public double this[int i]
+        public static Vector4 Cross(Vector4 vector1, Vector4 vector2)
         {
-            get => fields[i];
-            set
-            {
-                fields[i] = value;
-            }
-        }
-
-        public double X => fields[0]; 
-        public double Y => fields[1];
-        public double Z => fields[2]; 
-        public double W => fields[3];
-
-        public Vector(Vector m)
-        {
-            fields = m.fields;
-        }
-
-        public Vector(double x = 0, double y = 0, double z = 0, double w = 0)
-        {
-            fields[0] = x;
-            fields[1] = y;
-            fields[2] = z;
-            fields[3] = w;
-        }
-
-        public static Vector operator -(Vector v, Vector u)
-        {
-            Vector r = new Vector(v);
-            for (int i = 0; i < 4; i++) r[i] -= u[i];
-            return r;
-        }
-        public static Vector operator +(Vector v, Vector u)
-        {
-            Vector r = new Vector(v);
-            for (int i = 0; i < 4; i++) r[i] += u[i];
-            return r;
-        }
-
-        public static Vector Cross(Vector v, Vector u)
-        {
-            return new Vector(u.Y * v.Z - u.Z * v.Y, u.Z * v.X - u.X * v.Z, u.X * v.Y - u.Y * v.X);
+            return new Vector4(
+                vector1.Y * vector2.Z - vector1.Z * vector2.Y,
+                vector1.Z * vector2.X - vector1.X * vector2.Z,
+                vector1.X * vector2.Y - vector1.Y * vector2.X,
+                vector1.W * vector2.W);
         }
     }
 
-
     public class Matrix
     {
-        private double[,] fields = new double[4, 4];
-        public double this[int x, int y]
+        private float[,] fields = new float[4, 4];
+        public float this[int x, int y]
         {
             get => fields[x, y];
             set
@@ -73,7 +36,7 @@ namespace _3DModelViewer
             fields = m.fields;
         }
 
-        public Matrix(double x = 0, double y = 0, double z = 0, double w = 0)
+        public Matrix(float x = 0, float y = 0, float z = 0, float w = 0)
         {
             fields[0, 0] = x;
             fields[1, 1] = y;
@@ -81,12 +44,12 @@ namespace _3DModelViewer
             fields[3, 3] = w;
         }
 
-        public static Matrix Scale(double x, double y, double z)
+        public static Matrix Scale(float x, float y, float z)
         {
             return new Matrix(x, y, z, 1);
         }
 
-        public static Matrix Translate(double x, double y, double z)
+        public static Matrix Translate(float x, float y, float z)
         {
             Matrix N = new Matrix(1, 1, 1, 1);
             N[0, 3] = x;
@@ -95,7 +58,7 @@ namespace _3DModelViewer
             return N;
         }
 
-        public static Matrix Translate(Vector v)
+        public static Matrix Translate(Vector4 v)
         {
             Matrix N = new Matrix(1, 1, 1, 1);
             N[0, 3] = v.X;
@@ -106,31 +69,37 @@ namespace _3DModelViewer
 
         public static Matrix RotateX(double deg)
         {
-            Matrix N = new Matrix(1, Math.Cos(deg), Math.Cos(deg), 1);
-            N[1, 2] = -Math.Sin(deg);
-            N[2, 1] = Math.Sin(deg);
+            float cos = (float)Math.Cos(deg);
+            float sin = (float)Math.Sin(deg);
+            Matrix N = new Matrix(1, cos, cos, 1);
+            N[1, 2] = -sin;
+            N[2, 1] = sin;
             return N;
         }
 
         public static Matrix RotateY(double deg)
         {
-            Matrix N = new Matrix(Math.Cos(deg), 1, Math.Cos(deg), 1);
-            N[0, 2] = -Math.Sin(deg);
-            N[2, 0] = Math.Sin(deg);
+            float cos = (float)Math.Cos(deg);
+            float sin = (float)Math.Sin(deg);
+            Matrix N = new Matrix(cos, 1, cos, 1);
+            N[0, 2] = -sin;
+            N[2, 0] = sin;
             return N;
         }
 
         public static Matrix RotateZ(double deg)
         {
-            Matrix N = new Matrix(Math.Cos(deg), Math.Cos(deg), 1, 1);
-            N[0, 1] = -Math.Sin(deg);
-            N[1, 0] = Math.Sin(deg);
+            float cos = (float)Math.Cos(deg);
+            float sin = (float)Math.Sin(deg);
+            Matrix N = new Matrix(cos, cos, 1, 1);
+            N[0, 1] = -sin;
+            N[1, 0] = sin;
             return N;
         }
 
-        public static Matrix Proj(double fov, double n, double f, double aspect)
+        public static Matrix Proj(float fov, float n, float f, float aspect)
         {
-            double ctg = 1d / Math.Tan(fov / 2d);
+            float ctg = (float)(1 / Math.Tan(fov / 2d));
             Matrix N = new Matrix(ctg / aspect, ctg, (f + n) / (f - n), 0);
             N[3, 2] = 1;
             N[2, 3] = (-2 * f * n) / (f - n);
@@ -166,7 +135,7 @@ namespace _3DModelViewer
             return result;
         }
 
-        public static Matrix operator *(double k, Matrix N)
+        public static Matrix operator *(float k, Matrix N)
         {
             Matrix result = new Matrix();
             for (int i = 0; i < 4; i++)
@@ -175,13 +144,14 @@ namespace _3DModelViewer
             return result;
         }
 
-        public static Vector operator *(Matrix N, Vector v)
+        public static Vector4 operator *(Matrix M, Vector4 V)
         {
-            Vector result = new Vector();
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
-                    result[i] = result[i] + v[j] * N[i, j];
-            return result;
+            Vector4 R = new Vector4();
+            R.X = (float)(M[0, 0] * V.X + M[0, 1] * V.Y + M[0, 2] * V.Z + M[0, 3] * V.W);
+            R.Y = (float)(M[1, 0] * V.X + M[1, 1] * V.Y + M[1, 2] * V.Z + M[1, 3] * V.W);
+            R.Z = (float)(M[2, 0] * V.X + M[2, 1] * V.Y + M[2, 2] * V.Z + M[2, 3] * V.W);
+            R.W = (float)(M[3, 0] * V.X + M[3, 1] * V.Y + M[3, 2] * V.Z + M[3, 3] * V.W);
+            return R;
         }
     }
 }
