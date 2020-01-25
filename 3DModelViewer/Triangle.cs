@@ -18,7 +18,20 @@ namespace _3DModelViewer
         public Vector4 Binormal = new Vector4();
         public Vector4 Tangent = new Vector4();
 
-        public Vector4 V => new Vector4(X, Y, Z, 1);
+        public Vector4 V
+        {
+            get
+            {
+                return new Vector4(X, Y, Z, 1);
+            }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+                Z = value.Z;
+            }
+        }
+        
 
         public Point3(float x = 0, float y = 0, float z = 0)
         {

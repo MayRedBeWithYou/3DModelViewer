@@ -12,9 +12,41 @@ namespace _3DModelViewer
 {
     public class Camera
     {
-        public Point3 Position = new Point3();
+        public Point3 Position = new Point3(2,2,2);
+
+        public string PositionString => $"({Position.X.ToString("f2")}, {Position.Y.ToString("f2")}, {Position.Z.ToString("f2")})";
 
         public Point3 Target = new Point3();
+
+        public int FOV = 60;
+
+        public Vector4 Normal
+        {
+            get
+            {
+                return Vector4.Normalize(Target.V - Position.V);
+            }
+        }
+
+        public Vector4 Tangent
+        {
+            get
+            {
+                Vector4 tangent;
+
+                return Vector4.Normalize(Vector.Cross(Normal, Vector4.UnitY));                
+            }
+        }
+
+        public Vector4 Binormal
+        {
+            get
+            {
+                return Vector4.Normalize(Vector.Cross(Normal, Tangent));
+            }
+        }
+
+        public Camera() { }
 
         public Camera(Point3 pos)
         {
@@ -25,7 +57,6 @@ namespace _3DModelViewer
             Position = pos;
             Target = target;
         }
-
     }
 
     public static class Render
@@ -34,7 +65,7 @@ namespace _3DModelViewer
         {
             using (FastBitmap fast = bitmap.FastLock())
             {
-                fast.Clear(Color.Black);
+                fast.Clear(Color.FromArgb(25,25,50));
             }
         }
 
