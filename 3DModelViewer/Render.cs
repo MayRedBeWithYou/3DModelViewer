@@ -12,9 +12,9 @@ namespace _3DModelViewer
 {
     public class Camera
     {
-        public Point3 Position = new Point3(2,2,2);
+        public Point3 Position = new Point3(3,3,3);
 
-        public string PositionString => $"({Position.X.ToString("f2")}, {Position.Y.ToString("f2")}, {Position.Z.ToString("f2")})";
+        public string DisplayName => $"Camera (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
 
         public Point3 Target = new Point3();
 
@@ -32,8 +32,6 @@ namespace _3DModelViewer
         {
             get
             {
-                Vector4 tangent;
-
                 return Vector4.Normalize(Vector.Cross(Normal, Vector4.UnitY));                
             }
         }
@@ -79,20 +77,23 @@ namespace _3DModelViewer
             }
         }
 
-        public static void Fill(Bitmap bitmap, Point[] poly, Color c)
+        public static void Fill(Bitmap bitmap, Point[] poly, Color c, bool outline = false)
         {
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.FillPolygon(new SolidBrush(c), poly);
+                if (outline) g.DrawPolygon(new Pen(Color.Black), poly);
             }
         }
 
         public static void FillTriangle(Bitmap bitmap, Triangle t, Color color)
         {
-            List<Point3> points = new List<Point3>();
-            points.Add(t[0]);
-            points.Add(t[1]);
-            points.Add(t[2]);
+            List<Point3> points = new List<Point3>
+            {
+                t[0],
+                t[1],
+                t[2]
+            };
             points.Sort((a, b) => b.Y.CompareTo(a.Y));
             Point3 A = points[0];
             Point3 B = points[1];

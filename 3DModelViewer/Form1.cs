@@ -15,18 +15,20 @@ namespace _3DModelViewer
     {
         public Camera SelectedCamera { get; set; }
 
-        public BindingList<Camera> Cameras = new BindingList<Camera>();
+        public readonly BindingList<Camera> Cameras = new BindingList<Camera>();
 
         Bitmap bitmap;
 
         Point LastMousePos = Point.Empty;
 
-        List<Triangle> Triangles = new List<Triangle>();
+        readonly List<Triangle> Triangles = new List<Triangle>();
+
+        public readonly BindingList<Cuboid> Cuboids = new BindingList<Cuboid>();
 
         Point3 OC { get; } = new Point3();
-        Point3 OX { get; } = new Point3(1, 0, 0);
-        Point3 OY { get; } = new Point3(0, 1, 0);
-        Point3 OZ { get; } = new Point3(0, 0, 1);
+        Point3 OX { get; } = new Point3(5, 0, 0);
+        Point3 OY { get; } = new Point3(0, 5, 0);
+        Point3 OZ { get; } = new Point3(0, 0, 5);
 
         public Form1()
         {
@@ -34,22 +36,18 @@ namespace _3DModelViewer
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Render.Clear(bitmap);
             Canvas.Image = bitmap;
-            Point3 p1 = new Point3(0, 0.5f, 0);
-            Point3 p2 = new Point3(0.5f, 0, 0.5f);
-            Point3 p3 = new Point3(-0.5f, 0, 0.5f);
-            Triangles.Add(new Triangle(p1, p2, p3));
+            //Point3 p1 = new Point3(0, 0.5f, 0);
+            //Point3 p2 = new Point3(0.5f, 0, 0.5f);
+            //Point3 p3 = new Point3(-0.5f, 0, 0.5f);
+            //Triangles.Add(new Triangle(p1, p2, p3));
+            Cuboids.Add(new Cuboid());
+
             SelectedCamera = new Camera();
             Cameras.Add(SelectedCamera);
             CameraListBox.DataSource = Cameras;
-            CameraListBox.DisplayMember = "PositionString";
+            CameraListBox.DisplayMember = "DisplayName";
             CameraListBox.SelectedItem = SelectedCamera;
             PrepareRender();
-            XLabel.Text = SelectedCamera.Position.X.ToString();
-            YLabel.Text = SelectedCamera.Position.Y.ToString();
-            ZLabel.Text = SelectedCamera.Position.Z.ToString();
-            XSlider.Value = (int)SelectedCamera.Position.X * 10;
-            YSlider.Value = (int)SelectedCamera.Position.Y * 10;
-            ZSlider.Value = (int)SelectedCamera.Position.Z * 10;
         }
 
         public void PrepareRender()
@@ -66,7 +64,52 @@ namespace _3DModelViewer
             View[1, 2] = U.Z;
             View[2, 0] = D.X;
             View[2, 1] = D.Y;
-            View = View * Matrix.Translate(SelectedCamera.Position.V);
+            View *= Matrix.Translate(SelectedCamera.Position.V);
+            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / Canvas.Height);
+            Matrix PV = Proj * View;
+
+            Render.Clear(bitmap);
+            CalculateAndDrawAxes(PV);
+
+            foreach (Cuboid cube in Cuboids)
+            {
+                Matrix Trans = Matrix.Translate(cube.Center.V);
+                Matrix Rot = Matrix.RotateX(cube.Rotation.X) * Matrix.RotateY(cube.Rotation.Y) * Matrix.RotateZ(cube.Rotation.Z);
+                Matrix Scale = Matrix.Scale(cube.Scale);
+                Matrix Model = Trans * Rot * Scale;
+                Matrix PVM = PV * Model;
+
+                foreach (Triangle t in cube.Triangles)
+                {
+                    List<Point> points = new List<Point>();
+                    foreach (Point3 p in t.Points)
+                    {
+                        Vector4 r = PVM * p.V;
+                        r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1);
+                        r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z + 1) / 2f, 1);
+                        points.Add(new Point((int)r.X, (int)r.Y));
+                    }
+                    Render.Fill(bitmap, points.ToArray(), cube.Color);
+                }
+            }
+            Canvas.Refresh();
+        }
+
+        public void TestRender()
+        {
+            Vector4 up = new Vector4(0, 1, 0, 0);
+            Vector4 D = SelectedCamera.Normal;
+            Vector4 R = Vector4.Normalize(Vector.Cross(up, D));
+            Vector4 U = Vector4.Normalize(Vector.Cross(D, R));
+
+            Matrix View = new Matrix(R.X, U.Y, D.Z, 1);
+            View[0, 1] = R.Y;
+            View[0, 2] = R.Z;
+            View[1, 0] = U.X;
+            View[1, 2] = U.Z;
+            View[2, 0] = D.X;
+            View[2, 1] = D.Y;
+            View *= Matrix.Translate(SelectedCamera.Position.V);
 
             Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / Canvas.Height);
             Matrix Trans = Matrix.Translate(0, 0, 0);
@@ -122,30 +165,6 @@ namespace _3DModelViewer
             PrepareRender();
         }
 
-        private void ZSlider_ValueChanged(object sender, EventArgs e)
-        {
-            SelectedCamera.Position.Z = ZSlider.Value / 10f;
-            ZLabel.Text = SelectedCamera.Position.Z.ToString();
-            Cameras.ResetBindings();
-            PrepareRender();
-        }
-
-        private void XSlider_ValueChanged(object sender, EventArgs e)
-        {
-            SelectedCamera.Position.X = XSlider.Value / 10f;
-            XLabel.Text = SelectedCamera.Position.X.ToString();
-            Cameras.ResetBindings();
-            PrepareRender();
-        }
-
-        private void YSlider_ValueChanged(object sender, EventArgs e)
-        {
-            SelectedCamera.Position.Y = YSlider.Value / 10f;
-            YLabel.Text = SelectedCamera.Position.Y.ToString();
-            Cameras.ResetBindings();
-            PrepareRender();
-        }
-
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
@@ -166,8 +185,8 @@ namespace _3DModelViewer
                 Vector4 tan = SelectedCamera.Tangent;
                 Vector4 b = SelectedCamera.Binormal;
 
-                //SelectedCamera.Position.V += dx * tan + dy * b;
-                SelectedCamera.Target.V += dx * tan + dy * b;
+                SelectedCamera.Position.V += dx * tan + dy * b;
+                //SelectedCamera.Target.V += dx * tan + dy * b;
                 LastMousePos = new Point(e.X, e.Y);
                 Cameras.ResetBindings();
                 PrepareRender();
@@ -183,8 +202,8 @@ namespace _3DModelViewer
                 Vector4 tan = SelectedCamera.Tangent;
                 Vector4 b = SelectedCamera.Binormal;
 
-                SelectedCamera.Position.V -= dx * tan + dy * b;
-                //SelectedCamera.Target.V += dx * tan + dy * b;
+                SelectedCamera.Position.V += dx * tan + dy * b;
+                SelectedCamera.Target.V += dx * tan + dy * b;
                 LastMousePos = new Point(e.X, e.Y);
                 Cameras.ResetBindings();
                 PrepareRender();
@@ -197,26 +216,27 @@ namespace _3DModelViewer
             {
                 LastMousePos = new Point(e.X, e.Y);
 
-                Cursor.Hide();
+                //Cursor.Hide();
             }
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             LastMousePos = Point.Empty;
-            Cursor.Show();
+            //Cursor.Show();
         }
 
         private void Canvas_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0 && (SelectedCamera.Target.V - SelectedCamera.Position.V).Length() < 0.3f) return;
-            SelectedCamera.Position.V += e.Delta/120 * 0.1f * SelectedCamera.Normal;
+            SelectedCamera.Position.V += e.Delta / 120 * 0.1f * SelectedCamera.Normal;
+            Cameras.ResetBindings();
             PrepareRender();
         }
 
         private void AddCameraButton_Click(object sender, EventArgs e)
         {
-            Cameras.Add(new Camera(new Point3(2, 2, 2)));
+            Cameras.Add(new Camera());
             SelectedCamera = Cameras.Last();
             Cameras.ResetBindings();
             CameraListBox.SelectedItem = SelectedCamera;
@@ -243,7 +263,10 @@ namespace _3DModelViewer
 
         private void ResetCameraButton_Click(object sender, EventArgs e)
         {
-            SelectedCamera.Position = new Point3(2, 2, 2);
+            SelectedCamera.Position = new Point3(3, 3, 3);
+            SelectedCamera.Target = new Point3();
+            SelectedCamera.FOV = 60;
+            FOVSlider.Value = 60;
             Cameras.ResetBindings();
             PrepareRender();
         }

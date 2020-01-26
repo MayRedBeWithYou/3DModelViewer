@@ -58,7 +58,7 @@ namespace _3DModelViewer
 
     public class Triangle
     {
-        private Point3[] points = new Point3[3];
+        private readonly Point3[] points = new Point3[3];
 
         public Point3[] Points => points;
 

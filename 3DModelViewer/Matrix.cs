@@ -21,7 +21,7 @@ namespace _3DModelViewer
 
     public class Matrix
     {
-        private float[,] fields = new float[4, 4];
+        private readonly float[,] fields = new float[4, 4];
         public float this[int x, int y]
         {
             get => fields[x, y];
@@ -47,6 +47,11 @@ namespace _3DModelViewer
         public static Matrix Scale(float x, float y, float z)
         {
             return new Matrix(x, y, z, 1);
+        }
+
+        public static Matrix Scale(Vector4 v)
+        {
+            return new Matrix(v.X, v.Y, v.Z, 1);
         }
 
         public static Matrix Translate(float x, float y, float z)
@@ -146,11 +151,13 @@ namespace _3DModelViewer
 
         public static Vector4 operator *(Matrix M, Vector4 V)
         {
-            Vector4 R = new Vector4();
-            R.X = (float)(M[0, 0] * V.X + M[0, 1] * V.Y + M[0, 2] * V.Z + M[0, 3] * V.W);
-            R.Y = (float)(M[1, 0] * V.X + M[1, 1] * V.Y + M[1, 2] * V.Z + M[1, 3] * V.W);
-            R.Z = (float)(M[2, 0] * V.X + M[2, 1] * V.Y + M[2, 2] * V.Z + M[2, 3] * V.W);
-            R.W = (float)(M[3, 0] * V.X + M[3, 1] * V.Y + M[3, 2] * V.Z + M[3, 3] * V.W);
+            Vector4 R = new Vector4
+            {
+                X = (float)(M[0, 0] * V.X + M[0, 1] * V.Y + M[0, 2] * V.Z + M[0, 3] * V.W),
+                Y = (float)(M[1, 0] * V.X + M[1, 1] * V.Y + M[1, 2] * V.Z + M[1, 3] * V.W),
+                Z = (float)(M[2, 0] * V.X + M[2, 1] * V.Y + M[2, 2] * V.Z + M[2, 3] * V.W),
+                W = (float)(M[3, 0] * V.X + M[3, 1] * V.Y + M[3, 2] * V.Z + M[3, 3] * V.W)
+            };
             return R;
         }
     }
