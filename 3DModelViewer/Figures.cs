@@ -11,7 +11,7 @@ namespace _3DModelViewer
     public interface IFigure
     {
         List<Triangle> Triangles { get; }
-        Point3 Center { get; set; }
+        Point4 Center { get; set; }
 
         Color Color { get; set; }
 
@@ -22,13 +22,13 @@ namespace _3DModelViewer
         Vector4 Scale { get; set; }
 
         Vector4 Rotation { get; set; }
-}
+    }
 
     public class Cuboid : IFigure
     {
         public List<Triangle> Triangles { get; } = new List<Triangle>();
 
-        public Point3 Center { get; set; } = new Point3();
+        public Point4 Center { get; set; } = new Point4();
 
         public float DimX { get; set; } = 2f;
         public float DimY { get; set; } = 2f;
@@ -48,9 +48,9 @@ namespace _3DModelViewer
         {
             CreateTriangles();
         }
-        public Cuboid(Point3 C)
+        public Cuboid(Point4 C)
         {
-            Center = new Point3(C);
+            Center = new Point4(C);
             CreateTriangles();
         }
 
@@ -62,9 +62,9 @@ namespace _3DModelViewer
             CreateTriangles();
         }
 
-        public Cuboid(Point3 C, float x = 2f, float y = 2f, float z = 2f)
+        public Cuboid(Point4 C, float x = 2f, float y = 2f, float z = 2f)
         {
-            Center = new Point3(C);
+            Center = new Point4(C);
             DimX = x;
             DimY = y;
             DimY = z;
@@ -74,40 +74,40 @@ namespace _3DModelViewer
         private void CreateTriangles()
         {
             ///Lower vertices
-            Point3 P1 = new Point3(Center.X + DimX / 2f, Center.Y - DimY / 2f, Center.Z + DimZ / 2f);
-            Point3 P2 = new Point3(Center.X - DimX / 2f, Center.Y - DimY / 2f, Center.Z + DimZ / 2f);
-            Point3 P3 = new Point3(Center.X - DimX / 2f, Center.Y - DimY / 2f, Center.Z - DimZ / 2f);
-            Point3 P4 = new Point3(Center.X + DimX / 2f, Center.Y - DimY / 2f, Center.Z - DimZ / 2f);
+            Point4 P1 = new Point4(Center.X + DimX / 2f, Center.Y - DimY / 2f, Center.Z + DimZ / 2f);
+            Point4 P2 = new Point4(Center.X - DimX / 2f, Center.Y - DimY / 2f, Center.Z + DimZ / 2f);
+            Point4 P3 = new Point4(Center.X - DimX / 2f, Center.Y - DimY / 2f, Center.Z - DimZ / 2f);
+            Point4 P4 = new Point4(Center.X + DimX / 2f, Center.Y - DimY / 2f, Center.Z - DimZ / 2f);
 
             ///Higher vertices
-            Point3 P5 = new Point3(Center.X + DimX / 2f, Center.Y + DimY / 2f, Center.Z + DimZ / 2f);
-            Point3 P6 = new Point3(Center.X - DimX / 2f, Center.Y + DimY / 2f, Center.Z + DimZ / 2f);
-            Point3 P7 = new Point3(Center.X - DimX / 2f, Center.Y + DimY / 2f, Center.Z - DimZ / 2f);
-            Point3 P8 = new Point3(Center.X + DimX / 2f, Center.Y + DimY / 2f, Center.Z - DimZ / 2f);
+            Point4 P5 = new Point4(Center.X + DimX / 2f, Center.Y + DimY / 2f, Center.Z + DimZ / 2f);
+            Point4 P6 = new Point4(Center.X - DimX / 2f, Center.Y + DimY / 2f, Center.Z + DimZ / 2f);
+            Point4 P7 = new Point4(Center.X - DimX / 2f, Center.Y + DimY / 2f, Center.Z - DimZ / 2f);
+            Point4 P8 = new Point4(Center.X + DimX / 2f, Center.Y + DimY / 2f, Center.Z - DimZ / 2f);
 
             ///Front
-            Triangles.Add(new Triangle(new Point3(P1), new Point3(P2), new Point3(P5)));
-            Triangles.Add(new Triangle(new Point3(P2), new Point3(P6), new Point3(P5)));
+            Triangles.Add(new Triangle(new Point4(P1), new Point4(P2), new Point4(P5)));
+            Triangles.Add(new Triangle(new Point4(P2), new Point4(P6), new Point4(P5)));
 
             ///Back
-            Triangles.Add(new Triangle(new Point3(P4), new Point3(P3), new Point3(P8)));
-            Triangles.Add(new Triangle(new Point3(P3), new Point3(P7), new Point3(P8)));
+            Triangles.Add(new Triangle(new Point4(P4), new Point4(P3), new Point4(P8)));
+            Triangles.Add(new Triangle(new Point4(P3), new Point4(P7), new Point4(P8)));
 
             ///Up
-            Triangles.Add(new Triangle(new Point3(P5), new Point3(P6), new Point3(P8)));
-            Triangles.Add(new Triangle(new Point3(P6), new Point3(P7), new Point3(P8)));
+            Triangles.Add(new Triangle(new Point4(P5), new Point4(P6), new Point4(P8)));
+            Triangles.Add(new Triangle(new Point4(P6), new Point4(P7), new Point4(P8)));
 
             ///Down
-            Triangles.Add(new Triangle(new Point3(P1), new Point3(P2), new Point3(P4)));
-            Triangles.Add(new Triangle(new Point3(P2), new Point3(P3), new Point3(P4)));
+            Triangles.Add(new Triangle(new Point4(P1), new Point4(P2), new Point4(P4)));
+            Triangles.Add(new Triangle(new Point4(P2), new Point4(P3), new Point4(P4)));
 
             ///Left
-            Triangles.Add(new Triangle(new Point3(P5), new Point3(P6), new Point3(P8)));
-            Triangles.Add(new Triangle(new Point3(P6), new Point3(P7), new Point3(P8)));
+            Triangles.Add(new Triangle(new Point4(P5), new Point4(P6), new Point4(P8)));
+            Triangles.Add(new Triangle(new Point4(P6), new Point4(P7), new Point4(P8)));
 
             ///Right
-            Triangles.Add(new Triangle(new Point3(P2), new Point3(P3), new Point3(P6)));
-            Triangles.Add(new Triangle(new Point3(P7), new Point3(P6), new Point3(P3)));
+            Triangles.Add(new Triangle(new Point4(P2), new Point4(P3), new Point4(P6)));
+            Triangles.Add(new Triangle(new Point4(P7), new Point4(P6), new Point4(P3)));
 
         }
     }

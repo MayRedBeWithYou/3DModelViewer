@@ -12,11 +12,11 @@ namespace _3DModelViewer
 {
     public class Camera
     {
-        public Point3 Position = new Point3(3,3,3);
+        public Point4 Position = new Point4(3,3,3);
 
         public string DisplayName => $"Camera (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
 
-        public Point3 Target = new Point3();
+        public Point4 Target = new Point4();
 
         public int FOV = 60;
 
@@ -46,11 +46,11 @@ namespace _3DModelViewer
 
         public Camera() { }
 
-        public Camera(Point3 pos)
+        public Camera(Point4 pos)
         {
             Position = pos;
         }
-        public Camera(Point3 pos, Point3 target)
+        public Camera(Point4 pos, Point4 target)
         {
             Position = pos;
             Target = target;
@@ -86,18 +86,12 @@ namespace _3DModelViewer
             }
         }
 
-        public static void FillTriangle(Bitmap bitmap, Triangle t, Color color)
+        public static void FillTriangle(Bitmap bitmap, List<Point4> points, Color color)
         {
-            List<Point3> points = new List<Point3>
-            {
-                t[0],
-                t[1],
-                t[2]
-            };
             points.Sort((a, b) => b.Y.CompareTo(a.Y));
-            Point3 A = points[0];
-            Point3 B = points[1];
-            Point3 C = points[2];
+            Point4 A = points[0];
+            Point4 B = points[1];
+            Point4 C = points[2];
 
             float dx1;
             float dx2;
@@ -111,8 +105,8 @@ namespace _3DModelViewer
                 else dx2 = 0;
                 if (C.Y - B.Y > 0) dx3 = (C.X - B.X) / (C.Y - B.Y);
                 else dx3 = 0;
-                Point3 S = new Point3(A);
-                Point3 E = new Point3(A);
+                Point4 S = new Point4(A);
+                Point4 E = new Point4(A);
                 if (dx1 > dx2)
                 {
                     for (; S.Y <= B.Y; S.Y++, E.Y++, S.X += dx2, E.X += dx1)
@@ -120,7 +114,7 @@ namespace _3DModelViewer
                         {
                             fast.SetPixel(i, (int)S.Y, color);
                         }
-                    E = new Point3(B);
+                    E = new Point4(B);
                     for (; S.Y <= C.Y; S.Y++, E.Y++, S.X += dx2, E.X += dx3)
                         for (int i = (int)S.X; i < E.X; i++)
                         {
@@ -134,7 +128,7 @@ namespace _3DModelViewer
                         {
                             fast.SetPixel(i, (int)S.Y, color);
                         }
-                    S = new Point3(B);
+                    S = new Point4(B);
                     for (; S.Y <= C.Y; S.Y++, E.Y++, S.X += dx3, E.X += dx2)
                         for (int i = (int)S.X; i < E.X; i++)
                         {

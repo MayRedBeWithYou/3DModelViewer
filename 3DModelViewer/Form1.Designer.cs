@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -44,6 +45,14 @@
             this.FOVSlider = new System.Windows.Forms.TrackBar();
             this.panel4 = new System.Windows.Forms.Panel();
             this.CameraListBox = new System.Windows.Forms.ListBox();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.FigureDataGrid = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.FPSLabel = new System.Windows.Forms.ToolStripLabel();
+            this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,6 +61,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -66,6 +76,13 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FOVSlider)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -124,6 +141,10 @@
             // 
             this.splitContainer2.Panel1.Controls.Add(this.panel1);
             this.splitContainer2.Panel1MinSize = 158;
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer5);
             this.splitContainer2.Size = new System.Drawing.Size(200, 623);
             this.splitContainer2.SplitterDistance = 158;
             this.splitContainer2.TabIndex = 0;
@@ -282,11 +303,104 @@
             this.CameraListBox.TabIndex = 0;
             this.CameraListBox.SelectedIndexChanged += new System.EventHandler(this.CameraListBox_SelectedIndexChanged);
             // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.groupBox2);
+            this.splitContainer5.Panel1MinSize = 100;
+            this.splitContainer5.Size = new System.Drawing.Size(200, 461);
+            this.splitContainer5.SplitterDistance = 100;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.FigureDataGrid);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Figures";
+            // 
+            // FigureDataGrid
+            // 
+            this.FigureDataGrid.AllowUserToAddRows = false;
+            this.FigureDataGrid.AllowUserToResizeColumns = false;
+            this.FigureDataGrid.AllowUserToResizeRows = false;
+            this.FigureDataGrid.AutoGenerateColumns = false;
+            this.FigureDataGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.FigureDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.FigureDataGrid.ColumnHeadersVisible = false;
+            this.FigureDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Visibility,
+            this.displayNameDataGridViewTextBoxColumn});
+            this.FigureDataGrid.DataSource = this.iFigureBindingSource;
+            this.FigureDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FigureDataGrid.Location = new System.Drawing.Point(3, 16);
+            this.FigureDataGrid.MultiSelect = false;
+            this.FigureDataGrid.Name = "FigureDataGrid";
+            this.FigureDataGrid.RowHeadersVisible = false;
+            this.FigureDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.FigureDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.FigureDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.FigureDataGrid.Size = new System.Drawing.Size(194, 81);
+            this.FigureDataGrid.TabIndex = 0;
+            this.FigureDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FigureDataGrid_CellContentClick);
+            this.FigureDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FigureDataGrid_CellContentClick);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FPSLabel});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 598);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(974, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // FPSLabel
+            // 
+            this.FPSLabel.Name = "FPSLabel";
+            this.FPSLabel.Size = new System.Drawing.Size(47, 22);
+            this.FPSLabel.Text = "120 FPS";
+            // 
+            // Visibility
+            // 
+            this.Visibility.DataPropertyName = "Visibility";
+            this.Visibility.FalseValue = "false";
+            this.Visibility.HeaderText = "Visibility";
+            this.Visibility.Name = "Visibility";
+            this.Visibility.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Visibility.TrueValue = "true";
+            this.Visibility.Width = 25;
+            // 
+            // displayNameDataGridViewTextBoxColumn
+            // 
+            this.displayNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.HeaderText = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
+            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.displayNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // iFigureBindingSource
+            // 
+            this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 623);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -300,6 +414,7 @@
             this.panel2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -318,7 +433,16 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FOVSlider)).EndInit();
             this.panel4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -340,6 +464,14 @@
         private System.Windows.Forms.TrackBar FOVSlider;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ListBox CameraListBox;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView FigureDataGrid;
+        private System.Windows.Forms.BindingSource iFigureBindingSource;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel FPSLabel;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Visibility;
+        private System.Windows.Forms.DataGridViewTextBoxColumn displayNameDataGridViewTextBoxColumn;
     }
 }
 

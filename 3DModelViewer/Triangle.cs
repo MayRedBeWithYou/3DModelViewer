@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace _3DModelViewer
 {
-    public class Point3
+    public class Point4
     {
         public float X;
         public float Y;
         public float Z;
+        public float W;
 
         public Vector4 Normal = new Vector4();
         public Vector4 Binormal = new Vector4();
@@ -33,19 +34,19 @@ namespace _3DModelViewer
         }
         
 
-        public Point3(float x = 0, float y = 0, float z = 0)
+        public Point4(float x = 0, float y = 0, float z = 0, float w = 1)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public static implicit operator Point(Point3 p)
+        public static implicit operator Point(Point4 p)
         {
             return new Point((int)p.X, (int)p.Y);
         }
 
-        public Point3(Point3 A)
+        public Point4(Point4 A)
         {
             X = A.X;
             Y = A.Y;
@@ -58,18 +59,18 @@ namespace _3DModelViewer
 
     public class Triangle
     {
-        private readonly Point3[] points = new Point3[3];
+        private readonly Point4[] points = new Point4[3];
 
-        public Point3[] Points => points;
+        public Point4[] Points => points;
 
-        public Triangle(Point3 p1, Point3 p2, Point3 p3)
+        public Triangle(Point4 p1, Point4 p2, Point4 p3)
         {
             points[0] = p1;
             points[1] = p2;
             points[2] = p3;
         }
 
-        public Point3 this[int i]
+        public Point4 this[int i]
         {
             get => points[i];
             set
