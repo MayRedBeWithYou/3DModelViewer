@@ -86,56 +86,95 @@ namespace _3DModelViewer
             }
         }
 
-        public static void FillTriangle(Bitmap bitmap, List<Point4> points, Color color)
-        {
-            points.Sort((a, b) => b.Y.CompareTo(a.Y));
-            Point4 A = points[0];
-            Point4 B = points[1];
-            Point4 C = points[2];
 
-            float dx1;
-            float dx2;
-            float dx3;
+
+        public static void FillScanline(Bitmap bitmap, List<Point4> points, Color color)
+        {
+            points.Sort((p, r) => p.Y.CompareTo(r.Y));
+            Point4 v1 = points[0];
+            Point4 v2 = points[1];
+            Point4 v3 = points[2];
 
             using (FastBitmap fast = bitmap.FastLock())
             {
-                if (B.Y - A.Y > 0) dx1 = (B.X - A.X) / (B.Y - A.Y);
-                else dx1 = 0;
-                if (C.Y - A.Y > 0) dx2 = (C.X - A.X) / (C.Y - A.Y);
-                else dx2 = 0;
-                if (C.Y - B.Y > 0) dx3 = (C.X - B.X) / (C.Y - B.Y);
-                else dx3 = 0;
-                Point4 S = new Point4(A);
-                Point4 E = new Point4(A);
-                if (dx1 > dx2)
+                if (v2.Y == v3.Y)
                 {
-                    for (; S.Y <= B.Y; S.Y++, E.Y++, S.X += dx2, E.X += dx1)
-                        for (int i = (int)S.X; i < E.X; i++)
+                    float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
+                    float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
+
+                    float curX1 = v1.X;
+                    float curX2 = v1.X;
+
+                    for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
+                    {
+                        for (int i = (int)curX1; i < curX2; i++)
                         {
-                            fast.SetPixel(i, (int)S.Y, color);
+                            fast.SetPixel(i, scanlineY, color);
                         }
-                    E = new Point4(B);
-                    for (; S.Y <= C.Y; S.Y++, E.Y++, S.X += dx2, E.X += dx3)
-                        for (int i = (int)S.X; i < E.X; i++)
+                        curX1 += invslope1;
+                        curX2 += invslope2;
+                    }
+                }
+                else if (v1.Y == v2.Y)
+                {
+                    float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
+                    float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
+
+                    float curX1 = v3.X;
+                    float curX2 = v3.X;
+
+                    for (int scanlineY = (int)v3.Y; scanlineY > v1.Y; scanlineY--)
+                    {
+                        for (int i = (int)curX1; i < curX2; i++)
                         {
-                            fast.SetPixel(i, (int)S.Y, color);
+                            fast.SetPixel(i, scanlineY, color);
                         }
+                        curX1 -= invslope1;
+                        curX2 -= invslope2;
+                    }
                 }
                 else
                 {
-                    for (; S.Y <= B.Y; S.Y++, E.Y++, S.X += dx1, E.X += dx2)
-                        for (int i = (int)S.X; i < E.X; i++)
+
+                    Point v4 = new Point4(
+                       (int)(v1.X + ((float)(v2.Y - v1.Y) / (float)(v3.Y - v1.Y)) * (v3.X - v1.X)), v2.Y);
+
+                    //Fill bottom triangle
+
+                    float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
+                    float invslope2 = (v4.X - v1.X) / (v4.Y - v1.Y);
+
+                    float curX1 = v1.X;
+                    float curX2 = v1.X;
+
+                    for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
+                    {
+                        for (int i = (int)curX1; i < curX2; i++)
                         {
-                            fast.SetPixel(i, (int)S.Y, color);
+                            fast.SetPixel(i, scanlineY, color);
                         }
-                    S = new Point4(B);
-                    for (; S.Y <= C.Y; S.Y++, E.Y++, S.X += dx3, E.X += dx2)
-                        for (int i = (int)S.X; i < E.X; i++)
+                        curX1 += invslope1;
+                        curX2 += invslope2;
+                    }
+
+                    invslope1 = (v3.X - v2.X) / (v3.Y - v2.Y);
+                    invslope2 = (v3.X - v4.X) / (v3.Y - v4.Y);
+
+                    curX1 = v3.X;
+                    curX2 = v3.X;
+
+                    for (int scanlineY = (int)v3.Y; scanlineY > v2.Y; scanlineY--)
+                    {
+                        for (int i = (int)curX1; i < curX2; i++)
                         {
-                            fast.SetPixel(i, (int)S.Y, color);
+                            fast.SetPixel(i, scanlineY, color);
                         }
+                        curX1 -= invslope1;
+                        curX2 -= invslope2;
+                    }
                 }
             }
+        
         }
     }
 }

@@ -110,7 +110,8 @@ namespace _3DModelViewer
                         points3.Add(new Point4((int)r.X, (int)r.Y, r.Z, r.W));
                     }
                     //Render.FillTriangle(bitmap, points3, figure.Color);
-                    Render.Fill(bitmap, points.ToArray(), figure.Color);
+                    //Render.Fill(bitmap, points.ToArray(), figure.Color);
+                    Render.FillScanline(bitmap, points3, figure.Color);
                 }
             }
             Canvas.Refresh();
