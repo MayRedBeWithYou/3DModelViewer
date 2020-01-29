@@ -105,8 +105,8 @@ namespace _3DModelViewer
         public static Matrix Proj(float fov, float n, float f, float aspect)
         {
             float ctg = (float)(1 / Math.Tan(fov / 2d));
-            Matrix N = new Matrix(ctg / aspect, ctg, (f + n) / (f - n), 0);
-            N[3, 2] = 1;
+            Matrix N = new Matrix(ctg / aspect, ctg, -(f + n) / (f - n), 0);
+            N[3, 2] = -1;
             N[2, 3] = (-2 * f * n) / (f - n);
             return N;
         }

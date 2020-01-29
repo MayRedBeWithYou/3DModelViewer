@@ -25,14 +25,18 @@ namespace _3DModelViewer
 
         public readonly BindingList<IFigure> Figures = new BindingList<IFigure>();
 
+        public IFigure SelectedFigure { get; set; }
+
         Point4 OC { get; } = new Point4();
         Point4 OX { get; } = new Point4(5, 0, 0);
         Point4 OY { get; } = new Point4(0, 5, 0);
         Point4 OZ { get; } = new Point4(0, 0, 5);
 
-        Timer RefreshRate = new Timer();
+        Timer RefreshTimer = new Timer();
 
         DateTime frametime;
+
+        public bool FillTriangles = true;
 
         public Form1()
         {
@@ -40,25 +44,20 @@ namespace _3DModelViewer
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Render.Clear(bitmap);
             Canvas.Image = bitmap;
-            //Point3 p1 = new Point3(0, 0.5f, 0);
-            //Point3 p2 = new Point3(0.5f, 0, 0.5f);
-            //Point3 p3 = new Point3(-0.5f, 0, 0.5f);
-            //Triangles.Add(new Triangle(p1, p2, p3));
             Figures.Add(new Cuboid());
-            Figures.Add(new Cuboid { Visibility = false });
             SelectedCamera = new Camera();
             FigureDataGrid.DataSource = Figures;
             Cameras.Add(SelectedCamera);
             CameraListBox.DataSource = Cameras;
             CameraListBox.DisplayMember = "DisplayName";
             CameraListBox.SelectedItem = SelectedCamera;
-            RefreshRate.Tick += RefreshRate_Tick;
-            RefreshRate.Interval = 8;
-            RefreshRate.Start();
+            RefreshTimer.Tick += RefreshTimer_Tick;
+            RefreshTimer.Interval = 8;
+            RefreshTimer.Start();
             frametime = DateTime.Now;
         }
 
-        private void RefreshRate_Tick(object sender, EventArgs e)
+        private void RefreshTimer_Tick(object sender, EventArgs e)
         {
             TimeSpan time = DateTime.Now - frametime;
             int FPS = (int)(1 / time.TotalSeconds);
@@ -81,13 +80,13 @@ namespace _3DModelViewer
             View[1, 2] = U.Z;
             View[2, 0] = D.X;
             View[2, 1] = D.Y;
-            View *= Matrix.Translate(SelectedCamera.Position.V);
+            View *= Matrix.Translate(-SelectedCamera.Position.V);
             Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / Canvas.Height);
             Matrix PV = Proj * View;
 
             Render.Clear(bitmap);
             CalculateAndDrawAxes(PV);
-
+            List<RenderInfo> infos = new List<RenderInfo>();
             foreach (IFigure figure in Figures)
             {
                 if (figure.Visibility == false) continue;
@@ -97,64 +96,25 @@ namespace _3DModelViewer
                 Matrix Model = Trans * Rot * Scale;
                 Matrix PVM = PV * Model;
 
+                List<Triangle> projected = new List<Triangle>();
+                List<Point4> points3 = new List<Point4>();
+
                 foreach (Triangle t in figure.Triangles)
                 {
-                    List<Point> points = new List<Point>();
-                    List<Point4> points3 = new List<Point4>();
+                    points3.Clear();
                     foreach (Point4 p in t.Points)
                     {
                         Vector4 r = PVM * p.V;
                         r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1);
                         r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z + 1) / 2f, 1);
-                        points.Add(new Point((int)r.X, (int)r.Y));
                         points3.Add(new Point4((int)r.X, (int)r.Y, r.Z, r.W));
                     }
-                    //Render.FillTriangle(bitmap, points3, figure.Color);
-                    //Render.Fill(bitmap, points.ToArray(), figure.Color);
-                    Render.FillScanline(bitmap, points3, figure.Color);
+                    Triangle projectedTriangle = new Triangle(points3[0], points3[1], points3[2]);
+                    projected.Add(projectedTriangle);
                 }
+                infos.Add(new RenderInfo(projected, figure.Color, SelectedFigure == figure));
             }
-            Canvas.Refresh();
-        }
-
-        public void TestRender()
-        {
-            Vector4 up = new Vector4(0, 1, 0, 0);
-            Vector4 D = SelectedCamera.Normal;
-            Vector4 R = Vector4.Normalize(Vector.Cross(up, D));
-            Vector4 U = Vector4.Normalize(Vector.Cross(D, R));
-
-            Matrix View = new Matrix(R.X, U.Y, D.Z, 1);
-            View[0, 1] = R.Y;
-            View[0, 2] = R.Z;
-            View[1, 0] = U.X;
-            View[1, 2] = U.Z;
-            View[2, 0] = D.X;
-            View[2, 1] = D.Y;
-            View *= Matrix.Translate(SelectedCamera.Position.V);
-
-            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / Canvas.Height);
-            Matrix Trans = Matrix.Translate(0, 0, 0);
-            Matrix Rot = Matrix.RotateX(0) * Matrix.RotateY(0) * Matrix.RotateZ(0);
-            Matrix Scale = Matrix.Scale(1, 1, 1);
-            Matrix Model = Trans * Rot * Scale;
-            Matrix PVM = Proj * View * Model;
-
-            Render.Clear(bitmap);
-            CalculateAndDrawAxes(PVM);
-
-            foreach (Triangle t in Triangles)
-            {
-                List<Point> points = new List<Point>();
-                foreach (Point4 p in t.Points)
-                {
-                    Vector4 r = PVM * p.V;
-                    r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1);
-                    r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z + 1) / 2f, 1);
-                    points.Add(new Point((int)r.X, (int)r.Y));
-                }
-                Render.Fill(bitmap, points.ToArray(), Color.Gold);
-            }
+            Render.DrawObjects(bitmap, infos, FillTriangles);
             Canvas.Refresh();
         }
 
@@ -184,14 +144,12 @@ namespace _3DModelViewer
             SelectedCamera.FOV = FOVSlider.Value;
             if (SelectedCamera.FOV == 120) FOVLabel.Text = "Quake\nPro";
             else FOVLabel.Text = SelectedCamera.FOV.ToString();
-            //PrepareRender();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Canvas.Image = bitmap;
-            //PrepareRender();
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -207,11 +165,10 @@ namespace _3DModelViewer
                 Vector4 tan = SelectedCamera.Tangent;
                 Vector4 b = SelectedCamera.Binormal;
 
-                SelectedCamera.Position.V += dx * tan + dy * b;
+                SelectedCamera.Position.V -= dx * tan + dy * b;
                 //SelectedCamera.Target.V += dx * tan + dy * b;
                 LastMousePos = new Point(e.X, e.Y);
                 Cameras.ResetBindings();
-                //PrepareRender();
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -224,11 +181,10 @@ namespace _3DModelViewer
                 Vector4 tan = SelectedCamera.Tangent;
                 Vector4 b = SelectedCamera.Binormal;
 
-                SelectedCamera.Position.V += dx * tan + dy * b;
-                SelectedCamera.Target.V += dx * tan + dy * b;
+                SelectedCamera.Position.V -= dx * tan + dy * b;
+                SelectedCamera.Target.V -= dx * tan + dy * b;
                 LastMousePos = new Point(e.X, e.Y);
                 Cameras.ResetBindings();
-                //PrepareRender();
             }
         }
 
@@ -237,7 +193,6 @@ namespace _3DModelViewer
             if (e.Button == MouseButtons.Middle || e.Button == MouseButtons.Right)
             {
                 LastMousePos = new Point(e.X, e.Y);
-
                 //Cursor.Hide();
             }
         }
@@ -253,7 +208,7 @@ namespace _3DModelViewer
             if (e.Delta > 0 && (SelectedCamera.Target.V - SelectedCamera.Position.V).Length() < 0.3f) return;
             SelectedCamera.Position.V += e.Delta / 120 * 0.1f * SelectedCamera.Normal;
             Cameras.ResetBindings();
-            //PrepareRender();
+
         }
 
         private void AddCameraButton_Click(object sender, EventArgs e)
@@ -263,7 +218,7 @@ namespace _3DModelViewer
             Cameras.ResetBindings();
             CameraListBox.SelectedItem = SelectedCamera;
             if (Cameras.Count > 1) RemoveCameraButton.Enabled = true;
-            //PrepareRender();
+
 
         }
 
@@ -271,7 +226,7 @@ namespace _3DModelViewer
         {
             SelectedCamera = (Camera)CameraListBox.SelectedItem;
             FOVSlider.Value = SelectedCamera.FOV;
-            //PrepareRender();
+
         }
 
         private void RemoveCameraButton_Click(object sender, EventArgs e)
@@ -280,22 +235,121 @@ namespace _3DModelViewer
             Cameras.Remove(SelectedCamera);
             SelectedCamera = index == Cameras.Count ? Cameras[index - 1] : Cameras[index];
             if (Cameras.Count == 1) RemoveCameraButton.Enabled = false;
-            //PrepareRender();
+
         }
 
         private void ResetCameraButton_Click(object sender, EventArgs e)
         {
-            SelectedCamera.Position = new Point4(3, 3, 3);
-            SelectedCamera.Target = new Point4();
-            SelectedCamera.FOV = 60;
-            FOVSlider.Value = 60;
+            SelectedCamera.Reset();
+            FOVSlider.Value = SelectedCamera.FOV;
             Cameras.ResetBindings();
-            //PrepareRender();
+
         }
 
         private void FigureDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             FigureDataGrid.EndEdit();
+        }
+
+        private void AddFigureButton_Click(object sender, EventArgs e)
+        {
+            AddFigureMenu.Show(AddFigureButton, new Point(0, AddFigureButton.Height));
+        }
+
+        private void cuboidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Figures.Add(new Cuboid());
+            FigureDataGrid.ClearSelection();
+            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+        }
+
+        private void RemoveFigureButton_Click(object sender, EventArgs e)
+        {
+            if (FigureDataGrid.SelectedRows.Count != 0)
+                Figures.Remove((IFigure)FigureDataGrid.SelectedRows[0].DataBoundItem);
+            if (Figures.Count == 0)
+            {
+                RemoveFigureButton.Enabled = false;
+            }
+            else if (FigureDataGrid.SelectedRows.Count == 0)
+            {
+                FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            }
+        }
+
+        private void FigureDataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            CuboidGroupBox.Visible = false;
+            SphereGroupBox.Visible = false;
+            if (FigureDataGrid.SelectedRows.Count != 0)
+            {
+                SelectedFigure = (IFigure)FigureDataGrid.SelectedRows[0].DataBoundItem;
+                if (SelectedFigure is Cuboid)
+                {
+                    Cuboid cube = SelectedFigure as Cuboid;
+                    CuboidGroupBox.Visible = true;
+                    CuboidPosX.Value = (decimal)cube.Center.X;
+                    CuboidPosY.Value = (decimal)cube.Center.Y;
+                    CuboidPosZ.Value = (decimal)cube.Center.Z;
+
+                    CuboidDimX.Value = (decimal)cube.DimX;
+                    CuboidDimY.Value = (decimal)cube.DimY;
+                    CuboidDimZ.Value = (decimal)cube.DimZ;
+                }
+                else if (SelectedFigure is Sphere)
+                {
+                    SphereGroupBox.Visible = true;
+                }
+            }
+        }
+
+        private void CuboidPosX_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.Center.X = (float)CuboidPosX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidPosY_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.Center.Y = (float)CuboidPosY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidPosZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.Center.Z = (float)CuboidPosZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidDimX_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.DimX = (float)CuboidDimX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidDimY_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.DimY = (float)CuboidDimY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidDimZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.DimZ = (float)CuboidDimZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void fillTrianglesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillTriangles = !FillTriangles;
+            fillTrianglesToolStripMenuItem.Checked = FillTriangles;
         }
     }
 }
