@@ -38,6 +38,8 @@ namespace _3DModelViewer
 
         public bool FillTriangles = true;
 
+        public bool BackfaceCulling = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -81,7 +83,7 @@ namespace _3DModelViewer
             View[2, 0] = D.X;
             View[2, 1] = D.Y;
             View *= Matrix.Translate(-SelectedCamera.Position.V);
-            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / Canvas.Height);
+            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / (float)Canvas.Height);
             Matrix PV = Proj * View;
 
             Render.Clear(bitmap);
@@ -101,6 +103,7 @@ namespace _3DModelViewer
 
                 foreach (Triangle t in figure.Triangles)
                 {
+                    if (BackfaceCulling && Vector4.Dot(D, t.Normal) > 0) continue;
                     points3.Clear();
                     foreach (Point4 p in t.Points)
                     {
@@ -251,6 +254,17 @@ namespace _3DModelViewer
             FigureDataGrid.EndEdit();
         }
 
+        private void fillTrianglesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillTriangles = !FillTriangles;
+            fillTrianglesToolStripMenuItem.Checked = FillTriangles;
+        }
+        private void backfaceCullingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackfaceCulling = !BackfaceCulling;
+            backfaceCullingToolStripMenuItem.Checked = BackfaceCulling;
+        }
+
         private void AddFigureButton_Click(object sender, EventArgs e)
         {
             AddFigureMenu.Show(AddFigureButton, new Point(0, AddFigureButton.Height));
@@ -259,6 +273,14 @@ namespace _3DModelViewer
         private void cuboidToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Figures.Add(new Cuboid());
+            FigureDataGrid.ClearSelection();
+            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+        }
+
+        private void sphereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Figures.Add(new Sphere());
             FigureDataGrid.ClearSelection();
             FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
             if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
@@ -296,10 +318,30 @@ namespace _3DModelViewer
                     CuboidDimX.Value = (decimal)cube.DimX;
                     CuboidDimY.Value = (decimal)cube.DimY;
                     CuboidDimZ.Value = (decimal)cube.DimZ;
+
+                    CuboidRotX.Value = (decimal)cube.RotX;
+                    CuboidRotY.Value = (decimal)cube.RotY;
+                    CuboidRotZ.Value = (decimal)cube.RotZ;
                 }
                 else if (SelectedFigure is Sphere)
                 {
                     SphereGroupBox.Visible = true;
+                    Sphere sphere = SelectedFigure as Sphere;
+                    SpherePosX.Value = (decimal)sphere.Center.X;
+                    SpherePosY.Value = (decimal)sphere.Center.Y;
+                    SpherePosZ.Value = (decimal)sphere.Center.Z;
+
+                    SphereDimX.Value = (decimal)sphere.DimX;
+                    SphereDimY.Value = (decimal)sphere.DimY;
+                    SphereDimZ.Value = (decimal)sphere.DimZ;
+
+                    SphereRotX.Value = (decimal)sphere.RotX;
+                    SphereRotY.Value = (decimal)sphere.RotY;
+                    SphereRotZ.Value = (decimal)sphere.RotZ;
+
+                    SphereLat.Value = (decimal)sphere.Lat;
+                    SphereLon.Value = (decimal)sphere.Lon;
+                    SphereRadius.Value = (decimal)sphere.Radius;
                 }
             }
         }
@@ -346,11 +388,7 @@ namespace _3DModelViewer
             FigureDataGrid.Refresh();
         }
 
-        private void fillTrianglesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FillTriangles = !FillTriangles;
-            fillTrianglesToolStripMenuItem.Checked = FillTriangles;
-        }
+        
 
         private void CuboidRotX_ValueChanged(object sender, EventArgs e)
         {
@@ -379,12 +417,96 @@ namespace _3DModelViewer
             FigureDataGrid.Refresh();
         }
 
-        private void sphereToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SpherePosX_ValueChanged(object sender, EventArgs e)
         {
-            Figures.Add(new Sphere());
-            FigureDataGrid.ClearSelection();
-            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
-            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Center.X = (float)SpherePosX.Value;
+            FigureDataGrid.Refresh();
         }
+
+        private void SpherePosY_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Center.Y = (float)SpherePosY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SpherePosZ_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Center.Z = (float)SpherePosZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereDimX_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.DimX = (float)SphereDimX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereDimY_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.DimY = (float)SphereDimY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereDimZ_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.DimZ = (float)SphereDimZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+
+
+        private void SphereRotX_ValueChanged(object sender, EventArgs e)
+        {
+            if (SphereRotX.Value < 0) SphereRotX.Value += 360;
+            else if (SphereRotX.Value == 360) SphereRotX.Value = 0;
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.RotX = (float)SphereRotX.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereRotY_ValueChanged(object sender, EventArgs e)
+        {
+            if (SphereRotY.Value < 0) SphereRotY.Value += 360;
+            else if (SphereRotY.Value == 360) SphereRotY.Value = 0;
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.RotY = (float)SphereRotY.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereRotZ_ValueChanged(object sender, EventArgs e)
+        {
+            if (SphereRotZ.Value < 0) SphereRotZ.Value += 360;
+            else if (SphereRotZ.Value == 360) SphereRotZ.Value = 0;
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.RotZ = (float)SphereRotZ.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereLat_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Lat = (int)SphereLat.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereLon_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Lon = (int)SphereLon.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void SphereRadius_ValueChanged(object sender, EventArgs e)
+        {
+            Sphere sphere = SelectedFigure as Sphere;
+            sphere.Radius = (float)SphereRadius.Value;
+            FigureDataGrid.Refresh();
+        }       
     }
 }

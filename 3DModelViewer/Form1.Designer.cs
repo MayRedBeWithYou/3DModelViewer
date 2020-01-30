@@ -57,8 +57,14 @@
             this.RemoveFigureButton = new System.Windows.Forms.Button();
             this.AddFigureButton = new System.Windows.Forms.Button();
             this.FigureDataGrid = new System.Windows.Forms.DataGridView();
-            this.SphereGroupBox = new System.Windows.Forms.GroupBox();
             this.CuboidGroupBox = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CuboidRotZ = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CuboidRotY = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.CuboidRotX = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.CuboidDimZ = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -73,19 +79,42 @@
             this.label2 = new System.Windows.Forms.Label();
             this.CuboidPosX = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.SphereGroupBox = new System.Windows.Forms.GroupBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.SphereRadius = new System.Windows.Forms.NumericUpDown();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.SphereLon = new System.Windows.Forms.NumericUpDown();
+            this.SphereLat = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.SphereRotZ = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.SphereRotY = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.SphereRotX = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.SphereDimZ = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.SphereDimY = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.SphereDimX = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.SpherePosZ = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.SpherePosY = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.SpherePosX = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
             this.AddFigureMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cuboidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label9 = new System.Windows.Forms.Label();
-            this.CuboidRotZ = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.CuboidRotY = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.CuboidRotX = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
+            this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backfaceCullingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -122,16 +151,29 @@
             this.splitContainer6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).BeginInit();
             this.CuboidGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosX)).BeginInit();
+            this.SphereGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereLon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereLat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).BeginInit();
             this.AddFigureMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,7 +197,7 @@
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2MinSize = 200;
-            this.splitContainer1.Size = new System.Drawing.Size(974, 623);
+            this.splitContainer1.Size = new System.Drawing.Size(974, 601);
             this.splitContainer1.SplitterDistance = 770;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -163,7 +205,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FPSLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 601);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 579);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
             this.statusStrip1.Size = new System.Drawing.Size(770, 22);
@@ -197,7 +239,8 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillTrianglesToolStripMenuItem});
+            this.fillTrianglesToolStripMenuItem,
+            this.backfaceCullingToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -207,7 +250,7 @@
             this.fillTrianglesToolStripMenuItem.Checked = true;
             this.fillTrianglesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillTrianglesToolStripMenuItem.Name = "fillTrianglesToolStripMenuItem";
-            this.fillTrianglesToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.fillTrianglesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fillTrianglesToolStripMenuItem.Text = "Fill triangles";
             this.fillTrianglesToolStripMenuItem.Click += new System.EventHandler(this.fillTrianglesToolStripMenuItem_Click);
             // 
@@ -216,7 +259,7 @@
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Canvas.Location = new System.Drawing.Point(0, 0);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(770, 623);
+            this.Canvas.Size = new System.Drawing.Size(770, 601);
             this.Canvas.TabIndex = 0;
             this.Canvas.TabStop = false;
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
@@ -231,7 +274,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 623);
+            this.panel2.Size = new System.Drawing.Size(200, 601);
             this.panel2.TabIndex = 1;
             // 
             // splitContainer2
@@ -249,7 +292,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer2.Size = new System.Drawing.Size(200, 623);
+            this.splitContainer2.Size = new System.Drawing.Size(200, 601);
             this.splitContainer2.SplitterDistance = 158;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -421,9 +464,9 @@
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.SphereGroupBox);
             this.splitContainer5.Panel2.Controls.Add(this.CuboidGroupBox);
-            this.splitContainer5.Size = new System.Drawing.Size(200, 461);
+            this.splitContainer5.Panel2.Controls.Add(this.SphereGroupBox);
+            this.splitContainer5.Size = new System.Drawing.Size(200, 439);
             this.splitContainer5.SplitterDistance = 170;
             this.splitContainer5.TabIndex = 0;
             // 
@@ -506,17 +549,6 @@
             this.FigureDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FigureDataGrid_CellContentClick);
             this.FigureDataGrid.SelectionChanged += new System.EventHandler(this.FigureDataGrid_SelectionChanged);
             // 
-            // SphereGroupBox
-            // 
-            this.SphereGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SphereGroupBox.Location = new System.Drawing.Point(0, 226);
-            this.SphereGroupBox.Name = "SphereGroupBox";
-            this.SphereGroupBox.Size = new System.Drawing.Size(200, 100);
-            this.SphereGroupBox.TabIndex = 1;
-            this.SphereGroupBox.TabStop = false;
-            this.SphereGroupBox.Text = "Sphere properties";
-            this.SphereGroupBox.Visible = false;
-            // 
             // CuboidGroupBox
             // 
             this.CuboidGroupBox.Controls.Add(this.label9);
@@ -541,13 +573,121 @@
             this.CuboidGroupBox.Controls.Add(this.CuboidPosX);
             this.CuboidGroupBox.Controls.Add(this.label1);
             this.CuboidGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CuboidGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.CuboidGroupBox.Location = new System.Drawing.Point(0, 246);
             this.CuboidGroupBox.Name = "CuboidGroupBox";
             this.CuboidGroupBox.Size = new System.Drawing.Size(200, 226);
             this.CuboidGroupBox.TabIndex = 0;
             this.CuboidGroupBox.TabStop = false;
             this.CuboidGroupBox.Text = "Cuboid properties";
             this.CuboidGroupBox.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 192);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(14, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Z";
+            // 
+            // CuboidRotZ
+            // 
+            this.CuboidRotZ.DecimalPlaces = 1;
+            this.CuboidRotZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CuboidRotZ.Location = new System.Drawing.Point(26, 190);
+            this.CuboidRotZ.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CuboidRotZ.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CuboidRotZ.Name = "CuboidRotZ";
+            this.CuboidRotZ.Size = new System.Drawing.Size(53, 20);
+            this.CuboidRotZ.TabIndex = 19;
+            this.CuboidRotZ.ValueChanged += new System.EventHandler(this.CuboidRotZ_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 165);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(14, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Y";
+            // 
+            // CuboidRotY
+            // 
+            this.CuboidRotY.DecimalPlaces = 1;
+            this.CuboidRotY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CuboidRotY.Location = new System.Drawing.Point(26, 163);
+            this.CuboidRotY.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CuboidRotY.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CuboidRotY.Name = "CuboidRotY";
+            this.CuboidRotY.Size = new System.Drawing.Size(53, 20);
+            this.CuboidRotY.TabIndex = 17;
+            this.CuboidRotY.ValueChanged += new System.EventHandler(this.CuboidRotY_ValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 139);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(14, 13);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "X";
+            // 
+            // CuboidRotX
+            // 
+            this.CuboidRotX.DecimalPlaces = 1;
+            this.CuboidRotX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CuboidRotX.Location = new System.Drawing.Point(26, 137);
+            this.CuboidRotX.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CuboidRotX.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CuboidRotX.Name = "CuboidRotX";
+            this.CuboidRotX.Size = new System.Drawing.Size(53, 20);
+            this.CuboidRotX.TabIndex = 15;
+            this.CuboidRotX.ValueChanged += new System.EventHandler(this.CuboidRotX_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 121);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "Rotation";
             // 
             // label5
             // 
@@ -780,128 +920,516 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Position";
             // 
+            // SphereGroupBox
+            // 
+            this.SphereGroupBox.Controls.Add(this.label28);
+            this.SphereGroupBox.Controls.Add(this.SphereRadius);
+            this.SphereGroupBox.Controls.Add(this.label26);
+            this.SphereGroupBox.Controls.Add(this.label27);
+            this.SphereGroupBox.Controls.Add(this.label25);
+            this.SphereGroupBox.Controls.Add(this.SphereLon);
+            this.SphereGroupBox.Controls.Add(this.SphereLat);
+            this.SphereGroupBox.Controls.Add(this.label13);
+            this.SphereGroupBox.Controls.Add(this.SphereRotZ);
+            this.SphereGroupBox.Controls.Add(this.label14);
+            this.SphereGroupBox.Controls.Add(this.SphereRotY);
+            this.SphereGroupBox.Controls.Add(this.label15);
+            this.SphereGroupBox.Controls.Add(this.SphereRotX);
+            this.SphereGroupBox.Controls.Add(this.label16);
+            this.SphereGroupBox.Controls.Add(this.label17);
+            this.SphereGroupBox.Controls.Add(this.SphereDimZ);
+            this.SphereGroupBox.Controls.Add(this.label18);
+            this.SphereGroupBox.Controls.Add(this.SphereDimY);
+            this.SphereGroupBox.Controls.Add(this.label19);
+            this.SphereGroupBox.Controls.Add(this.SphereDimX);
+            this.SphereGroupBox.Controls.Add(this.label20);
+            this.SphereGroupBox.Controls.Add(this.label21);
+            this.SphereGroupBox.Controls.Add(this.SpherePosZ);
+            this.SphereGroupBox.Controls.Add(this.label22);
+            this.SphereGroupBox.Controls.Add(this.SpherePosY);
+            this.SphereGroupBox.Controls.Add(this.label23);
+            this.SphereGroupBox.Controls.Add(this.SpherePosX);
+            this.SphereGroupBox.Controls.Add(this.label24);
+            this.SphereGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SphereGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.SphereGroupBox.Name = "SphereGroupBox";
+            this.SphereGroupBox.Size = new System.Drawing.Size(200, 246);
+            this.SphereGroupBox.TabIndex = 1;
+            this.SphereGroupBox.TabStop = false;
+            this.SphereGroupBox.Text = "Sphere properties";
+            this.SphereGroupBox.Visible = false;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(100, 193);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(15, 13);
+            this.label28.TabIndex = 48;
+            this.label28.Text = "R";
+            // 
+            // SphereRadius
+            // 
+            this.SphereRadius.DecimalPlaces = 2;
+            this.SphereRadius.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereRadius.Location = new System.Drawing.Point(121, 191);
+            this.SphereRadius.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereRadius.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereRadius.Name = "SphereRadius";
+            this.SphereRadius.Size = new System.Drawing.Size(53, 20);
+            this.SphereRadius.TabIndex = 47;
+            this.SphereRadius.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereRadius.ValueChanged += new System.EventHandler(this.SphereRadius_ValueChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(95, 166);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(25, 13);
+            this.label26.TabIndex = 46;
+            this.label26.Text = "Lon";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(95, 140);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(22, 13);
+            this.label27.TabIndex = 45;
+            this.label27.Text = "Lat";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(101, 121);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(60, 13);
+            this.label25.TabIndex = 44;
+            this.label25.Text = "Parameters";
+            // 
+            // SphereLon
+            // 
+            this.SphereLon.Location = new System.Drawing.Point(121, 163);
+            this.SphereLon.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereLon.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.SphereLon.Name = "SphereLon";
+            this.SphereLon.Size = new System.Drawing.Size(53, 20);
+            this.SphereLon.TabIndex = 43;
+            this.SphereLon.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.SphereLon.ValueChanged += new System.EventHandler(this.SphereLon_ValueChanged);
+            // 
+            // SphereLat
+            // 
+            this.SphereLat.Location = new System.Drawing.Point(121, 137);
+            this.SphereLat.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereLat.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.SphereLat.Name = "SphereLat";
+            this.SphereLat.Size = new System.Drawing.Size(53, 20);
+            this.SphereLat.TabIndex = 42;
+            this.SphereLat.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.SphereLat.ValueChanged += new System.EventHandler(this.SphereLat_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 192);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(14, 13);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "Z";
+            // 
+            // SphereRotZ
+            // 
+            this.SphereRotZ.DecimalPlaces = 1;
+            this.SphereRotZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereRotZ.Location = new System.Drawing.Point(29, 190);
+            this.SphereRotZ.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.SphereRotZ.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.SphereRotZ.Name = "SphereRotZ";
+            this.SphereRotZ.Size = new System.Drawing.Size(53, 20);
+            this.SphereRotZ.TabIndex = 40;
+            this.SphereRotZ.ValueChanged += new System.EventHandler(this.SphereRotZ_ValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 165);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(14, 13);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Y";
+            // 
+            // SphereRotY
+            // 
+            this.SphereRotY.DecimalPlaces = 1;
+            this.SphereRotY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereRotY.Location = new System.Drawing.Point(29, 163);
+            this.SphereRotY.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.SphereRotY.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.SphereRotY.Name = "SphereRotY";
+            this.SphereRotY.Size = new System.Drawing.Size(53, 20);
+            this.SphereRotY.TabIndex = 38;
+            this.SphereRotY.ValueChanged += new System.EventHandler(this.SphereRotY_ValueChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 139);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(14, 13);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "X";
+            // 
+            // SphereRotX
+            // 
+            this.SphereRotX.DecimalPlaces = 1;
+            this.SphereRotX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereRotX.Location = new System.Drawing.Point(29, 137);
+            this.SphereRotX.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.SphereRotX.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.SphereRotX.Name = "SphereRotX";
+            this.SphereRotX.Size = new System.Drawing.Size(53, 20);
+            this.SphereRotX.TabIndex = 36;
+            this.SphereRotX.ValueChanged += new System.EventHandler(this.SphereRotX_ValueChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 121);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(47, 13);
+            this.label16.TabIndex = 35;
+            this.label16.Text = "Rotation";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(101, 87);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(14, 13);
+            this.label17.TabIndex = 34;
+            this.label17.Text = "Z";
+            // 
+            // SphereDimZ
+            // 
+            this.SphereDimZ.DecimalPlaces = 2;
+            this.SphereDimZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereDimZ.Location = new System.Drawing.Point(121, 85);
+            this.SphereDimZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereDimZ.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimZ.Name = "SphereDimZ";
+            this.SphereDimZ.Size = new System.Drawing.Size(53, 20);
+            this.SphereDimZ.TabIndex = 33;
+            this.SphereDimZ.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimZ.ValueChanged += new System.EventHandler(this.SphereDimZ_ValueChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(101, 60);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(14, 13);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "Y";
+            // 
+            // SphereDimY
+            // 
+            this.SphereDimY.DecimalPlaces = 2;
+            this.SphereDimY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereDimY.Location = new System.Drawing.Point(121, 58);
+            this.SphereDimY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereDimY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimY.Name = "SphereDimY";
+            this.SphereDimY.Size = new System.Drawing.Size(53, 20);
+            this.SphereDimY.TabIndex = 31;
+            this.SphereDimY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimY.ValueChanged += new System.EventHandler(this.SphereDimY_ValueChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(101, 34);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(14, 13);
+            this.label19.TabIndex = 30;
+            this.label19.Text = "X";
+            // 
+            // SphereDimX
+            // 
+            this.SphereDimX.DecimalPlaces = 2;
+            this.SphereDimX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SphereDimX.Location = new System.Drawing.Point(121, 32);
+            this.SphereDimX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SphereDimX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimX.Name = "SphereDimX";
+            this.SphereDimX.Size = new System.Drawing.Size(53, 20);
+            this.SphereDimX.TabIndex = 29;
+            this.SphereDimX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.SphereDimX.ValueChanged += new System.EventHandler(this.SphereDimX_ValueChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(98, 16);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(34, 13);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Scale";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 87);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(14, 13);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "Z";
+            // 
+            // SpherePosZ
+            // 
+            this.SpherePosZ.DecimalPlaces = 2;
+            this.SpherePosZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SpherePosZ.Location = new System.Drawing.Point(29, 85);
+            this.SpherePosZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SpherePosZ.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.SpherePosZ.Name = "SpherePosZ";
+            this.SpherePosZ.Size = new System.Drawing.Size(53, 20);
+            this.SpherePosZ.TabIndex = 26;
+            this.SpherePosZ.ValueChanged += new System.EventHandler(this.SpherePosZ_ValueChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(9, 60);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(14, 13);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Y";
+            // 
+            // SpherePosY
+            // 
+            this.SpherePosY.DecimalPlaces = 2;
+            this.SpherePosY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SpherePosY.Location = new System.Drawing.Point(29, 58);
+            this.SpherePosY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SpherePosY.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.SpherePosY.Name = "SpherePosY";
+            this.SpherePosY.Size = new System.Drawing.Size(53, 20);
+            this.SpherePosY.TabIndex = 24;
+            this.SpherePosY.ValueChanged += new System.EventHandler(this.SpherePosY_ValueChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(9, 34);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(14, 13);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "X";
+            // 
+            // SpherePosX
+            // 
+            this.SpherePosX.DecimalPlaces = 2;
+            this.SpherePosX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.SpherePosX.Location = new System.Drawing.Point(29, 32);
+            this.SpherePosX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.SpherePosX.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.SpherePosX.Name = "SpherePosX";
+            this.SpherePosX.Size = new System.Drawing.Size(53, 20);
+            this.SpherePosX.TabIndex = 22;
+            this.SpherePosX.ValueChanged += new System.EventHandler(this.SpherePosX_ValueChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 16);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(44, 13);
+            this.label24.TabIndex = 21;
+            this.label24.Text = "Position";
+            // 
             // AddFigureMenu
             // 
             this.AddFigureMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cuboidToolStripMenuItem,
             this.sphereToolStripMenuItem});
             this.AddFigureMenu.Name = "AddFigureMenu";
-            this.AddFigureMenu.Size = new System.Drawing.Size(181, 70);
+            this.AddFigureMenu.Size = new System.Drawing.Size(114, 48);
             // 
             // cuboidToolStripMenuItem
             // 
             this.cuboidToolStripMenuItem.Name = "cuboidToolStripMenuItem";
-            this.cuboidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cuboidToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.cuboidToolStripMenuItem.Text = "Cuboid";
             this.cuboidToolStripMenuItem.Click += new System.EventHandler(this.cuboidToolStripMenuItem_Click);
             // 
-            // label9
+            // sphereToolStripMenuItem
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 192);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(14, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Z";
-            // 
-            // CuboidRotZ
-            // 
-            this.CuboidRotZ.DecimalPlaces = 1;
-            this.CuboidRotZ.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.CuboidRotZ.Location = new System.Drawing.Point(26, 190);
-            this.CuboidRotZ.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.CuboidRotZ.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.CuboidRotZ.Name = "CuboidRotZ";
-            this.CuboidRotZ.Size = new System.Drawing.Size(53, 20);
-            this.CuboidRotZ.TabIndex = 19;
-            this.CuboidRotZ.ValueChanged += new System.EventHandler(this.CuboidRotZ_ValueChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 165);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(14, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Y";
-            // 
-            // CuboidRotY
-            // 
-            this.CuboidRotY.DecimalPlaces = 1;
-            this.CuboidRotY.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.CuboidRotY.Location = new System.Drawing.Point(26, 163);
-            this.CuboidRotY.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.CuboidRotY.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.CuboidRotY.Name = "CuboidRotY";
-            this.CuboidRotY.Size = new System.Drawing.Size(53, 20);
-            this.CuboidRotY.TabIndex = 17;
-            this.CuboidRotY.ValueChanged += new System.EventHandler(this.CuboidRotY_ValueChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 139);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(14, 13);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "X";
-            // 
-            // CuboidRotX
-            // 
-            this.CuboidRotX.DecimalPlaces = 1;
-            this.CuboidRotX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.CuboidRotX.Location = new System.Drawing.Point(26, 137);
-            this.CuboidRotX.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.CuboidRotX.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.CuboidRotX.Name = "CuboidRotX";
-            this.CuboidRotX.Size = new System.Drawing.Size(53, 20);
-            this.CuboidRotX.TabIndex = 15;
-            this.CuboidRotX.ValueChanged += new System.EventHandler(this.CuboidRotX_ValueChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 121);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(47, 13);
-            this.label12.TabIndex = 14;
-            this.label12.Text = "Rotation";
+            this.sphereToolStripMenuItem.Name = "sphereToolStripMenuItem";
+            this.sphereToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sphereToolStripMenuItem.Text = "Sphere";
+            this.sphereToolStripMenuItem.Click += new System.EventHandler(this.sphereToolStripMenuItem_Click);
             // 
             // Visibility
             // 
@@ -926,18 +1454,20 @@
             // 
             this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
             // 
-            // sphereToolStripMenuItem
+            // backfaceCullingToolStripMenuItem
             // 
-            this.sphereToolStripMenuItem.Name = "sphereToolStripMenuItem";
-            this.sphereToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sphereToolStripMenuItem.Text = "Sphere";
-            this.sphereToolStripMenuItem.Click += new System.EventHandler(this.sphereToolStripMenuItem_Click);
+            this.backfaceCullingToolStripMenuItem.Checked = true;
+            this.backfaceCullingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.backfaceCullingToolStripMenuItem.Name = "backfaceCullingToolStripMenuItem";
+            this.backfaceCullingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backfaceCullingToolStripMenuItem.Text = "Backface culling";
+            this.backfaceCullingToolStripMenuItem.Click += new System.EventHandler(this.backfaceCullingToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 623);
+            this.ClientSize = new System.Drawing.Size(974, 601);
             this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(860, 640);
@@ -989,16 +1519,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).EndInit();
             this.CuboidGroupBox.ResumeLayout(false);
             this.CuboidGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidDimX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidPosX)).EndInit();
+            this.SphereGroupBox.ResumeLayout(false);
+            this.SphereGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereLon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereLat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereRotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereDimX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).EndInit();
             this.AddFigureMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CuboidRotX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -1063,6 +1607,35 @@
         private System.Windows.Forms.NumericUpDown CuboidRotX;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ToolStripMenuItem sphereToolStripMenuItem;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown SphereRotZ;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown SphereRotY;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown SphereRotX;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown SphereDimZ;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown SphereDimY;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown SphereDimX;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.NumericUpDown SpherePosZ;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.NumericUpDown SpherePosY;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown SpherePosX;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.NumericUpDown SphereLon;
+        private System.Windows.Forms.NumericUpDown SphereLat;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.NumericUpDown SphereRadius;
+        private System.Windows.Forms.ToolStripMenuItem backfaceCullingToolStripMenuItem;
     }
 }
 

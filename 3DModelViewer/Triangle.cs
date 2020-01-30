@@ -68,6 +68,7 @@ namespace _3DModelViewer
             points[0] = p1;
             points[1] = p2;
             points[2] = p3;
+            RecalculateNormal();
         }
 
         public Point4 this[int i]
@@ -76,7 +77,17 @@ namespace _3DModelViewer
             set
             {
                 points[i] = value;
+                RecalculateNormal();
             }
+        }
+
+        public Vector4 Normal { get; private set; }
+
+        private void RecalculateNormal()
+        {
+            Vector4 U = points[1].V - points[0].V;
+            Vector4 V = points[2].V - points[0].V;
+            Normal = Vector.Cross(U, V);
         }
     }
 }
