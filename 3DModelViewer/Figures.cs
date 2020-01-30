@@ -30,6 +30,10 @@ namespace _3DModelViewer
         private float dimY = 2f;
         private float dimZ = 2f;
 
+        private float rotX = 0f;
+        private float rotY = 0f;
+        private float rotZ = 0f;
+
         public List<Triangle> Triangles { get; } = new List<Triangle>();
 
         public Point4 Center { get; set; } = new Point4();
@@ -78,7 +82,23 @@ namespace _3DModelViewer
             }
         }
 
-        public Vector4 Rotation { get; set; } = new Vector4(0, 0, 0, 0);
+        public float RotX { get => rotX; set => rotX = value; }
+        public float RotY { get => rotY; set => rotY = value; }
+        public float RotZ { get => rotZ; set => rotZ = value; }
+
+        public Vector4 Rotation
+        {
+            get
+            {
+                return new Vector4(rotX, rotY, rotZ, 0);
+            }
+            set
+            {
+                rotX = value.X;
+                rotY = value.Y;
+                rotZ = value.Z;
+            }
+        }
 
         public Color Color { get; set; } = Color.Gold;
 
@@ -158,6 +178,17 @@ namespace _3DModelViewer
     public class Sphere : IFigure
     {
         private float radius = 2f;
+        private int lat = 20;
+        private int lon = 20;
+
+        private float rotX = 0f;
+        private float rotY = 0f;
+        private float rotZ = 0f;
+
+        public Sphere()
+        {
+            CreateTriangles();
+        }
 
         public float Radius
         {
@@ -172,20 +203,90 @@ namespace _3DModelViewer
             }
         }
 
+        public int Lat
+        {
+            get
+            {
+                return lat;
+            }
+            set
+            {
+                lat = value;
+                CreateTriangles();
+            }
+        }
+
+        public int Lon
+        {
+            get
+            {
+                return lon;
+            }
+            set
+            {
+                lon = value;
+                CreateTriangles();
+            }
+        }
+
+
         public List<Triangle> Triangles { get; } = new List<Triangle>();
 
-        public Point4 Center { get; set; }
-        public Color Color { get; set; }
+        public Point4 Center { get; set; } = new Point4();
+        public Color Color { get; set; } = Color.CornflowerBlue;
 
         public string DisplayName => $"Sphere (X:{Center.X.ToString("f2")}, Y:{Center.Y.ToString("f2")}, Z:{Center.Z.ToString("f2")})";
 
-        public bool Visibility { get; set; }
-        public Vector4 Scale { get; set; }
-        public Vector4 Rotation { get; set; }
+        public bool Visibility { get; set; } = true;
+        public Vector4 Scale { get; set; } = new Vector4(1, 1, 1, 0);
+
+        public float RotX { get => rotX; set => rotX = value; }
+        public float RotY { get => rotY; set => rotY = value; }
+        public float RotZ { get => rotZ; set => rotZ = value; }
+
+        public Vector4 Rotation
+        {
+            get
+            {
+                return new Vector4(rotX, rotY, rotZ, 0);
+            }
+            set
+            {
+                rotX = value.X;
+                rotY = value.Y;
+                rotZ = value.Z;
+            }
+        }
 
         private void CreateTriangles()
-        { 
-        
+        {
+            Triangles.Clear();
+            for (float m = 0; m < lon; m++)
+            {
+                float theta1 = (float)(m / lon * Math.PI);
+                float theta2 = (float)((m + 1) / lon * Math.PI);
+
+                for (float p = 0; p < lat; p++)
+                {
+                    float phi1 = (float)(p / lat * 2f * Math.PI);
+                    float phi2 = (float)((p + 1) / lat * 2f * Math.PI);
+
+                    Point4 p1 = new Point4(radius * (float)Math.Sin(theta1) * (float)Math.Cos(phi1), radius * (float)Math.Cos(phi1), radius * (float)Math.Sin(theta1) * (float)Math.Sin(phi1), 1);
+                    Point4 p2 = new Point4(radius * (float)Math.Sin(theta1) * (float)Math.Cos(phi2), radius * (float)Math.Cos(phi2), radius * (float)Math.Sin(theta1) * (float)Math.Sin(phi2), 1);
+                    Point4 p3 = new Point4(radius * (float)Math.Sin(theta2) * (float)Math.Cos(phi2), radius * (float)Math.Cos(phi2), radius * (float)Math.Sin(theta2) * (float)Math.Sin(phi2), 1);
+                    Point4 p4 = new Point4(radius * (float)Math.Sin(theta2) * (float)Math.Cos(phi1), radius * (float)Math.Cos(phi1), radius * (float)Math.Sin(theta2) * (float)Math.Sin(phi1), 1);
+
+                    if (m == 0)
+                        Triangles.Add(new Triangle(new Point4(p1), new Point4(p3), new Point4(p4)));
+                    else if (m + 1 == lon)
+                        Triangles.Add(new Triangle(new Point4(p3), new Point4(p1), new Point4(p2)));
+                    else
+                    {
+                        Triangles.Add(new Triangle(new Point4(p1), new Point4(p2), new Point4(p4)));
+                        Triangles.Add(new Triangle(new Point4(p2), new Point4(p3), new Point4(p4)));
+                    }
+                }
+            }
         }
     }
 }

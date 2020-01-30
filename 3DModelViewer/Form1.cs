@@ -351,5 +351,40 @@ namespace _3DModelViewer
             FillTriangles = !FillTriangles;
             fillTrianglesToolStripMenuItem.Checked = FillTriangles;
         }
+
+        private void CuboidRotX_ValueChanged(object sender, EventArgs e)
+        {
+            if (CuboidRotX.Value < 0) CuboidRotX.Value += 360;
+            else if (CuboidRotX.Value == 360) CuboidRotX.Value = 0;
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.RotX = (float)CuboidRotX.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidRotY_ValueChanged(object sender, EventArgs e)
+        {
+            if (CuboidRotY.Value < 0) CuboidRotY.Value += 360;
+            else if (CuboidRotY.Value == 360) CuboidRotY.Value = 0;
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.RotY = (float)CuboidRotY.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidRotZ_ValueChanged(object sender, EventArgs e)
+        {
+            if (CuboidRotZ.Value < 0) CuboidRotZ.Value += 360;
+            else if (CuboidRotZ.Value == 360) CuboidRotZ.Value = 0;
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.RotZ = (float)CuboidRotZ.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void sphereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Figures.Add(new Sphere());
+            FigureDataGrid.ClearSelection();
+            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+        }
     }
 }
