@@ -282,4 +282,263 @@ namespace _3DModelViewer
             }
         }
     }
+
+    public class Cylinder : IFigure
+    {
+        private float radius = 2f;
+        private float height = 2f;
+        private int division = 12;
+
+        public List<Triangle> Triangles { get; } = new List<Triangle>();
+
+        public Point4 Center { get; set; } = new Point4();
+
+        public Color Color { get; set; } = Color.Brown;
+
+        public string DisplayName => $"Cylinder (X:{Center.X.ToString("f2")}, Y:{Center.Y.ToString("f2")}, Z:{Center.Z.ToString("f2")})";
+
+        public bool Visibility { get; set; } = true;
+
+        public Cylinder()
+        {
+            CreateTriangles();
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return radius;
+            }
+            set
+            {
+                radius = value;
+                CreateTriangles();
+            }
+        }
+
+        public float Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                height = value;
+                CreateTriangles();
+            }
+        }
+
+        public int Division
+        {
+            get
+            {
+                return division;
+            }
+            set
+            {
+                division = value;
+                CreateTriangles();
+            }
+        }
+
+        public float DimX { get; set; } = 1f;
+
+        public float DimY { get; set; } = 1f;
+
+        public float DimZ { get; set; } = 1f;
+
+        public Vector4 Scale
+        {
+            get
+            {
+                return new Vector4(DimX, DimY, DimZ, 0);
+            }
+            set
+            {
+                DimX = value.X;
+                DimY = value.Y;
+                DimZ = value.Z;
+            }
+        }
+
+        public float RotX { get; set; } = 0f;
+        public float RotY { get; set; } = 0f;
+        public float RotZ { get; set; } = 0f;
+
+        public Vector4 Rotation
+        {
+            get
+            {
+                return new Vector4(RotX, RotY, RotZ, 0);
+            }
+            set
+            {
+                RotX = value.X;
+                RotY = value.Y;
+                RotZ = value.Z;
+            }
+        }
+
+        private float Sin(float rad)
+        {
+            return (float)Math.Sin(rad);
+        }
+
+        private float Cos(float rad)
+        {
+            return (float)Math.Cos(rad);
+        }
+
+        private void CreateTriangles()
+        {
+            Triangles.Clear();
+
+            for (float m = 0; m < division; m++)
+            {
+                float theta1 = (float)(m / division * 2f * Math.PI);
+                float theta2 = (float)((m + 1) / division * 2f * Math.PI);
+
+                Point4 p1 = new Point4(radius * Cos(theta1), height / 2f, radius * Sin(theta1), 1);
+                Point4 p2 = new Point4(radius * Cos(theta1), -height / 2f, radius * Sin(theta1), 1);
+                Point4 p3 = new Point4(radius * Cos(theta2), -height / 2f, radius * Sin(theta2), 1);
+                Point4 p4 = new Point4(radius * Cos(theta2), height / 2f, radius * Sin(theta2), 1);
+
+                Triangles.Add(new Triangle(new Point4(p4), new Point4(p2), new Point4(p1)));
+                Triangles.Add(new Triangle(new Point4(p4), new Point4(p3), new Point4(p2)));
+
+                Triangles.Add(new Triangle(new Point4(p4), new Point4(p1), new Point4(0, height / 2f, 0)));
+                Triangles.Add(new Triangle(new Point4(p2), new Point4(p3), new Point4(0, -height / 2f, 0)));
+            }
+
+        }
+    }
+    public class Cone : IFigure
+    {
+        private float radius = 1f;
+        private float height = 2f;
+        private int division = 12;
+
+        public List<Triangle> Triangles { get; } = new List<Triangle>();
+
+        public Point4 Center { get; set; } = new Point4();
+
+        public Color Color { get; set; } = Color.Moccasin;
+
+        public string DisplayName => $"Cone (X:{Center.X.ToString("f2")}, Y:{Center.Y.ToString("f2")}, Z:{Center.Z.ToString("f2")})";
+
+        public bool Visibility { get; set; } = true;
+
+        public Cone()
+        {
+            CreateTriangles();
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return radius;
+            }
+            set
+            {
+                radius = value;
+                CreateTriangles();
+            }
+        }
+
+        public float Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                height = value;
+                CreateTriangles();
+            }
+        }
+
+        public int Division
+        {
+            get
+            {
+                return division;
+            }
+            set
+            {
+                division = value;
+                CreateTriangles();
+            }
+        }
+
+        public float DimX { get; set; } = 1f;
+
+        public float DimY { get; set; } = 1f;
+
+        public float DimZ { get; set; } = 1f;
+
+        public Vector4 Scale
+        {
+            get
+            {
+                return new Vector4(DimX, DimY, DimZ, 0);
+            }
+            set
+            {
+                DimX = value.X;
+                DimY = value.Y;
+                DimZ = value.Z;
+            }
+        }
+
+        public float RotX { get; set; } = 0f;
+        public float RotY { get; set; } = 0f;
+        public float RotZ { get; set; } = 0f;
+
+        public Vector4 Rotation
+        {
+            get
+            {
+                return new Vector4(RotX, RotY, RotZ, 0);
+            }
+            set
+            {
+                RotX = value.X;
+                RotY = value.Y;
+                RotZ = value.Z;
+            }
+        }
+
+        private float Sin(float rad)
+        {
+            return (float)Math.Sin(rad);
+        }
+
+        private float Cos(float rad)
+        {
+            return (float)Math.Cos(rad);
+        }
+
+        private void CreateTriangles()
+        {
+            Triangles.Clear();
+            Point4 center = new Point4(0, -height / 2f, 0);
+            Point4 tip = new Point4(0, height / 2f, 0);
+            for (float m = 0; m < division; m++)
+            {
+                float theta1 = (float)(m / division * 2f * Math.PI);
+                float theta2 = (float)((m + 1) / division * 2f * Math.PI);
+
+                Point4 p1 = new Point4(radius * Cos(theta1), center.Y, radius * Sin(theta1), 1);
+                Point4 p2 = new Point4(radius * Cos(theta2), center.Y, radius * Sin(theta2), 1);
+
+                Triangles.Add(new Triangle(new Point4(p1), new Point4(p2), new Point4(center)));
+                Triangles.Add(new Triangle(new Point4(p2), new Point4(p1), new Point4(tip)));
+            }
+
+        }
+    }
 }

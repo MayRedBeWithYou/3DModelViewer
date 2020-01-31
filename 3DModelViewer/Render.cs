@@ -10,17 +10,28 @@ using FastBitmapLib;
 
 namespace _3DModelViewer
 {
+    public interface ISceneElement
+    {
+        string DisplayName { get; }
+
+        Point4 Position { get; set; }
+    }
+
     public class Camera
     {
-        private Point4 defaultPosition = new Point4(3, 3, 4);
+        private Point4 defaultPosition = new Point4(6, 2, 3);
 
-        public Point4 Position;
+        public Point4 Position { get; set; }
 
         public string DisplayName => $"Camera (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
 
         public Point4 Target = new Point4();
 
         public int FOV = 60;
+
+        public float N = 0.1f;
+
+        public float F = 100f;
 
         public Vector4 Normal
         {
@@ -66,7 +77,18 @@ namespace _3DModelViewer
             Position = new Point4(defaultPosition);
             Target = new Point4();
             FOV = 60;
+            N = 0.1f;
+            F = 100f;
         }
+    }
+
+    public class Light : ISceneElement
+    {
+        public string DisplayName => $"Light (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
+
+        public Point4 Position { get; set; } = new Point4(7, 7, 7);
+
+        public Color Color { get; set; } = Color.Aquamarine;
     }
 
     public class RenderInfo
@@ -85,6 +107,14 @@ namespace _3DModelViewer
 
     public static class Render
     {
+        public static bool FillTriangles = true;
+
+        public static bool BackfaceCulling = true;
+
+        public static bool ZBuffering = false;
+
+        private static float[][] Depth;
+
         public static void Clear(Bitmap bitmap)
         {
             using (FastBitmap fast = bitmap.FastLock())
@@ -121,15 +151,18 @@ namespace _3DModelViewer
             b = tmp;
         }
 
-        public static void DrawObjects(Bitmap bitmap, List<RenderInfo> infos, bool filling)
+        public static void DrawObjects(Bitmap bitmap, List<RenderInfo> infos)
         {
-            float[][] depth = new float[bitmap.Width][];
-            depth[0] = new float[bitmap.Height];
-            for (int i = 0; i < bitmap.Height; i++) depth[0][i] = float.MaxValue;
-            for (int i = 1; i < bitmap.Width; i++)
+            if (ZBuffering)
             {
-                depth[i] = new float[bitmap.Height];
-                Array.Copy(depth[0], 0, depth[i], 0, bitmap.Height);
+                Depth = new float[bitmap.Width][];
+                Depth[0] = new float[bitmap.Height];
+                for (int i = 0; i < bitmap.Height; i++) Depth[0][i] = float.MaxValue;
+                for (int i = 1; i < bitmap.Width; i++)
+                {
+                    Depth[i] = new float[bitmap.Height];
+                    Array.Copy(Depth[0], 0, Depth[i], 0, bitmap.Height);
+                }
             }
 
             using (FastBitmap fast = bitmap.FastLock())
@@ -138,9 +171,9 @@ namespace _3DModelViewer
                 {
                     foreach (Triangle t in info.triangles)
                     {
-                        if (filling)
+                        if (FillTriangles)
                         {
-                            FillScanline(fast, t.Points.ToList(), ref depth, info.color);
+                            FillScanline(fast, t.Points.ToList(), info.color);
                         }
                         else Outlines(fast, t.Points.ToList(), info.color);
                     }
@@ -148,7 +181,116 @@ namespace _3DModelViewer
             }
         }
 
-        public static void FillScanline(FastBitmap fast, List<Point4> points, ref float[][] z, Color color)
+        private static void FillFlatTopTriangle(FastBitmap fast, Point4 v1, Point4 v2, Point4 v3, Color color)
+        {
+            float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
+            float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
+            float zslope1 = v3.Z - v1.Z / (v3.Y - v1.Y);
+            float zslope2 = v3.Z - v2.Z / (v3.Y - v2.Y);
+
+            if (v1.X > v2.X)
+            {
+                Swap(ref invslope1, ref invslope2);
+                Swap(ref zslope1, ref zslope2);
+            }
+            float curX1 = v3.X;
+            float curX2 = v3.X;
+
+            float zL = v3.Z;
+            float zR = v3.Z;
+
+            for (int scanlineY = (int)v3.Y; scanlineY > v1.Y; scanlineY--)
+            {
+                float curZ = zL;
+                float curQ = 1 / (float)((int)curX2 - (int)curX1);
+                if (scanlineY > 0 && scanlineY < fast.Height)
+                {
+                    for (int i = (int)curX1; i < curX2; i++)
+                    {
+                        if (ZBuffering)
+                        {
+                            if (i > 0 && i < fast.Width)
+                            {
+                                if (curZ <= Depth[i][scanlineY])
+                                {
+                                    fast.SetPixel(i, scanlineY, color);
+                                    Depth[i][scanlineY] = curZ;
+                                }
+                            }
+                            float q = curQ * (i - (int)curX1);
+                            curZ = zL * (1f - q) + zR * q;
+                        }
+                        else
+                        {
+                            if (i > 0 && i < fast.Width)
+                            {
+                                fast.SetPixel(i, scanlineY, color);
+                            }
+                        }
+                    }
+                }
+                zL -= zslope1;
+                zR -= zslope2;
+                curX1 -= invslope1;
+                curX2 -= invslope2;
+            }
+        }
+
+        private static void FillFlatBottomTriangle(FastBitmap fast, Point4 v1, Point4 v2, Point4 v3, Color color)
+        {
+            float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
+            float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
+            float zslope1 = v2.Z - v1.Z / (v2.Y - v1.Y);
+            float zslope2 = v3.Z - v1.Z / (v3.Y - v1.Y);
+            if (v2.X > v3.X)
+            {
+                Swap(ref invslope1, ref invslope2);
+                Swap(ref zslope1, ref zslope2);
+            }
+            float curX1 = v1.X;
+            float curX2 = v1.X;
+            float zL = v1.Z;
+            float zR = v1.Z;
+
+
+            for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
+            {
+                if (scanlineY > 0 && scanlineY < fast.Height)
+                {
+                    float curZ = zL;
+                    float curQ = 1 / (float)((int)curX2 - (int)curX1);
+                    for (int i = (int)curX1; i < curX2; i++)
+                    {
+                        if (ZBuffering)
+                        {
+                            if (i > 0 && i < fast.Width)
+                            {
+                                if (curZ <= Depth[i][scanlineY])
+                                {
+                                    fast.SetPixel(i, scanlineY, color);
+                                    Depth[i][scanlineY] = curZ;
+                                }
+                            }
+                            float q = curQ * (i - (int)curX1);
+                            curZ = zL * (1f - q) + zR * q;
+                        }
+                        else
+                        {
+                            if (i > 0 && i < fast.Width)
+                            {
+                                fast.SetPixel(i, scanlineY, color);
+                            }
+                        }
+                    }
+                }
+                zL += zslope1;
+                zR += zslope2;
+                curX1 += invslope1;
+                curX2 += invslope2;
+            }
+        }
+
+        public static void FillScanline(FastBitmap fast, List<Point4> points, Color color)
         {
             points.Sort((p, r) => p.Y.CompareTo(r.Y));
             Point4 v1 = points[0];
@@ -156,181 +298,20 @@ namespace _3DModelViewer
             Point4 v3 = points[2];
             if (v2.Y == v3.Y)
             {
-                float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
-                float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
-                float zslope1 = v2.Z - v1.Z / (v2.Y - v1.Y);
-                float zslope2 = v3.Z - v1.Z / (v3.Y - v1.Y);
-                if (v2.X > v3.X)
-                {
-                    Swap(ref invslope1, ref invslope2);
-                    Swap(ref zslope1, ref zslope2);
-                }
-                float curX1 = v1.X;
-                float curX2 = v1.X;
-                float zL = v1.Z;
-                float zR = v1.Z;
-
-
-                for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
-                {
-                    if (scanlineY > 0 && scanlineY < fast.Height)
-                    {
-                        float curZ = zL;
-                        float curQ = 1 / (float)((int)curX2 - (int)curX1);
-                        for (int i = (int)curX1; i < curX2; i++)
-                        {
-                            if (i > 0 && i < fast.Width)
-                            {
-                                if (curZ <= z[i][scanlineY])
-                                {
-                                    fast.SetPixel(i, scanlineY, color);
-                                    z[i][scanlineY] = curZ;
-                                }                                
-                            }
-                            float q = curQ * (i - (int)curX1);
-                            curZ = zL * (1f - q) + zR * q;
-                        }
-                    }
-                    zL += zslope1;
-                    zR += zslope2;
-                    curX1 += invslope1;
-                    curX2 += invslope2;
-                }
+                FillFlatBottomTriangle(fast, v1, v2, v3, color);
             }
             else if (v1.Y == v2.Y)
             {
-                float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
-                float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
-                float zslope1 = v3.Z - v1.Z / (v3.Y - v1.Y);
-                float zslope2 = v3.Z - v2.Z / (v3.Y - v2.Y);
-
-                if (v1.X > v2.X)
-                {
-                    Swap(ref invslope1, ref invslope2);
-                    Swap(ref zslope1, ref zslope2);
-                }
-                float curX1 = v3.X;
-                float curX2 = v3.X;
-
-                float zL = v3.Z;
-                float zR = v3.Z;
-
-                for (int scanlineY = (int)v3.Y; scanlineY > v1.Y; scanlineY--)
-                {
-                    float curZ = zL;
-                    float curQ = 1 / (float)((int)curX2 - (int)curX1);
-                    if (scanlineY > 0 && scanlineY < fast.Height)
-                    {
-                        for (int i = (int)curX1; i < curX2; i++)
-                        {
-                            if (i > 0 && i < fast.Width)
-                            {
-                                if (curZ <= z[i][scanlineY])
-                                {
-                                    fast.SetPixel(i, scanlineY, color);
-                                    z[i][scanlineY] = curZ;
-                                }
-                            }
-                            float q = curQ * (i - (int)curX1);
-                            curZ = zL * (1f - q) + zR * q;
-                        }
-                    }
-                    zL -= zslope1;
-                    zR -= zslope2;
-                    curX1 -= invslope1;
-                    curX2 -= invslope2;
-                }
+                FillFlatTopTriangle(fast, v1, v2, v3, color);
             }
             else
             {
                 float z4 = v1.Z + (v2.Y - v1.Y) * (v3.Z - v1.Z) / (v3.Y - v1.Y);
-                Point4 v4 = new Point4(
-                   (int)(v1.X + ((float)(v2.Y - v1.Y) / (float)(v3.Y - v1.Y)) * (v3.X - v1.X)), (int)v2.Y, z4);
-
-                //Fill bottom triangle
-
-                float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
-                float invslope2 = (v4.X - v1.X) / (v4.Y - v1.Y);
-                float zslope1 = v2.Z - v1.Z / (v2.Y - v1.Y);
-                float zslope2 = v4.Z - v1.Z / (v4.Y - v1.Y);
-                if (v2.X > v4.X)
-                {
-                    Swap(ref invslope1, ref invslope2);
-                    Swap(ref zslope1, ref zslope2);
-                }
-
-                float curX1 = v1.X;
-                float curX2 = v1.X;
-                float zL = v1.Z;
-                float zR = v1.Z;
-
-                for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
-                {
-                    if (scanlineY > 0 && scanlineY < fast.Height)
-                    {
-                        float curZ = zL;
-                        float curQ = 1 / (float)((int)curX2 - (int)curX1);
-                        for (int i = (int)curX1; i < curX2; i++)
-                        {
-                            if (i > 0 && i < fast.Width)
-                            {
-                                if (curZ <= z[i][scanlineY])
-                                {
-                                    fast.SetPixel(i, scanlineY, color);
-                                    z[i][scanlineY] = curZ;
-                                }
-                            }
-                            float q = curQ * (i - (int)curX1);
-                            curZ = zL * (1f - q) + zR * q;
-                        }
-                    }
-
-                    zL += zslope1;
-                    zR += zslope2;
-                    curX1 += invslope1;
-                    curX2 += invslope2;
-                }
-
-                invslope1 = (v3.X - v2.X) / (v3.Y - v2.Y);
-                invslope2 = (v3.X - v4.X) / (v3.Y - v4.Y);
-                zslope1 = v3.Z - v2.Z / (v3.Y - v2.Y);
-                zslope2 = v3.Z - v4.Z / (v3.Y - v4.Y);
-
-                if (v2.X > v4.X)
-                {
-                    Swap(ref invslope1, ref invslope2);
-                    Swap(ref zslope1, ref zslope2);
-                }
-
-                curX1 = v3.X;
-                curX2 = v3.X;
-
-                for (int scanlineY = (int)v3.Y; scanlineY > v2.Y; scanlineY--)
-                {
-                    if (scanlineY > 0 && scanlineY < fast.Height)
-                    {
-                        float curZ = zL;
-                        float curQ = 1 / (float)((int)curX2 - (int)curX1);
-                        for (int i = (int)curX1; i < curX2; i++)
-                        {
-                            if (i > 0 && i < fast.Width)
-                            {
-                                if (curZ <= z[i][scanlineY])
-                                {
-                                    fast.SetPixel(i, scanlineY, color);
-                                    z[i][scanlineY] = curZ;
-                                }
-                            }
-                            float q = curQ * (i - (int)curX1);
-                            curZ = zL * (1f - q) + zR * q;
-                        }                        
-                    }
-                    zL -= zslope1;
-                    zR -= zslope2;
-                    curX1 -= invslope1;
-                    curX2 -= invslope2;
-                }
+                Point4 v4 = new Point4((int)(v1.X + ((float)(v2.Y - v1.Y) / (float)(v3.Y - v1.Y)) * (v3.X - v1.X)), (int)v2.Y, z4);
+                FillFlatBottomTriangle(fast, v1, v2, v4, color);
+                FillFlatTopTriangle(fast, v2, v4, v3, color);
             }
+            //Outlines(fast, points, Color.Black);
         }
 
         public static void Outlines(FastBitmap fast, List<Point4> points, Color color)

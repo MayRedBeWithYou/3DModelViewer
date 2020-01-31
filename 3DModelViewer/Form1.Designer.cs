@@ -36,6 +36,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fillTrianglesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backfaceCullingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zbufferingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -47,6 +49,10 @@
             this.AddCameraButton = new System.Windows.Forms.Button();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CameraF = new System.Windows.Forms.NumericUpDown();
+            this.label30 = new System.Windows.Forms.Label();
+            this.CameraN = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
             this.FOVLabel = new System.Windows.Forms.Label();
             this.FOVSlider = new System.Windows.Forms.TrackBar();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -111,10 +117,81 @@
             this.AddFigureMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cuboidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cylinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CylinderGroupBox = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.CylinderRadius = new System.Windows.Forms.NumericUpDown();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.CylinderHeight = new System.Windows.Forms.NumericUpDown();
+            this.CylinderDiv = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.CylinderRotZ = new System.Windows.Forms.NumericUpDown();
+            this.label36 = new System.Windows.Forms.Label();
+            this.CylinderRotY = new System.Windows.Forms.NumericUpDown();
+            this.label37 = new System.Windows.Forms.Label();
+            this.CylinderRotX = new System.Windows.Forms.NumericUpDown();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.CylinderDimZ = new System.Windows.Forms.NumericUpDown();
+            this.label40 = new System.Windows.Forms.Label();
+            this.CylinderDimY = new System.Windows.Forms.NumericUpDown();
+            this.label41 = new System.Windows.Forms.Label();
+            this.CylinderDimX = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.CylinderPosZ = new System.Windows.Forms.NumericUpDown();
+            this.label44 = new System.Windows.Forms.Label();
+            this.CylinderPosY = new System.Windows.Forms.NumericUpDown();
+            this.label45 = new System.Windows.Forms.Label();
+            this.CylinderPosX = new System.Windows.Forms.NumericUpDown();
+            this.label46 = new System.Windows.Forms.Label();
+            this.coneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConeGroupBox = new System.Windows.Forms.GroupBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.ConeRadius = new System.Windows.Forms.NumericUpDown();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.ConeHeight = new System.Windows.Forms.NumericUpDown();
+            this.ConeDiv = new System.Windows.Forms.NumericUpDown();
+            this.label51 = new System.Windows.Forms.Label();
+            this.ConeRotZ = new System.Windows.Forms.NumericUpDown();
+            this.label52 = new System.Windows.Forms.Label();
+            this.ConeRotY = new System.Windows.Forms.NumericUpDown();
+            this.label53 = new System.Windows.Forms.Label();
+            this.ConeRotX = new System.Windows.Forms.NumericUpDown();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.ConeDimZ = new System.Windows.Forms.NumericUpDown();
+            this.label56 = new System.Windows.Forms.Label();
+            this.ConeDimY = new System.Windows.Forms.NumericUpDown();
+            this.label57 = new System.Windows.Forms.Label();
+            this.ConeDimX = new System.Windows.Forms.NumericUpDown();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.ConePosZ = new System.Windows.Forms.NumericUpDown();
+            this.label60 = new System.Windows.Forms.Label();
+            this.ConePosY = new System.Windows.Forms.NumericUpDown();
+            this.label61 = new System.Windows.Forms.Label();
+            this.ConePosX = new System.Windows.Forms.NumericUpDown();
+            this.label62 = new System.Windows.Forms.Label();
+            this.CylinderColor = new System.Windows.Forms.PictureBox();
+            this.label63 = new System.Windows.Forms.Label();
             this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.backfaceCullingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label64 = new System.Windows.Forms.Label();
+            this.SphereColor = new System.Windows.Forms.PictureBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.CuboidColor = new System.Windows.Forms.PictureBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.ConeColor = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -138,6 +215,8 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FOVSlider)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
@@ -174,7 +253,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).BeginInit();
             this.AddFigureMenu.SuspendLayout();
+            this.CylinderGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDiv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosX)).BeginInit();
+            this.ConeGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDiv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -197,7 +306,7 @@
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2MinSize = 200;
-            this.splitContainer1.Size = new System.Drawing.Size(974, 601);
+            this.splitContainer1.Size = new System.Drawing.Size(974, 617);
             this.splitContainer1.SplitterDistance = 770;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -205,7 +314,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FPSLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 579);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
             this.statusStrip1.Size = new System.Drawing.Size(770, 22);
@@ -232,6 +341,11 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveSceneToolStripMenuItem,
+            this.loadSceneToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -240,7 +354,8 @@
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fillTrianglesToolStripMenuItem,
-            this.backfaceCullingToolStripMenuItem});
+            this.backfaceCullingToolStripMenuItem,
+            this.zbufferingToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -250,16 +365,32 @@
             this.fillTrianglesToolStripMenuItem.Checked = true;
             this.fillTrianglesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillTrianglesToolStripMenuItem.Name = "fillTrianglesToolStripMenuItem";
-            this.fillTrianglesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fillTrianglesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.fillTrianglesToolStripMenuItem.Text = "Fill triangles";
             this.fillTrianglesToolStripMenuItem.Click += new System.EventHandler(this.fillTrianglesToolStripMenuItem_Click);
+            // 
+            // backfaceCullingToolStripMenuItem
+            // 
+            this.backfaceCullingToolStripMenuItem.Checked = true;
+            this.backfaceCullingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.backfaceCullingToolStripMenuItem.Name = "backfaceCullingToolStripMenuItem";
+            this.backfaceCullingToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.backfaceCullingToolStripMenuItem.Text = "Backface culling";
+            this.backfaceCullingToolStripMenuItem.Click += new System.EventHandler(this.backfaceCullingToolStripMenuItem_Click);
+            // 
+            // zbufferingToolStripMenuItem
+            // 
+            this.zbufferingToolStripMenuItem.Name = "zbufferingToolStripMenuItem";
+            this.zbufferingToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.zbufferingToolStripMenuItem.Text = "Z-buffering";
+            this.zbufferingToolStripMenuItem.Click += new System.EventHandler(this.zbufferingToolStripMenuItem_Click);
             // 
             // Canvas
             // 
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Canvas.Location = new System.Drawing.Point(0, 0);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(770, 601);
+            this.Canvas.Size = new System.Drawing.Size(770, 617);
             this.Canvas.TabIndex = 0;
             this.Canvas.TabStop = false;
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
@@ -274,7 +405,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 601);
+            this.panel2.Size = new System.Drawing.Size(200, 617);
             this.panel2.TabIndex = 1;
             // 
             // splitContainer2
@@ -292,19 +423,18 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer2.Size = new System.Drawing.Size(200, 601);
-            this.splitContainer2.SplitterDistance = 158;
+            this.splitContainer2.Size = new System.Drawing.Size(200, 617);
+            this.splitContainer2.SplitterDistance = 184;
             this.splitContainer2.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
             this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.groupBox8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 158);
+            this.panel1.Size = new System.Drawing.Size(200, 184);
             this.panel1.TabIndex = 1;
             // 
             // groupBox8
@@ -314,7 +444,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(0, 0);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(200, 158);
+            this.groupBox8.Size = new System.Drawing.Size(200, 184);
             this.groupBox8.TabIndex = 10;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Cameras";
@@ -337,7 +467,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(194, 139);
+            this.splitContainer3.Size = new System.Drawing.Size(194, 165);
             this.splitContainer3.SplitterDistance = 30;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -388,21 +518,91 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.panel4);
-            this.splitContainer4.Size = new System.Drawing.Size(194, 105);
-            this.splitContainer4.SplitterDistance = 56;
+            this.splitContainer4.Size = new System.Drawing.Size(194, 131);
+            this.splitContainer4.SplitterDistance = 76;
             this.splitContainer4.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CameraF);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Controls.Add(this.CameraN);
+            this.groupBox1.Controls.Add(this.label29);
             this.groupBox1.Controls.Add(this.FOVLabel);
             this.groupBox1.Controls.Add(this.FOVSlider);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(194, 56);
+            this.groupBox1.Size = new System.Drawing.Size(194, 76);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FOV";
+            // 
+            // CameraF
+            // 
+            this.CameraF.DecimalPlaces = 2;
+            this.CameraF.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CameraF.Location = new System.Drawing.Point(115, 49);
+            this.CameraF.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.CameraF.Name = "CameraF";
+            this.CameraF.Size = new System.Drawing.Size(47, 20);
+            this.CameraF.TabIndex = 5;
+            this.CameraF.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CameraF.ValueChanged += new System.EventHandler(this.CameraF_ValueChanged);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(99, 51);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(10, 13);
+            this.label30.TabIndex = 4;
+            this.label30.Text = "f";
+            // 
+            // CameraN
+            // 
+            this.CameraN.DecimalPlaces = 2;
+            this.CameraN.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CameraN.Location = new System.Drawing.Point(27, 49);
+            this.CameraN.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.CameraN.Name = "CameraN";
+            this.CameraN.Size = new System.Drawing.Size(47, 20);
+            this.CameraN.TabIndex = 3;
+            this.CameraN.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CameraN.ValueChanged += new System.EventHandler(this.CameraN_ValueChanged);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(11, 51);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(13, 13);
+            this.label29.TabIndex = 2;
+            this.label29.Text = "n";
             // 
             // FOVLabel
             // 
@@ -436,7 +636,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.MinimumSize = new System.Drawing.Size(0, 40);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(194, 45);
+            this.panel4.Size = new System.Drawing.Size(194, 51);
             this.panel4.TabIndex = 1;
             // 
             // CameraListBox
@@ -446,7 +646,7 @@
             this.CameraListBox.Location = new System.Drawing.Point(0, 0);
             this.CameraListBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.CameraListBox.Name = "CameraListBox";
-            this.CameraListBox.Size = new System.Drawing.Size(194, 45);
+            this.CameraListBox.Size = new System.Drawing.Size(194, 51);
             this.CameraListBox.TabIndex = 0;
             this.CameraListBox.SelectedIndexChanged += new System.EventHandler(this.CameraListBox_SelectedIndexChanged);
             // 
@@ -464,9 +664,12 @@
             // 
             // splitContainer5.Panel2
             // 
+            this.splitContainer5.Panel2.AutoScroll = true;
+            this.splitContainer5.Panel2.Controls.Add(this.ConeGroupBox);
+            this.splitContainer5.Panel2.Controls.Add(this.CylinderGroupBox);
             this.splitContainer5.Panel2.Controls.Add(this.CuboidGroupBox);
             this.splitContainer5.Panel2.Controls.Add(this.SphereGroupBox);
-            this.splitContainer5.Size = new System.Drawing.Size(200, 439);
+            this.splitContainer5.Size = new System.Drawing.Size(200, 429);
             this.splitContainer5.SplitterDistance = 170;
             this.splitContainer5.TabIndex = 0;
             // 
@@ -551,6 +754,8 @@
             // 
             // CuboidGroupBox
             // 
+            this.CuboidGroupBox.Controls.Add(this.label65);
+            this.CuboidGroupBox.Controls.Add(this.CuboidColor);
             this.CuboidGroupBox.Controls.Add(this.label9);
             this.CuboidGroupBox.Controls.Add(this.CuboidRotZ);
             this.CuboidGroupBox.Controls.Add(this.label10);
@@ -575,7 +780,7 @@
             this.CuboidGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.CuboidGroupBox.Location = new System.Drawing.Point(0, 246);
             this.CuboidGroupBox.Name = "CuboidGroupBox";
-            this.CuboidGroupBox.Size = new System.Drawing.Size(200, 226);
+            this.CuboidGroupBox.Size = new System.Drawing.Size(183, 239);
             this.CuboidGroupBox.TabIndex = 0;
             this.CuboidGroupBox.TabStop = false;
             this.CuboidGroupBox.Text = "Cuboid properties";
@@ -584,7 +789,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 192);
+            this.label9.Location = new System.Drawing.Point(6, 184);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 20;
@@ -598,7 +803,7 @@
             0,
             0,
             65536});
-            this.CuboidRotZ.Location = new System.Drawing.Point(26, 190);
+            this.CuboidRotZ.Location = new System.Drawing.Point(26, 182);
             this.CuboidRotZ.Maximum = new decimal(new int[] {
             360,
             0,
@@ -617,7 +822,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 165);
+            this.label10.Location = new System.Drawing.Point(6, 157);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 13);
             this.label10.TabIndex = 18;
@@ -631,7 +836,7 @@
             0,
             0,
             65536});
-            this.CuboidRotY.Location = new System.Drawing.Point(26, 163);
+            this.CuboidRotY.Location = new System.Drawing.Point(26, 155);
             this.CuboidRotY.Maximum = new decimal(new int[] {
             360,
             0,
@@ -650,7 +855,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 139);
+            this.label11.Location = new System.Drawing.Point(6, 131);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(14, 13);
             this.label11.TabIndex = 16;
@@ -664,7 +869,7 @@
             0,
             0,
             65536});
-            this.CuboidRotX.Location = new System.Drawing.Point(26, 137);
+            this.CuboidRotX.Location = new System.Drawing.Point(26, 129);
             this.CuboidRotX.Maximum = new decimal(new int[] {
             360,
             0,
@@ -683,7 +888,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 121);
+            this.label12.Location = new System.Drawing.Point(3, 113);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(47, 13);
             this.label12.TabIndex = 14;
@@ -922,6 +1127,8 @@
             // 
             // SphereGroupBox
             // 
+            this.SphereGroupBox.Controls.Add(this.label64);
+            this.SphereGroupBox.Controls.Add(this.SphereColor);
             this.SphereGroupBox.Controls.Add(this.label28);
             this.SphereGroupBox.Controls.Add(this.SphereRadius);
             this.SphereGroupBox.Controls.Add(this.label26);
@@ -953,7 +1160,7 @@
             this.SphereGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.SphereGroupBox.Location = new System.Drawing.Point(0, 0);
             this.SphereGroupBox.Name = "SphereGroupBox";
-            this.SphereGroupBox.Size = new System.Drawing.Size(200, 246);
+            this.SphereGroupBox.Size = new System.Drawing.Size(183, 246);
             this.SphereGroupBox.TabIndex = 1;
             this.SphereGroupBox.TabStop = false;
             this.SphereGroupBox.Text = "Sphere properties";
@@ -962,7 +1169,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(100, 193);
+            this.label28.Location = new System.Drawing.Point(100, 186);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(15, 13);
             this.label28.TabIndex = 48;
@@ -976,7 +1183,7 @@
             0,
             0,
             131072});
-            this.SphereRadius.Location = new System.Drawing.Point(121, 191);
+            this.SphereRadius.Location = new System.Drawing.Point(121, 184);
             this.SphereRadius.Maximum = new decimal(new int[] {
             50,
             0,
@@ -1000,7 +1207,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(95, 166);
+            this.label26.Location = new System.Drawing.Point(95, 159);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(25, 13);
             this.label26.TabIndex = 46;
@@ -1009,7 +1216,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(95, 140);
+            this.label27.Location = new System.Drawing.Point(95, 133);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(22, 13);
             this.label27.TabIndex = 45;
@@ -1018,7 +1225,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(101, 121);
+            this.label25.Location = new System.Drawing.Point(101, 114);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(60, 13);
             this.label25.TabIndex = 44;
@@ -1026,7 +1233,7 @@
             // 
             // SphereLon
             // 
-            this.SphereLon.Location = new System.Drawing.Point(121, 163);
+            this.SphereLon.Location = new System.Drawing.Point(121, 156);
             this.SphereLon.Maximum = new decimal(new int[] {
             50,
             0,
@@ -1049,7 +1256,7 @@
             // 
             // SphereLat
             // 
-            this.SphereLat.Location = new System.Drawing.Point(121, 137);
+            this.SphereLat.Location = new System.Drawing.Point(121, 130);
             this.SphereLat.Maximum = new decimal(new int[] {
             50,
             0,
@@ -1073,7 +1280,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 192);
+            this.label13.Location = new System.Drawing.Point(9, 185);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(14, 13);
             this.label13.TabIndex = 41;
@@ -1087,7 +1294,7 @@
             0,
             0,
             65536});
-            this.SphereRotZ.Location = new System.Drawing.Point(29, 190);
+            this.SphereRotZ.Location = new System.Drawing.Point(29, 183);
             this.SphereRotZ.Maximum = new decimal(new int[] {
             360,
             0,
@@ -1106,7 +1313,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 165);
+            this.label14.Location = new System.Drawing.Point(9, 158);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(14, 13);
             this.label14.TabIndex = 39;
@@ -1120,7 +1327,7 @@
             0,
             0,
             65536});
-            this.SphereRotY.Location = new System.Drawing.Point(29, 163);
+            this.SphereRotY.Location = new System.Drawing.Point(29, 156);
             this.SphereRotY.Maximum = new decimal(new int[] {
             360,
             0,
@@ -1139,7 +1346,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 139);
+            this.label15.Location = new System.Drawing.Point(9, 132);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(14, 13);
             this.label15.TabIndex = 37;
@@ -1153,7 +1360,7 @@
             0,
             0,
             65536});
-            this.SphereRotX.Location = new System.Drawing.Point(29, 137);
+            this.SphereRotX.Location = new System.Drawing.Point(29, 130);
             this.SphereRotX.Maximum = new decimal(new int[] {
             360,
             0,
@@ -1172,7 +1379,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 121);
+            this.label16.Location = new System.Drawing.Point(6, 114);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(47, 13);
             this.label16.TabIndex = 35;
@@ -1413,23 +1620,1081 @@
             // 
             this.AddFigureMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cuboidToolStripMenuItem,
-            this.sphereToolStripMenuItem});
+            this.sphereToolStripMenuItem,
+            this.cylinderToolStripMenuItem,
+            this.coneToolStripMenuItem});
             this.AddFigureMenu.Name = "AddFigureMenu";
-            this.AddFigureMenu.Size = new System.Drawing.Size(114, 48);
+            this.AddFigureMenu.Size = new System.Drawing.Size(119, 92);
             // 
             // cuboidToolStripMenuItem
             // 
             this.cuboidToolStripMenuItem.Name = "cuboidToolStripMenuItem";
-            this.cuboidToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.cuboidToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.cuboidToolStripMenuItem.Text = "Cuboid";
             this.cuboidToolStripMenuItem.Click += new System.EventHandler(this.cuboidToolStripMenuItem_Click);
             // 
             // sphereToolStripMenuItem
             // 
             this.sphereToolStripMenuItem.Name = "sphereToolStripMenuItem";
-            this.sphereToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sphereToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.sphereToolStripMenuItem.Text = "Sphere";
             this.sphereToolStripMenuItem.Click += new System.EventHandler(this.sphereToolStripMenuItem_Click);
+            // 
+            // saveSceneToolStripMenuItem
+            // 
+            this.saveSceneToolStripMenuItem.Enabled = false;
+            this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
+            this.saveSceneToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.saveSceneToolStripMenuItem.Text = "Save scene...";
+            // 
+            // loadSceneToolStripMenuItem
+            // 
+            this.loadSceneToolStripMenuItem.Enabled = false;
+            this.loadSceneToolStripMenuItem.Name = "loadSceneToolStripMenuItem";
+            this.loadSceneToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.loadSceneToolStripMenuItem.Text = "Load scene...";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // cylinderToolStripMenuItem
+            // 
+            this.cylinderToolStripMenuItem.Name = "cylinderToolStripMenuItem";
+            this.cylinderToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.cylinderToolStripMenuItem.Text = "Cylinder";
+            this.cylinderToolStripMenuItem.Click += new System.EventHandler(this.cylinderToolStripMenuItem_Click);
+            // 
+            // CylinderGroupBox
+            // 
+            this.CylinderGroupBox.Controls.Add(this.label63);
+            this.CylinderGroupBox.Controls.Add(this.CylinderColor);
+            this.CylinderGroupBox.Controls.Add(this.label31);
+            this.CylinderGroupBox.Controls.Add(this.CylinderRadius);
+            this.CylinderGroupBox.Controls.Add(this.label32);
+            this.CylinderGroupBox.Controls.Add(this.label33);
+            this.CylinderGroupBox.Controls.Add(this.label34);
+            this.CylinderGroupBox.Controls.Add(this.CylinderHeight);
+            this.CylinderGroupBox.Controls.Add(this.CylinderDiv);
+            this.CylinderGroupBox.Controls.Add(this.label35);
+            this.CylinderGroupBox.Controls.Add(this.CylinderRotZ);
+            this.CylinderGroupBox.Controls.Add(this.label36);
+            this.CylinderGroupBox.Controls.Add(this.CylinderRotY);
+            this.CylinderGroupBox.Controls.Add(this.label37);
+            this.CylinderGroupBox.Controls.Add(this.CylinderRotX);
+            this.CylinderGroupBox.Controls.Add(this.label38);
+            this.CylinderGroupBox.Controls.Add(this.label39);
+            this.CylinderGroupBox.Controls.Add(this.CylinderDimZ);
+            this.CylinderGroupBox.Controls.Add(this.label40);
+            this.CylinderGroupBox.Controls.Add(this.CylinderDimY);
+            this.CylinderGroupBox.Controls.Add(this.label41);
+            this.CylinderGroupBox.Controls.Add(this.CylinderDimX);
+            this.CylinderGroupBox.Controls.Add(this.label42);
+            this.CylinderGroupBox.Controls.Add(this.label43);
+            this.CylinderGroupBox.Controls.Add(this.CylinderPosZ);
+            this.CylinderGroupBox.Controls.Add(this.label44);
+            this.CylinderGroupBox.Controls.Add(this.CylinderPosY);
+            this.CylinderGroupBox.Controls.Add(this.label45);
+            this.CylinderGroupBox.Controls.Add(this.CylinderPosX);
+            this.CylinderGroupBox.Controls.Add(this.label46);
+            this.CylinderGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CylinderGroupBox.Location = new System.Drawing.Point(0, 485);
+            this.CylinderGroupBox.Name = "CylinderGroupBox";
+            this.CylinderGroupBox.Size = new System.Drawing.Size(183, 246);
+            this.CylinderGroupBox.TabIndex = 2;
+            this.CylinderGroupBox.TabStop = false;
+            this.CylinderGroupBox.Text = "Cylinder properties";
+            this.CylinderGroupBox.Visible = false;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(100, 186);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(15, 13);
+            this.label31.TabIndex = 48;
+            this.label31.Text = "R";
+            // 
+            // CylinderRadius
+            // 
+            this.CylinderRadius.DecimalPlaces = 2;
+            this.CylinderRadius.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderRadius.Location = new System.Drawing.Point(121, 184);
+            this.CylinderRadius.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderRadius.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderRadius.Name = "CylinderRadius";
+            this.CylinderRadius.Size = new System.Drawing.Size(53, 20);
+            this.CylinderRadius.TabIndex = 47;
+            this.CylinderRadius.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderRadius.ValueChanged += new System.EventHandler(this.CylinderRadius_ValueChanged);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(100, 158);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(15, 13);
+            this.label32.TabIndex = 46;
+            this.label32.Text = "H";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(95, 133);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(23, 13);
+            this.label33.TabIndex = 45;
+            this.label33.Text = "Div";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(101, 114);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(60, 13);
+            this.label34.TabIndex = 44;
+            this.label34.Text = "Parameters";
+            // 
+            // CylinderHeight
+            // 
+            this.CylinderHeight.DecimalPlaces = 2;
+            this.CylinderHeight.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderHeight.Location = new System.Drawing.Point(121, 156);
+            this.CylinderHeight.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderHeight.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderHeight.Name = "CylinderHeight";
+            this.CylinderHeight.Size = new System.Drawing.Size(53, 20);
+            this.CylinderHeight.TabIndex = 43;
+            this.CylinderHeight.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CylinderHeight.ValueChanged += new System.EventHandler(this.CylinderHeight_ValueChanged);
+            // 
+            // CylinderDiv
+            // 
+            this.CylinderDiv.Location = new System.Drawing.Point(121, 130);
+            this.CylinderDiv.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderDiv.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CylinderDiv.Name = "CylinderDiv";
+            this.CylinderDiv.Size = new System.Drawing.Size(53, 20);
+            this.CylinderDiv.TabIndex = 42;
+            this.CylinderDiv.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CylinderDiv.ValueChanged += new System.EventHandler(this.CylinderDiv_ValueChanged);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(9, 185);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(14, 13);
+            this.label35.TabIndex = 41;
+            this.label35.Text = "Z";
+            // 
+            // CylinderRotZ
+            // 
+            this.CylinderRotZ.DecimalPlaces = 1;
+            this.CylinderRotZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderRotZ.Location = new System.Drawing.Point(29, 183);
+            this.CylinderRotZ.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CylinderRotZ.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CylinderRotZ.Name = "CylinderRotZ";
+            this.CylinderRotZ.Size = new System.Drawing.Size(53, 20);
+            this.CylinderRotZ.TabIndex = 40;
+            this.CylinderRotZ.ValueChanged += new System.EventHandler(this.CylinderRotZ_ValueChanged);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(9, 158);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(14, 13);
+            this.label36.TabIndex = 39;
+            this.label36.Text = "Y";
+            // 
+            // CylinderRotY
+            // 
+            this.CylinderRotY.DecimalPlaces = 1;
+            this.CylinderRotY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderRotY.Location = new System.Drawing.Point(29, 156);
+            this.CylinderRotY.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CylinderRotY.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CylinderRotY.Name = "CylinderRotY";
+            this.CylinderRotY.Size = new System.Drawing.Size(53, 20);
+            this.CylinderRotY.TabIndex = 38;
+            this.CylinderRotY.ValueChanged += new System.EventHandler(this.CylinderRotY_ValueChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(9, 132);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(14, 13);
+            this.label37.TabIndex = 37;
+            this.label37.Text = "X";
+            // 
+            // CylinderRotX
+            // 
+            this.CylinderRotX.DecimalPlaces = 1;
+            this.CylinderRotX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderRotX.Location = new System.Drawing.Point(29, 130);
+            this.CylinderRotX.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.CylinderRotX.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.CylinderRotX.Name = "CylinderRotX";
+            this.CylinderRotX.Size = new System.Drawing.Size(53, 20);
+            this.CylinderRotX.TabIndex = 36;
+            this.CylinderRotX.ValueChanged += new System.EventHandler(this.CylinderRotX_ValueChanged);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(6, 114);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(47, 13);
+            this.label38.TabIndex = 35;
+            this.label38.Text = "Rotation";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(101, 87);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(14, 13);
+            this.label39.TabIndex = 34;
+            this.label39.Text = "Z";
+            // 
+            // CylinderDimZ
+            // 
+            this.CylinderDimZ.DecimalPlaces = 2;
+            this.CylinderDimZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderDimZ.Location = new System.Drawing.Point(121, 85);
+            this.CylinderDimZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderDimZ.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimZ.Name = "CylinderDimZ";
+            this.CylinderDimZ.Size = new System.Drawing.Size(53, 20);
+            this.CylinderDimZ.TabIndex = 33;
+            this.CylinderDimZ.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimZ.ValueChanged += new System.EventHandler(this.CylinderDimZ_ValueChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(101, 60);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(14, 13);
+            this.label40.TabIndex = 32;
+            this.label40.Text = "Y";
+            // 
+            // CylinderDimY
+            // 
+            this.CylinderDimY.DecimalPlaces = 2;
+            this.CylinderDimY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderDimY.Location = new System.Drawing.Point(121, 58);
+            this.CylinderDimY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderDimY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimY.Name = "CylinderDimY";
+            this.CylinderDimY.Size = new System.Drawing.Size(53, 20);
+            this.CylinderDimY.TabIndex = 31;
+            this.CylinderDimY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimY.ValueChanged += new System.EventHandler(this.CylinderDimY_ValueChanged);
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(101, 34);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(14, 13);
+            this.label41.TabIndex = 30;
+            this.label41.Text = "X";
+            // 
+            // CylinderDimX
+            // 
+            this.CylinderDimX.DecimalPlaces = 2;
+            this.CylinderDimX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderDimX.Location = new System.Drawing.Point(121, 32);
+            this.CylinderDimX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderDimX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimX.Name = "CylinderDimX";
+            this.CylinderDimX.Size = new System.Drawing.Size(53, 20);
+            this.CylinderDimX.TabIndex = 29;
+            this.CylinderDimX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.CylinderDimX.ValueChanged += new System.EventHandler(this.CylinderDimX_ValueChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(98, 16);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(34, 13);
+            this.label42.TabIndex = 28;
+            this.label42.Text = "Scale";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(9, 87);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(14, 13);
+            this.label43.TabIndex = 27;
+            this.label43.Text = "Z";
+            // 
+            // CylinderPosZ
+            // 
+            this.CylinderPosZ.DecimalPlaces = 2;
+            this.CylinderPosZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderPosZ.Location = new System.Drawing.Point(29, 85);
+            this.CylinderPosZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderPosZ.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.CylinderPosZ.Name = "CylinderPosZ";
+            this.CylinderPosZ.Size = new System.Drawing.Size(53, 20);
+            this.CylinderPosZ.TabIndex = 26;
+            this.CylinderPosZ.ValueChanged += new System.EventHandler(this.CylinderDimZ_ValueChanged);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(9, 60);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(14, 13);
+            this.label44.TabIndex = 25;
+            this.label44.Text = "Y";
+            // 
+            // CylinderPosY
+            // 
+            this.CylinderPosY.DecimalPlaces = 2;
+            this.CylinderPosY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderPosY.Location = new System.Drawing.Point(29, 58);
+            this.CylinderPosY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderPosY.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.CylinderPosY.Name = "CylinderPosY";
+            this.CylinderPosY.Size = new System.Drawing.Size(53, 20);
+            this.CylinderPosY.TabIndex = 24;
+            this.CylinderPosY.ValueChanged += new System.EventHandler(this.CylinderPosY_ValueChanged);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(9, 34);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(14, 13);
+            this.label45.TabIndex = 23;
+            this.label45.Text = "X";
+            // 
+            // CylinderPosX
+            // 
+            this.CylinderPosX.DecimalPlaces = 2;
+            this.CylinderPosX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CylinderPosX.Location = new System.Drawing.Point(29, 32);
+            this.CylinderPosX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CylinderPosX.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.CylinderPosX.Name = "CylinderPosX";
+            this.CylinderPosX.Size = new System.Drawing.Size(53, 20);
+            this.CylinderPosX.TabIndex = 22;
+            this.CylinderPosX.ValueChanged += new System.EventHandler(this.CylinderPosX_ValueChanged);
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(6, 16);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(44, 13);
+            this.label46.TabIndex = 21;
+            this.label46.Text = "Position";
+            // 
+            // coneToolStripMenuItem
+            // 
+            this.coneToolStripMenuItem.Name = "coneToolStripMenuItem";
+            this.coneToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.coneToolStripMenuItem.Text = "Cone";
+            this.coneToolStripMenuItem.Click += new System.EventHandler(this.coneToolStripMenuItem_Click);
+            // 
+            // ConeGroupBox
+            // 
+            this.ConeGroupBox.Controls.Add(this.label66);
+            this.ConeGroupBox.Controls.Add(this.ConeColor);
+            this.ConeGroupBox.Controls.Add(this.label47);
+            this.ConeGroupBox.Controls.Add(this.ConeRadius);
+            this.ConeGroupBox.Controls.Add(this.label48);
+            this.ConeGroupBox.Controls.Add(this.label49);
+            this.ConeGroupBox.Controls.Add(this.label50);
+            this.ConeGroupBox.Controls.Add(this.ConeHeight);
+            this.ConeGroupBox.Controls.Add(this.ConeDiv);
+            this.ConeGroupBox.Controls.Add(this.label51);
+            this.ConeGroupBox.Controls.Add(this.ConeRotZ);
+            this.ConeGroupBox.Controls.Add(this.label52);
+            this.ConeGroupBox.Controls.Add(this.ConeRotY);
+            this.ConeGroupBox.Controls.Add(this.label53);
+            this.ConeGroupBox.Controls.Add(this.ConeRotX);
+            this.ConeGroupBox.Controls.Add(this.label54);
+            this.ConeGroupBox.Controls.Add(this.label55);
+            this.ConeGroupBox.Controls.Add(this.ConeDimZ);
+            this.ConeGroupBox.Controls.Add(this.label56);
+            this.ConeGroupBox.Controls.Add(this.ConeDimY);
+            this.ConeGroupBox.Controls.Add(this.label57);
+            this.ConeGroupBox.Controls.Add(this.ConeDimX);
+            this.ConeGroupBox.Controls.Add(this.label58);
+            this.ConeGroupBox.Controls.Add(this.label59);
+            this.ConeGroupBox.Controls.Add(this.ConePosZ);
+            this.ConeGroupBox.Controls.Add(this.label60);
+            this.ConeGroupBox.Controls.Add(this.ConePosY);
+            this.ConeGroupBox.Controls.Add(this.label61);
+            this.ConeGroupBox.Controls.Add(this.ConePosX);
+            this.ConeGroupBox.Controls.Add(this.label62);
+            this.ConeGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ConeGroupBox.Location = new System.Drawing.Point(0, 731);
+            this.ConeGroupBox.Name = "ConeGroupBox";
+            this.ConeGroupBox.Size = new System.Drawing.Size(183, 246);
+            this.ConeGroupBox.TabIndex = 3;
+            this.ConeGroupBox.TabStop = false;
+            this.ConeGroupBox.Text = "Cone properties";
+            this.ConeGroupBox.Visible = false;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(100, 186);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(15, 13);
+            this.label47.TabIndex = 48;
+            this.label47.Text = "R";
+            // 
+            // ConeRadius
+            // 
+            this.ConeRadius.DecimalPlaces = 2;
+            this.ConeRadius.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeRadius.Location = new System.Drawing.Point(121, 184);
+            this.ConeRadius.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeRadius.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeRadius.Name = "ConeRadius";
+            this.ConeRadius.Size = new System.Drawing.Size(53, 20);
+            this.ConeRadius.TabIndex = 47;
+            this.ConeRadius.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeRadius.ValueChanged += new System.EventHandler(this.ConeRadius_ValueChanged);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(100, 158);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(15, 13);
+            this.label48.TabIndex = 46;
+            this.label48.Text = "H";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(95, 133);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(23, 13);
+            this.label49.TabIndex = 45;
+            this.label49.Text = "Div";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(101, 114);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(60, 13);
+            this.label50.TabIndex = 44;
+            this.label50.Text = "Parameters";
+            // 
+            // ConeHeight
+            // 
+            this.ConeHeight.DecimalPlaces = 2;
+            this.ConeHeight.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeHeight.Location = new System.Drawing.Point(121, 156);
+            this.ConeHeight.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeHeight.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeHeight.Name = "ConeHeight";
+            this.ConeHeight.Size = new System.Drawing.Size(53, 20);
+            this.ConeHeight.TabIndex = 43;
+            this.ConeHeight.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.ConeHeight.ValueChanged += new System.EventHandler(this.ConeHeight_ValueChanged);
+            // 
+            // ConeDiv
+            // 
+            this.ConeDiv.Location = new System.Drawing.Point(121, 130);
+            this.ConeDiv.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeDiv.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.ConeDiv.Name = "ConeDiv";
+            this.ConeDiv.Size = new System.Drawing.Size(53, 20);
+            this.ConeDiv.TabIndex = 42;
+            this.ConeDiv.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.ConeDiv.ValueChanged += new System.EventHandler(this.ConeDiv_ValueChanged);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(9, 185);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(14, 13);
+            this.label51.TabIndex = 41;
+            this.label51.Text = "Z";
+            // 
+            // ConeRotZ
+            // 
+            this.ConeRotZ.DecimalPlaces = 1;
+            this.ConeRotZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeRotZ.Location = new System.Drawing.Point(29, 183);
+            this.ConeRotZ.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.ConeRotZ.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.ConeRotZ.Name = "ConeRotZ";
+            this.ConeRotZ.Size = new System.Drawing.Size(53, 20);
+            this.ConeRotZ.TabIndex = 40;
+            this.ConeRotZ.ValueChanged += new System.EventHandler(this.ConeRotZ_ValueChanged);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(9, 158);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(14, 13);
+            this.label52.TabIndex = 39;
+            this.label52.Text = "Y";
+            // 
+            // ConeRotY
+            // 
+            this.ConeRotY.DecimalPlaces = 1;
+            this.ConeRotY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeRotY.Location = new System.Drawing.Point(29, 156);
+            this.ConeRotY.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.ConeRotY.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.ConeRotY.Name = "ConeRotY";
+            this.ConeRotY.Size = new System.Drawing.Size(53, 20);
+            this.ConeRotY.TabIndex = 38;
+            this.ConeRotY.ValueChanged += new System.EventHandler(this.ConeRotY_ValueChanged);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(9, 132);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(14, 13);
+            this.label53.TabIndex = 37;
+            this.label53.Text = "X";
+            // 
+            // ConeRotX
+            // 
+            this.ConeRotX.DecimalPlaces = 1;
+            this.ConeRotX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeRotX.Location = new System.Drawing.Point(29, 130);
+            this.ConeRotX.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.ConeRotX.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.ConeRotX.Name = "ConeRotX";
+            this.ConeRotX.Size = new System.Drawing.Size(53, 20);
+            this.ConeRotX.TabIndex = 36;
+            this.ConeRotX.ValueChanged += new System.EventHandler(this.ConeRotX_ValueChanged);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(6, 114);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(47, 13);
+            this.label54.TabIndex = 35;
+            this.label54.Text = "Rotation";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(101, 87);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(14, 13);
+            this.label55.TabIndex = 34;
+            this.label55.Text = "Z";
+            // 
+            // ConeDimZ
+            // 
+            this.ConeDimZ.DecimalPlaces = 2;
+            this.ConeDimZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeDimZ.Location = new System.Drawing.Point(121, 85);
+            this.ConeDimZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeDimZ.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimZ.Name = "ConeDimZ";
+            this.ConeDimZ.Size = new System.Drawing.Size(53, 20);
+            this.ConeDimZ.TabIndex = 33;
+            this.ConeDimZ.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimZ.ValueChanged += new System.EventHandler(this.ConeDimZ_ValueChanged);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(101, 60);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(14, 13);
+            this.label56.TabIndex = 32;
+            this.label56.Text = "Y";
+            // 
+            // ConeDimY
+            // 
+            this.ConeDimY.DecimalPlaces = 2;
+            this.ConeDimY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeDimY.Location = new System.Drawing.Point(121, 58);
+            this.ConeDimY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeDimY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimY.Name = "ConeDimY";
+            this.ConeDimY.Size = new System.Drawing.Size(53, 20);
+            this.ConeDimY.TabIndex = 31;
+            this.ConeDimY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimY.ValueChanged += new System.EventHandler(this.ConeDimY_ValueChanged);
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(101, 34);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(14, 13);
+            this.label57.TabIndex = 30;
+            this.label57.Text = "X";
+            // 
+            // ConeDimX
+            // 
+            this.ConeDimX.DecimalPlaces = 2;
+            this.ConeDimX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConeDimX.Location = new System.Drawing.Point(121, 32);
+            this.ConeDimX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConeDimX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimX.Name = "ConeDimX";
+            this.ConeDimX.Size = new System.Drawing.Size(53, 20);
+            this.ConeDimX.TabIndex = 29;
+            this.ConeDimX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ConeDimX.ValueChanged += new System.EventHandler(this.ConeDimX_ValueChanged);
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(98, 16);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(34, 13);
+            this.label58.TabIndex = 28;
+            this.label58.Text = "Scale";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(9, 87);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(14, 13);
+            this.label59.TabIndex = 27;
+            this.label59.Text = "Z";
+            // 
+            // ConePosZ
+            // 
+            this.ConePosZ.DecimalPlaces = 2;
+            this.ConePosZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConePosZ.Location = new System.Drawing.Point(29, 85);
+            this.ConePosZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConePosZ.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.ConePosZ.Name = "ConePosZ";
+            this.ConePosZ.Size = new System.Drawing.Size(53, 20);
+            this.ConePosZ.TabIndex = 26;
+            this.ConePosZ.ValueChanged += new System.EventHandler(this.ConePosZ_ValueChanged);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(9, 60);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(14, 13);
+            this.label60.TabIndex = 25;
+            this.label60.Text = "Y";
+            // 
+            // ConePosY
+            // 
+            this.ConePosY.DecimalPlaces = 2;
+            this.ConePosY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConePosY.Location = new System.Drawing.Point(29, 58);
+            this.ConePosY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConePosY.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.ConePosY.Name = "ConePosY";
+            this.ConePosY.Size = new System.Drawing.Size(53, 20);
+            this.ConePosY.TabIndex = 24;
+            this.ConePosY.ValueChanged += new System.EventHandler(this.ConePosY_ValueChanged);
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(9, 34);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(14, 13);
+            this.label61.TabIndex = 23;
+            this.label61.Text = "X";
+            // 
+            // ConePosX
+            // 
+            this.ConePosX.DecimalPlaces = 2;
+            this.ConePosX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.ConePosX.Location = new System.Drawing.Point(29, 32);
+            this.ConePosX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ConePosX.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.ConePosX.Name = "ConePosX";
+            this.ConePosX.Size = new System.Drawing.Size(53, 20);
+            this.ConePosX.TabIndex = 22;
+            this.ConePosX.ValueChanged += new System.EventHandler(this.ConePosX_ValueChanged);
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(6, 16);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(44, 13);
+            this.label62.TabIndex = 21;
+            this.label62.Text = "Position";
+            // 
+            // CylinderColor
+            // 
+            this.CylinderColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.CylinderColor.Location = new System.Drawing.Point(43, 211);
+            this.CylinderColor.Name = "CylinderColor";
+            this.CylinderColor.Size = new System.Drawing.Size(20, 19);
+            this.CylinderColor.TabIndex = 49;
+            this.CylinderColor.TabStop = false;
+            this.CylinderColor.Click += new System.EventHandler(this.CylinderColor_Click);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(8, 214);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(31, 13);
+            this.label63.TabIndex = 50;
+            this.label63.Text = "Color";
             // 
             // Visibility
             // 
@@ -1454,25 +2719,73 @@
             // 
             this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
             // 
-            // backfaceCullingToolStripMenuItem
+            // label64
             // 
-            this.backfaceCullingToolStripMenuItem.Checked = true;
-            this.backfaceCullingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.backfaceCullingToolStripMenuItem.Name = "backfaceCullingToolStripMenuItem";
-            this.backfaceCullingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.backfaceCullingToolStripMenuItem.Text = "Backface culling";
-            this.backfaceCullingToolStripMenuItem.Click += new System.EventHandler(this.backfaceCullingToolStripMenuItem_Click);
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(9, 217);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(31, 13);
+            this.label64.TabIndex = 52;
+            this.label64.Text = "Color";
+            // 
+            // SphereColor
+            // 
+            this.SphereColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SphereColor.Location = new System.Drawing.Point(44, 214);
+            this.SphereColor.Name = "SphereColor";
+            this.SphereColor.Size = new System.Drawing.Size(20, 19);
+            this.SphereColor.TabIndex = 51;
+            this.SphereColor.TabStop = false;
+            this.SphereColor.Click += new System.EventHandler(this.SphereColor_Click);
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(8, 214);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(31, 13);
+            this.label65.TabIndex = 54;
+            this.label65.Text = "Color";
+            // 
+            // CuboidColor
+            // 
+            this.CuboidColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.CuboidColor.Location = new System.Drawing.Point(43, 211);
+            this.CuboidColor.Name = "CuboidColor";
+            this.CuboidColor.Size = new System.Drawing.Size(20, 19);
+            this.CuboidColor.TabIndex = 53;
+            this.CuboidColor.TabStop = false;
+            this.CuboidColor.Click += new System.EventHandler(this.CuboidColor_Click);
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(12, 211);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(31, 13);
+            this.label66.TabIndex = 56;
+            this.label66.Text = "Color";
+            // 
+            // ConeColor
+            // 
+            this.ConeColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ConeColor.Location = new System.Drawing.Point(47, 208);
+            this.ConeColor.Name = "ConeColor";
+            this.ConeColor.Size = new System.Drawing.Size(20, 19);
+            this.ConeColor.TabIndex = 55;
+            this.ConeColor.TabStop = false;
+            this.ConeColor.Click += new System.EventHandler(this.ConeColor_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 601);
+            this.ClientSize = new System.Drawing.Size(974, 617);
             this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(860, 640);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "3D Model Renderer";
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -1505,6 +2818,8 @@
             this.splitContainer4.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FOVSlider)).EndInit();
             this.panel4.ResumeLayout(false);
             this.splitContainer5.Panel1.ResumeLayout(false);
@@ -1543,7 +2858,39 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).EndInit();
             this.AddFigureMenu.ResumeLayout(false);
+            this.CylinderGroupBox.ResumeLayout(false);
+            this.CylinderGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDiv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderRotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderDimX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderPosX)).EndInit();
+            this.ConeGroupBox.ResumeLayout(false);
+            this.ConeGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDiv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeRotX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeDimX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConePosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CylinderColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SphereColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1556,16 +2903,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.Button ResetCameraButton;
-        private System.Windows.Forms.Button RemoveCameraButton;
-        private System.Windows.Forms.Button AddCameraButton;
-        private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label FOVLabel;
-        private System.Windows.Forms.TrackBar FOVSlider;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ListBox CameraListBox;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.BindingSource iFigureBindingSource;
@@ -1636,6 +2973,93 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.NumericUpDown SphereRadius;
         private System.Windows.Forms.ToolStripMenuItem backfaceCullingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zbufferingToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.Button ResetCameraButton;
+        private System.Windows.Forms.Button RemoveCameraButton;
+        private System.Windows.Forms.Button AddCameraButton;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label FOVLabel;
+        private System.Windows.Forms.TrackBar FOVSlider;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ListBox CameraListBox;
+        private System.Windows.Forms.NumericUpDown CameraN;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.NumericUpDown CameraF;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ToolStripMenuItem saveSceneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadSceneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cylinderToolStripMenuItem;
+        private System.Windows.Forms.GroupBox CylinderGroupBox;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.NumericUpDown CylinderRadius;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.NumericUpDown CylinderHeight;
+        private System.Windows.Forms.NumericUpDown CylinderDiv;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.NumericUpDown CylinderRotZ;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.NumericUpDown CylinderRotY;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.NumericUpDown CylinderRotX;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.NumericUpDown CylinderDimZ;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.NumericUpDown CylinderDimY;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.NumericUpDown CylinderDimX;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.NumericUpDown CylinderPosZ;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.NumericUpDown CylinderPosY;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.NumericUpDown CylinderPosX;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.ToolStripMenuItem coneToolStripMenuItem;
+        private System.Windows.Forms.GroupBox ConeGroupBox;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.NumericUpDown ConeRadius;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.NumericUpDown ConeHeight;
+        private System.Windows.Forms.NumericUpDown ConeDiv;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.NumericUpDown ConeRotZ;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.NumericUpDown ConeRotY;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.NumericUpDown ConeRotX;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.NumericUpDown ConeDimZ;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.NumericUpDown ConeDimY;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.NumericUpDown ConeDimX;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.NumericUpDown ConePosZ;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.NumericUpDown ConePosY;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.NumericUpDown ConePosX;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.PictureBox CylinderColor;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.PictureBox SphereColor;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.PictureBox CuboidColor;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.PictureBox ConeColor;
     }
 }
 

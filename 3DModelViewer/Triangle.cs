@@ -30,6 +30,7 @@ namespace _3DModelViewer
                 X = value.X;
                 Y = value.Y;
                 Z = value.Z;
+                W = value.W;
             }
         }
         
@@ -39,6 +40,7 @@ namespace _3DModelViewer
             X = x;
             Y = y;
             Z = z;
+            W = w;
         }
 
         public static implicit operator Point(Point4 p)
@@ -81,7 +83,7 @@ namespace _3DModelViewer
             }
         }
 
-        public Vector4 Normal { get; private set; }
+        public Vector4 Normal { get; set; }
 
         private void RecalculateNormal()
         {

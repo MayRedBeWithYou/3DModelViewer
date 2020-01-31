@@ -160,5 +160,46 @@ namespace _3DModelViewer
             };
             return R;
         }
+
+        public Matrix Transpose()
+        {
+            Matrix result = new Matrix();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    result[j, i] = this[i, j];
+                }
+            }
+            return result;
+        }
+
+        public Matrix Inverse()
+        {
+            Matrix4x4 matrix = new Matrix4x4(
+                this[0, 0], this[0, 1], this[0, 2], this[0, 3],
+                this[1, 0], this[1, 1], this[1, 2], this[1, 3],
+                this[2, 0], this[2, 1], this[2, 2], this[2, 3],
+                this[3, 0], this[3, 1], this[3, 2], this[3, 3]);
+            Matrix4x4.Invert(matrix, out matrix);
+            Matrix result = new Matrix();
+            result[0, 0] = matrix.M11;
+            result[0, 1] = matrix.M12;
+            result[0, 2] = matrix.M13;
+            result[0, 3] = matrix.M14;
+            result[1, 0] = matrix.M21;
+            result[1, 1] = matrix.M22;
+            result[1, 2] = matrix.M23;
+            result[1, 3] = matrix.M24;
+            result[2, 0] = matrix.M11;
+            result[2, 1] = matrix.M12;
+            result[2, 2] = matrix.M13;
+            result[2, 3] = matrix.M14;
+            result[1, 0] = matrix.M21;
+            result[1, 1] = matrix.M22;
+            result[1, 2] = matrix.M23;
+            result[1, 3] = matrix.M24;
+            return result;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FastBitmapLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,10 +37,6 @@ namespace _3DModelViewer
 
         DateTime frametime;
 
-        public bool FillTriangles = true;
-
-        public bool BackfaceCulling = true;
-
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +54,22 @@ namespace _3DModelViewer
             RefreshTimer.Interval = 8;
             RefreshTimer.Start();
             frametime = DateTime.Now;
+
+            Render.ZBuffering = zbufferingToolStripMenuItem.Checked;
+            Render.FillTriangles = fillTrianglesToolStripMenuItem.Checked;
+            Render.BackfaceCulling = backfaceCullingToolStripMenuItem.Checked;
+
+            CuboidColor.Image = new Bitmap(CuboidColor.Width, CuboidColor.Height);
+            CuboidColor.Refresh();
+
+            SphereColor.Image = new Bitmap(SphereColor.Width, SphereColor.Height);
+            SphereColor.Refresh();
+
+            CylinderColor.Image = new Bitmap(CylinderColor.Width, CylinderColor.Height);
+            CylinderColor.Refresh();
+
+            ConeColor.Image = new Bitmap(ConeColor.Width, ConeColor.Height);
+            ConeColor.Refresh();
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -83,7 +96,7 @@ namespace _3DModelViewer
             View[2, 0] = D.X;
             View[2, 1] = D.Y;
             View *= Matrix.Translate(-SelectedCamera.Position.V);
-            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, 0.1f, 100f, Canvas.Width / (float)Canvas.Height);
+            Matrix Proj = Matrix.Proj(SelectedCamera.FOV * (float)Math.PI / 180f, SelectedCamera.N, SelectedCamera.F, Canvas.Width / (float)Canvas.Height);
             Matrix PV = Proj * View;
 
             Render.Clear(bitmap);
@@ -103,21 +116,22 @@ namespace _3DModelViewer
 
                 foreach (Triangle t in figure.Triangles)
                 {
-                    if (BackfaceCulling && Vector4.Dot(D, t.Normal) > 0) continue;
                     points3.Clear();
                     foreach (Point4 p in t.Points)
                     {
                         Vector4 r = PVM * p.V;
                         r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1);
-                        r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z + 1) / 2f, 1);
+                        r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z - 1f) / 2f, 1f);
                         points3.Add(new Point4((int)r.X, (int)r.Y, r.Z, r.W));
                     }
                     Triangle projectedTriangle = new Triangle(points3[0], points3[1], points3[2]);
+                    if (Render.BackfaceCulling
+                        && Vector4.Dot(new Vector4(D.X, D.Y, Math.Abs(D.Z), D.W), projectedTriangle.Normal) > 0) continue;
                     projected.Add(projectedTriangle);
                 }
                 infos.Add(new RenderInfo(projected, figure.Color, SelectedFigure == figure));
             }
-            Render.DrawObjects(bitmap, infos, FillTriangles);
+            Render.DrawObjects(bitmap, infos);
             Canvas.Refresh();
         }
 
@@ -153,6 +167,7 @@ namespace _3DModelViewer
         {
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Canvas.Image = bitmap;
+            PrepareRender();
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -229,7 +244,8 @@ namespace _3DModelViewer
         {
             SelectedCamera = (Camera)CameraListBox.SelectedItem;
             FOVSlider.Value = SelectedCamera.FOV;
-
+            CameraN.Value = (decimal)SelectedCamera.N;
+            CameraF.Value = (decimal)SelectedCamera.F;
         }
 
         private void RemoveCameraButton_Click(object sender, EventArgs e)
@@ -246,7 +262,6 @@ namespace _3DModelViewer
             SelectedCamera.Reset();
             FOVSlider.Value = SelectedCamera.FOV;
             Cameras.ResetBindings();
-
         }
 
         private void FigureDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -256,13 +271,19 @@ namespace _3DModelViewer
 
         private void fillTrianglesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FillTriangles = !FillTriangles;
-            fillTrianglesToolStripMenuItem.Checked = FillTriangles;
+            Render.FillTriangles = !Render.FillTriangles;
+            fillTrianglesToolStripMenuItem.Checked = Render.FillTriangles;
         }
         private void backfaceCullingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackfaceCulling = !BackfaceCulling;
-            backfaceCullingToolStripMenuItem.Checked = BackfaceCulling;
+            Render.BackfaceCulling = !Render.BackfaceCulling;
+            backfaceCullingToolStripMenuItem.Checked = Render.BackfaceCulling;
+        }
+
+        private void zbufferingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Render.ZBuffering = !Render.ZBuffering;
+            zbufferingToolStripMenuItem.Checked = Render.ZBuffering;
         }
 
         private void AddFigureButton_Click(object sender, EventArgs e)
@@ -286,6 +307,22 @@ namespace _3DModelViewer
             if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
         }
 
+        private void cylinderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Figures.Add(new Cylinder());
+            FigureDataGrid.ClearSelection();
+            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+        }
+
+        private void coneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Figures.Add(new Cone());
+            FigureDataGrid.ClearSelection();
+            FigureDataGrid.Rows[Figures.Count - 1].Selected = true;
+            if (Figures.Count > 0) RemoveFigureButton.Enabled = true;
+        }
+
         private void RemoveFigureButton_Click(object sender, EventArgs e)
         {
             if (FigureDataGrid.SelectedRows.Count != 0)
@@ -304,6 +341,8 @@ namespace _3DModelViewer
         {
             CuboidGroupBox.Visible = false;
             SphereGroupBox.Visible = false;
+            CylinderGroupBox.Visible = false;
+            ConeGroupBox.Visible = false;
             if (FigureDataGrid.SelectedRows.Count != 0)
             {
                 SelectedFigure = (IFigure)FigureDataGrid.SelectedRows[0].DataBoundItem;
@@ -322,6 +361,12 @@ namespace _3DModelViewer
                     CuboidRotX.Value = (decimal)cube.RotX;
                     CuboidRotY.Value = (decimal)cube.RotY;
                     CuboidRotZ.Value = (decimal)cube.RotZ;
+
+                    using (FastBitmap fast = ((Bitmap)CuboidColor.Image).FastLock())
+                    {
+                        fast.Clear(cube.Color);
+                    }
+                    CuboidColor.Refresh();
                 }
                 else if (SelectedFigure is Sphere)
                 {
@@ -342,6 +387,64 @@ namespace _3DModelViewer
                     SphereLat.Value = (decimal)sphere.Lat;
                     SphereLon.Value = (decimal)sphere.Lon;
                     SphereRadius.Value = (decimal)sphere.Radius;
+
+                    using (FastBitmap fast = ((Bitmap)SphereColor.Image).FastLock())
+                    {
+                        fast.Clear(sphere.Color);
+                    }
+                    SphereColor.Refresh();
+                }
+                else if (SelectedFigure is Cylinder)
+                {
+                    CylinderGroupBox.Visible = true;
+                    Cylinder cylinder = SelectedFigure as Cylinder;
+                    CylinderPosX.Value = (decimal)cylinder.Center.X;
+                    CylinderPosY.Value = (decimal)cylinder.Center.Y;
+                    CylinderPosZ.Value = (decimal)cylinder.Center.Z;
+
+                    CylinderDimX.Value = (decimal)cylinder.DimX;
+                    CylinderDimY.Value = (decimal)cylinder.DimY;
+                    CylinderDimZ.Value = (decimal)cylinder.DimZ;
+
+                    CylinderRotX.Value = (decimal)cylinder.RotX;
+                    CylinderRotY.Value = (decimal)cylinder.RotY;
+                    CylinderRotZ.Value = (decimal)cylinder.RotZ;
+
+                    CylinderDiv.Value = (decimal)cylinder.Division;
+                    CylinderHeight.Value = (decimal)cylinder.Height;
+                    CylinderRadius.Value = (decimal)cylinder.Radius;
+
+                    using(FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
+                    {
+                        fast.Clear(cylinder.Color);
+                    }
+                    CylinderColor.Refresh();
+                }
+                else if (SelectedFigure is Cone)
+                {
+                    ConeGroupBox.Visible = true;
+                    Cone cone = SelectedFigure as Cone;
+                    ConePosX.Value = (decimal)cone.Center.X;
+                    ConePosY.Value = (decimal)cone.Center.Y;
+                    ConePosZ.Value = (decimal)cone.Center.Z;
+
+                    ConeDimX.Value = (decimal)cone.DimX;
+                    ConeDimY.Value = (decimal)cone.DimY;
+                    ConeDimZ.Value = (decimal)cone.DimZ;
+
+                    ConeRotX.Value = (decimal)cone.RotX;
+                    ConeRotY.Value = (decimal)cone.RotY;
+                    ConeRotZ.Value = (decimal)cone.RotZ;
+
+                    ConeDiv.Value = (decimal)cone.Division;
+                    ConeHeight.Value = (decimal)cone.Height;
+                    ConeRadius.Value = (decimal)cone.Radius;
+
+                    using (FastBitmap fast = ((Bitmap)ConeColor.Image).FastLock())
+                    {
+                        fast.Clear(cone.Color);
+                    }
+                    ConeColor.Refresh();
                 }
             }
         }
@@ -388,7 +491,7 @@ namespace _3DModelViewer
             FigureDataGrid.Refresh();
         }
 
-        
+
 
         private void CuboidRotX_ValueChanged(object sender, EventArgs e)
         {
@@ -507,6 +610,257 @@ namespace _3DModelViewer
             Sphere sphere = SelectedFigure as Sphere;
             sphere.Radius = (float)SphereRadius.Value;
             FigureDataGrid.Refresh();
-        }       
+        }
+
+        private void CylinderPosX_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Center.X = (float)CylinderPosX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderPosY_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Center.Y = (float)CylinderPosY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderPosZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Center.Z = (float)CylinderPosZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderDimX_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.DimX = (float)CylinderDimX.Value;
+            FigureDataGrid.Refresh();
+        }
+        private void CylinderDimY_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.DimY = (float)CylinderDimY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderDimZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.DimZ = (float)CylinderDimZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderRotX_ValueChanged(object sender, EventArgs e)
+        {
+            if (CylinderRotX.Value < 0) CylinderRotX.Value += 360;
+            else if (CylinderRotX.Value == 360) CylinderRotX.Value = 0;
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.RotX = (float)CylinderRotX.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderRotY_ValueChanged(object sender, EventArgs e)
+        {
+            if (CylinderRotY.Value < 0) CylinderRotY.Value += 360;
+            else if (CylinderRotY.Value == 360) CylinderRotY.Value = 0;
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.RotY = (float)CylinderRotY.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderRotZ_ValueChanged(object sender, EventArgs e)
+        {
+            if (CylinderRotZ.Value < 0) CylinderRotZ.Value += 360;
+            else if (CylinderRotZ.Value == 360) CylinderRotZ.Value = 0;
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.RotZ = (float)CylinderRotZ.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderDiv_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Division = (int)CylinderDiv.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderHeight_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Height = (float)CylinderHeight.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CylinderRadius_ValueChanged(object sender, EventArgs e)
+        {
+            Cylinder cylinder = SelectedFigure as Cylinder;
+            cylinder.Radius = (float)CylinderRadius.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConePosX_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Center.X = (float)ConePosX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConePosY_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Center.Y = (float)ConePosY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConePosZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Center.Z = (float)ConePosZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeDimX_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.DimX = (float)ConeDimX.Value;
+            FigureDataGrid.Refresh();
+        }
+        private void ConeDimY_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.DimY = (float)ConeDimY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeDimZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.DimZ = (float)ConeDimZ.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeRotX_ValueChanged(object sender, EventArgs e)
+        {
+            if (ConeRotX.Value < 0) ConeRotX.Value += 360;
+            else if (ConeRotX.Value == 360) ConeRotX.Value = 0;
+            Cone cone = SelectedFigure as Cone;
+            cone.RotX = (float)ConeRotX.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeRotY_ValueChanged(object sender, EventArgs e)
+        {
+            if (ConeRotY.Value < 0) ConeRotY.Value += 360;
+            else if (ConeRotY.Value == 360) ConeRotY.Value = 0;
+            Cone cone = SelectedFigure as Cone;
+            cone.RotY = (float)ConeRotY.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeRotZ_ValueChanged(object sender, EventArgs e)
+        {
+            if (ConeRotZ.Value < 0) ConeRotZ.Value += 360;
+            else if (ConeRotZ.Value == 360) ConeRotZ.Value = 0;
+            Cone cone = SelectedFigure as Cone;
+            cone.RotZ = (float)ConeRotZ.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeDiv_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Division = (int)ConeDiv.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeHeight_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Height = (float)ConeHeight.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void ConeRadius_ValueChanged(object sender, EventArgs e)
+        {
+            Cone cone = SelectedFigure as Cone;
+            cone.Radius = (float)ConeRadius.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CameraN_ValueChanged(object sender, EventArgs e)
+        {
+            if (CameraN.Value >= CameraF.Value) CameraN.Value = CameraF.Value - CameraN.Increment;
+            SelectedCamera.N = (float)CameraN.Value;
+        }
+
+        private void CameraF_ValueChanged(object sender, EventArgs e)
+        {
+            if (CameraF.Value <= CameraN.Value) CameraF.Value = CameraN.Value + CameraF.Increment;
+            SelectedCamera.F = (float)CameraF.Value;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void CylinderColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedFigure.Color = dialog.Color;
+                using(FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
+                {
+                    fast.Clear(dialog.Color);
+                }
+                CylinderColor.Refresh();
+            }
+        }
+
+        private void SphereColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedFigure.Color = dialog.Color;
+                using (FastBitmap fast = ((Bitmap)SphereColor.Image).FastLock())
+                {
+                    fast.Clear(dialog.Color);
+                }
+                SphereColor.Refresh();
+            }
+        }
+
+        private void CuboidColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedFigure.Color = dialog.Color;
+                using (FastBitmap fast = ((Bitmap)CuboidColor.Image).FastLock())
+                {
+                    fast.Clear(dialog.Color);
+                }
+                CuboidColor.Refresh();
+            }
+        }
+
+        private void ConeColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedFigure.Color = dialog.Color;
+                using (FastBitmap fast = ((Bitmap)ConeColor.Image).FastLock())
+                {
+                    fast.Clear(dialog.Color);
+                }
+                ConeColor.Refresh();
+            }
+        }
     }
 }
