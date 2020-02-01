@@ -140,7 +140,7 @@ namespace _3DModelViewer
                     {
                         Vector4 r = PVM * p.V;
                         r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1f);
-                        r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z - 1f) / 2f, 1f);
+                        r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, -(r.Z - 1f) / 2f, 1f);
                         points3.Add(new Point4((int)r.X, (int)r.Y, r.Z, r.W));
                     }
                     Triangle projectedTriangle = new Triangle(points3[0], points3[1], points3[2]);
@@ -150,7 +150,7 @@ namespace _3DModelViewer
                 }
                 infos.Add(new RenderInfo(projected, figure.Color, SelectedFigure == figure));
             }
-            Render.DrawObjects(bitmap, infos);
+            Render.DrawObjects(bitmap, infos, Lights.ToList());
             Canvas.Refresh();
         }
 

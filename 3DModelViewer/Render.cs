@@ -69,7 +69,7 @@ namespace _3DModelViewer
             b = tmp;
         }
 
-        public static void DrawObjects(Bitmap bitmap, List<RenderInfo> infos)
+        public static void DrawObjects(Bitmap bitmap, List<RenderInfo> infos, List<Light> lights)
         {
             if (ZBuffering)
             {
@@ -91,7 +91,7 @@ namespace _3DModelViewer
                     {
                         if (FillTriangles)
                         {
-                            FillScanline(fast, t.Points.ToList(), info.color);
+                            FillScanline(fast, t.Points.ToList(), info.color, lights);
                         }
                         else Outlines(fast, t.Points.ToList(), info.color);
                     }
@@ -103,8 +103,8 @@ namespace _3DModelViewer
         {
             float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
             float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
-            float zslope1 = v3.Z - v1.Z / (v3.Y - v1.Y);
-            float zslope2 = v3.Z - v2.Z / (v3.Y - v2.Y);
+            float zslope1 = (v3.Z - v1.Z) / (v3.Y - v1.Y);
+            float zslope2 = (v3.Z - v2.Z) / (v3.Y - v2.Y);
 
             if (v1.X > v2.X)
             {
@@ -155,11 +155,11 @@ namespace _3DModelViewer
         }
 
         private static void FillFlatBottomTriangle(FastBitmap fast, Point4 v1, Point4 v2, Point4 v3, Color color)
-        {            
+        {
             float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
             float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
-            float zslope1 = v2.Z - v1.Z / (v2.Y - v1.Y);
-            float zslope2 = v3.Z - v1.Z / (v3.Y - v1.Y);
+            float zslope1 = (v2.Z - v1.Z) / (v2.Y - v1.Y);
+            float zslope2 = (v3.Z - v1.Z) / (v3.Y - v1.Y);
             if (v2.X > v3.X)
             {
                 Swap(ref invslope1, ref invslope2);
@@ -167,9 +167,9 @@ namespace _3DModelViewer
             }
             float curX1 = v1.X;
             float curX2 = v1.X;
+
             float zL = v1.Z;
             float zR = v1.Z;
-
 
             for (int scanlineY = (int)v1.Y; scanlineY <= v2.Y; scanlineY++)
             {
@@ -208,7 +208,7 @@ namespace _3DModelViewer
             }
         }
 
-        public static void FillScanline(FastBitmap fast, List<Point4> points, Color color)
+        public static void FillScanline(FastBitmap fast, List<Point4> points, Color color, List<Light> lights)
         {
             points.Sort((p, r) => p.Y.CompareTo(r.Y));
             Point4 v1 = points[0];

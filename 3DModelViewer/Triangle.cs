@@ -39,6 +39,9 @@ namespace _3DModelViewer
             Vector4 U = points[1].V - points[0].V;
             Vector4 V = points[2].V - points[0].V;
             Normal = Vector.Cross(U, V);
+            points[0].Normal = Normal;
+            points[1].Normal = Normal;
+            points[2].Normal = Normal;
         }
     }
 }

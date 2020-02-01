@@ -64,12 +64,35 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.CameraListBox = new System.Windows.Forms.ListBox();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.splitContainer8 = new System.Windows.Forms.SplitContainer();
+            this.RemoveLightButton = new System.Windows.Forms.Button();
+            this.AddLightButton = new System.Windows.Forms.Button();
+            this.splitContainer9 = new System.Windows.Forms.SplitContainer();
+            this.LightGroupBox = new System.Windows.Forms.GroupBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.LightPosZ = new System.Windows.Forms.NumericUpDown();
+            this.label71 = new System.Windows.Forms.Label();
+            this.LightPosY = new System.Windows.Forms.NumericUpDown();
+            this.label72 = new System.Windows.Forms.Label();
+            this.LightPosX = new System.Windows.Forms.NumericUpDown();
+            this.label73 = new System.Windows.Forms.Label();
+            this.LightRange = new System.Windows.Forms.NumericUpDown();
+            this.label69 = new System.Windows.Forms.Label();
+            this.LightIntensity = new System.Windows.Forms.NumericUpDown();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.LightColor = new System.Windows.Forms.PictureBox();
+            this.LightListBox = new System.Windows.Forms.ListBox();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitContainer7 = new System.Windows.Forms.SplitContainer();
             this.RemoveFigureButton = new System.Windows.Forms.Button();
             this.AddFigureButton = new System.Windows.Forms.Button();
             this.FigureDataGrid = new System.Windows.Forms.DataGridView();
+            this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ConeGroupBox = new System.Windows.Forms.GroupBox();
             this.label66 = new System.Windows.Forms.Label();
             this.ConeColor = new System.Windows.Forms.PictureBox();
@@ -192,29 +215,6 @@
             this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cylinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.splitContainer8 = new System.Windows.Forms.SplitContainer();
-            this.RemoveLightButton = new System.Windows.Forms.Button();
-            this.AddLightButton = new System.Windows.Forms.Button();
-            this.splitContainer9 = new System.Windows.Forms.SplitContainer();
-            this.LightGroupBox = new System.Windows.Forms.GroupBox();
-            this.label70 = new System.Windows.Forms.Label();
-            this.LightPosZ = new System.Windows.Forms.NumericUpDown();
-            this.label71 = new System.Windows.Forms.Label();
-            this.LightPosY = new System.Windows.Forms.NumericUpDown();
-            this.label72 = new System.Windows.Forms.Label();
-            this.LightPosX = new System.Windows.Forms.NumericUpDown();
-            this.label73 = new System.Windows.Forms.Label();
-            this.LightRange = new System.Windows.Forms.NumericUpDown();
-            this.label69 = new System.Windows.Forms.Label();
-            this.LightIntensity = new System.Windows.Forms.NumericUpDown();
-            this.label68 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
-            this.LightColor = new System.Windows.Forms.PictureBox();
-            this.LightListBox = new System.Windows.Forms.ListBox();
-            this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -246,6 +246,22 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).BeginInit();
+            this.splitContainer8.Panel1.SuspendLayout();
+            this.splitContainer8.Panel2.SuspendLayout();
+            this.splitContainer8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).BeginInit();
+            this.splitContainer9.Panel1.SuspendLayout();
+            this.splitContainer9.Panel2.SuspendLayout();
+            this.splitContainer9.SuspendLayout();
+            this.LightGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightRange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightIntensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
             this.splitContainer6.Panel1.SuspendLayout();
             this.splitContainer6.Panel2.SuspendLayout();
@@ -256,6 +272,7 @@
             this.splitContainer7.Panel2.SuspendLayout();
             this.splitContainer7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.ConeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConeRadius)).BeginInit();
@@ -310,23 +327,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).BeginInit();
             this.AddFigureMenu.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).BeginInit();
-            this.splitContainer8.Panel1.SuspendLayout();
-            this.splitContainer8.Panel2.SuspendLayout();
-            this.splitContainer8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).BeginInit();
-            this.splitContainer9.Panel1.SuspendLayout();
-            this.splitContainer9.Panel2.SuspendLayout();
-            this.splitContainer9.SuspendLayout();
-            this.LightGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightRange)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightIntensity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -436,6 +436,8 @@
             // 
             // fillTrianglesToolStripMenuItem
             // 
+            this.fillTrianglesToolStripMenuItem.Checked = true;
+            this.fillTrianglesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillTrianglesToolStripMenuItem.Name = "fillTrianglesToolStripMenuItem";
             this.fillTrianglesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.fillTrianglesToolStripMenuItem.Text = "Fill triangles";
@@ -452,6 +454,8 @@
             // 
             // zbufferingToolStripMenuItem
             // 
+            this.zbufferingToolStripMenuItem.Checked = true;
+            this.zbufferingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.zbufferingToolStripMenuItem.Name = "zbufferingToolStripMenuItem";
             this.zbufferingToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.zbufferingToolStripMenuItem.Text = "Z-buffering";
@@ -757,6 +761,305 @@
             this.splitContainer5.SplitterDistance = 220;
             this.splitContainer5.TabIndex = 0;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.splitContainer8);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(203, 220);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Lights";
+            // 
+            // splitContainer8
+            // 
+            this.splitContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer8.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer8.IsSplitterFixed = true;
+            this.splitContainer8.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer8.Name = "splitContainer8";
+            this.splitContainer8.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer8.Panel1
+            // 
+            this.splitContainer8.Panel1.Controls.Add(this.RemoveLightButton);
+            this.splitContainer8.Panel1.Controls.Add(this.AddLightButton);
+            // 
+            // splitContainer8.Panel2
+            // 
+            this.splitContainer8.Panel2.Controls.Add(this.splitContainer9);
+            this.splitContainer8.Size = new System.Drawing.Size(197, 201);
+            this.splitContainer8.SplitterDistance = 30;
+            this.splitContainer8.TabIndex = 1;
+            // 
+            // RemoveLightButton
+            // 
+            this.RemoveLightButton.Location = new System.Drawing.Point(58, 3);
+            this.RemoveLightButton.Name = "RemoveLightButton";
+            this.RemoveLightButton.Size = new System.Drawing.Size(60, 23);
+            this.RemoveLightButton.TabIndex = 4;
+            this.RemoveLightButton.Text = "Remove";
+            this.RemoveLightButton.UseVisualStyleBackColor = true;
+            this.RemoveLightButton.Click += new System.EventHandler(this.RemoveLightButton_Click);
+            // 
+            // AddLightButton
+            // 
+            this.AddLightButton.Location = new System.Drawing.Point(3, 3);
+            this.AddLightButton.Name = "AddLightButton";
+            this.AddLightButton.Size = new System.Drawing.Size(53, 23);
+            this.AddLightButton.TabIndex = 3;
+            this.AddLightButton.Text = "Add";
+            this.AddLightButton.UseVisualStyleBackColor = true;
+            this.AddLightButton.Click += new System.EventHandler(this.AddLightButton_Click);
+            // 
+            // splitContainer9
+            // 
+            this.splitContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer9.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer9.IsSplitterFixed = true;
+            this.splitContainer9.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer9.Name = "splitContainer9";
+            this.splitContainer9.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer9.Panel1
+            // 
+            this.splitContainer9.Panel1.Controls.Add(this.LightGroupBox);
+            // 
+            // splitContainer9.Panel2
+            // 
+            this.splitContainer9.Panel2.Controls.Add(this.LightListBox);
+            this.splitContainer9.Size = new System.Drawing.Size(197, 167);
+            this.splitContainer9.SplitterDistance = 110;
+            this.splitContainer9.TabIndex = 0;
+            // 
+            // LightGroupBox
+            // 
+            this.LightGroupBox.Controls.Add(this.label70);
+            this.LightGroupBox.Controls.Add(this.LightPosZ);
+            this.LightGroupBox.Controls.Add(this.label71);
+            this.LightGroupBox.Controls.Add(this.LightPosY);
+            this.LightGroupBox.Controls.Add(this.label72);
+            this.LightGroupBox.Controls.Add(this.LightPosX);
+            this.LightGroupBox.Controls.Add(this.label73);
+            this.LightGroupBox.Controls.Add(this.LightRange);
+            this.LightGroupBox.Controls.Add(this.label69);
+            this.LightGroupBox.Controls.Add(this.LightIntensity);
+            this.LightGroupBox.Controls.Add(this.label68);
+            this.LightGroupBox.Controls.Add(this.label67);
+            this.LightGroupBox.Controls.Add(this.LightColor);
+            this.LightGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.LightGroupBox.Name = "LightGroupBox";
+            this.LightGroupBox.Size = new System.Drawing.Size(197, 110);
+            this.LightGroupBox.TabIndex = 14;
+            this.LightGroupBox.TabStop = false;
+            this.LightGroupBox.Text = "Light properties";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(121, 85);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(14, 13);
+            this.label70.TabIndex = 65;
+            this.label70.Text = "Z";
+            // 
+            // LightPosZ
+            // 
+            this.LightPosZ.DecimalPlaces = 2;
+            this.LightPosZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.LightPosZ.Location = new System.Drawing.Point(141, 83);
+            this.LightPosZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.LightPosZ.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.LightPosZ.Name = "LightPosZ";
+            this.LightPosZ.Size = new System.Drawing.Size(53, 20);
+            this.LightPosZ.TabIndex = 64;
+            this.LightPosZ.ValueChanged += new System.EventHandler(this.LightPosZ_ValueChanged);
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(121, 58);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(14, 13);
+            this.label71.TabIndex = 63;
+            this.label71.Text = "Y";
+            // 
+            // LightPosY
+            // 
+            this.LightPosY.DecimalPlaces = 2;
+            this.LightPosY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.LightPosY.Location = new System.Drawing.Point(141, 56);
+            this.LightPosY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.LightPosY.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.LightPosY.Name = "LightPosY";
+            this.LightPosY.Size = new System.Drawing.Size(53, 20);
+            this.LightPosY.TabIndex = 62;
+            this.LightPosY.ValueChanged += new System.EventHandler(this.LightPosY_ValueChanged);
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(121, 32);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(14, 13);
+            this.label72.TabIndex = 61;
+            this.label72.Text = "X";
+            // 
+            // LightPosX
+            // 
+            this.LightPosX.DecimalPlaces = 2;
+            this.LightPosX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.LightPosX.Location = new System.Drawing.Point(141, 30);
+            this.LightPosX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.LightPosX.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            -2147483648});
+            this.LightPosX.Name = "LightPosX";
+            this.LightPosX.Size = new System.Drawing.Size(53, 20);
+            this.LightPosX.TabIndex = 60;
+            this.LightPosX.ValueChanged += new System.EventHandler(this.LightPosX_ValueChanged);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(120, 13);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(44, 13);
+            this.label73.TabIndex = 59;
+            this.label73.Text = "Position";
+            // 
+            // LightRange
+            // 
+            this.LightRange.DecimalPlaces = 2;
+            this.LightRange.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.LightRange.Location = new System.Drawing.Point(61, 82);
+            this.LightRange.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.LightRange.Name = "LightRange";
+            this.LightRange.Size = new System.Drawing.Size(47, 20);
+            this.LightRange.TabIndex = 58;
+            this.LightRange.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.LightRange.ValueChanged += new System.EventHandler(this.LightRange_ValueChanged);
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(16, 84);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(39, 13);
+            this.label69.TabIndex = 57;
+            this.label69.Text = "Range";
+            // 
+            // LightIntensity
+            // 
+            this.LightIntensity.DecimalPlaces = 2;
+            this.LightIntensity.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.LightIntensity.Location = new System.Drawing.Point(61, 56);
+            this.LightIntensity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.LightIntensity.Name = "LightIntensity";
+            this.LightIntensity.Size = new System.Drawing.Size(47, 20);
+            this.LightIntensity.TabIndex = 56;
+            this.LightIntensity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.LightIntensity.ValueChanged += new System.EventHandler(this.LightIntensity_ValueChanged);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(12, 58);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(46, 13);
+            this.label68.TabIndex = 55;
+            this.label68.Text = "Intensity";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(27, 34);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(31, 13);
+            this.label67.TabIndex = 54;
+            this.label67.Text = "Color";
+            // 
+            // LightColor
+            // 
+            this.LightColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LightColor.Location = new System.Drawing.Point(62, 31);
+            this.LightColor.Name = "LightColor";
+            this.LightColor.Size = new System.Drawing.Size(20, 19);
+            this.LightColor.TabIndex = 53;
+            this.LightColor.TabStop = false;
+            this.LightColor.Click += new System.EventHandler(this.LightColor_Click);
+            // 
+            // LightListBox
+            // 
+            this.LightListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightListBox.FormattingEnabled = true;
+            this.LightListBox.Location = new System.Drawing.Point(0, 0);
+            this.LightListBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.LightListBox.Name = "LightListBox";
+            this.LightListBox.Size = new System.Drawing.Size(197, 53);
+            this.LightListBox.TabIndex = 1;
+            this.LightListBox.SelectedIndexChanged += new System.EventHandler(this.LightListBox_SelectedIndexChanged);
+            // 
             // splitContainer6
             // 
             this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -858,6 +1161,29 @@
             this.FigureDataGrid.Size = new System.Drawing.Size(197, 147);
             this.FigureDataGrid.TabIndex = 1;
             this.FigureDataGrid.SelectionChanged += new System.EventHandler(this.FigureDataGrid_SelectionChanged);
+            // 
+            // Visibility
+            // 
+            this.Visibility.DataPropertyName = "Visibility";
+            this.Visibility.FalseValue = "false";
+            this.Visibility.HeaderText = "Visibility";
+            this.Visibility.Name = "Visibility";
+            this.Visibility.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Visibility.TrueValue = "true";
+            this.Visibility.Width = 25;
+            // 
+            // displayNameDataGridViewTextBoxColumn
+            // 
+            this.displayNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.HeaderText = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
+            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.displayNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // iFigureBindingSource
+            // 
+            this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
             // 
             // ConeGroupBox
             // 
@@ -2831,328 +3157,6 @@
             this.coneToolStripMenuItem.Text = "Cone";
             this.coneToolStripMenuItem.Click += new System.EventHandler(this.coneToolStripMenuItem_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.splitContainer8);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(203, 220);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Lights";
-            // 
-            // splitContainer8
-            // 
-            this.splitContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer8.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer8.IsSplitterFixed = true;
-            this.splitContainer8.Location = new System.Drawing.Point(3, 16);
-            this.splitContainer8.Name = "splitContainer8";
-            this.splitContainer8.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer8.Panel1
-            // 
-            this.splitContainer8.Panel1.Controls.Add(this.RemoveLightButton);
-            this.splitContainer8.Panel1.Controls.Add(this.AddLightButton);
-            // 
-            // splitContainer8.Panel2
-            // 
-            this.splitContainer8.Panel2.Controls.Add(this.splitContainer9);
-            this.splitContainer8.Size = new System.Drawing.Size(197, 201);
-            this.splitContainer8.SplitterDistance = 30;
-            this.splitContainer8.TabIndex = 1;
-            // 
-            // RemoveLightButton
-            // 
-            this.RemoveLightButton.Location = new System.Drawing.Point(58, 3);
-            this.RemoveLightButton.Name = "RemoveLightButton";
-            this.RemoveLightButton.Size = new System.Drawing.Size(60, 23);
-            this.RemoveLightButton.TabIndex = 4;
-            this.RemoveLightButton.Text = "Remove";
-            this.RemoveLightButton.UseVisualStyleBackColor = true;
-            this.RemoveLightButton.Click += new System.EventHandler(this.RemoveLightButton_Click);
-            // 
-            // AddLightButton
-            // 
-            this.AddLightButton.Location = new System.Drawing.Point(3, 3);
-            this.AddLightButton.Name = "AddLightButton";
-            this.AddLightButton.Size = new System.Drawing.Size(53, 23);
-            this.AddLightButton.TabIndex = 3;
-            this.AddLightButton.Text = "Add";
-            this.AddLightButton.UseVisualStyleBackColor = true;
-            this.AddLightButton.Click += new System.EventHandler(this.AddLightButton_Click);
-            // 
-            // splitContainer9
-            // 
-            this.splitContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer9.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer9.IsSplitterFixed = true;
-            this.splitContainer9.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer9.Name = "splitContainer9";
-            this.splitContainer9.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer9.Panel1
-            // 
-            this.splitContainer9.Panel1.Controls.Add(this.LightGroupBox);
-            // 
-            // splitContainer9.Panel2
-            // 
-            this.splitContainer9.Panel2.Controls.Add(this.LightListBox);
-            this.splitContainer9.Size = new System.Drawing.Size(197, 167);
-            this.splitContainer9.SplitterDistance = 110;
-            this.splitContainer9.TabIndex = 0;
-            // 
-            // LightGroupBox
-            // 
-            this.LightGroupBox.Controls.Add(this.label70);
-            this.LightGroupBox.Controls.Add(this.LightPosZ);
-            this.LightGroupBox.Controls.Add(this.label71);
-            this.LightGroupBox.Controls.Add(this.LightPosY);
-            this.LightGroupBox.Controls.Add(this.label72);
-            this.LightGroupBox.Controls.Add(this.LightPosX);
-            this.LightGroupBox.Controls.Add(this.label73);
-            this.LightGroupBox.Controls.Add(this.LightRange);
-            this.LightGroupBox.Controls.Add(this.label69);
-            this.LightGroupBox.Controls.Add(this.LightIntensity);
-            this.LightGroupBox.Controls.Add(this.label68);
-            this.LightGroupBox.Controls.Add(this.label67);
-            this.LightGroupBox.Controls.Add(this.LightColor);
-            this.LightGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.LightGroupBox.Name = "LightGroupBox";
-            this.LightGroupBox.Size = new System.Drawing.Size(197, 110);
-            this.LightGroupBox.TabIndex = 14;
-            this.LightGroupBox.TabStop = false;
-            this.LightGroupBox.Text = "Light properties";
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(121, 85);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(14, 13);
-            this.label70.TabIndex = 65;
-            this.label70.Text = "Z";
-            // 
-            // LightPosZ
-            // 
-            this.LightPosZ.DecimalPlaces = 2;
-            this.LightPosZ.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.LightPosZ.Location = new System.Drawing.Point(141, 83);
-            this.LightPosZ.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.LightPosZ.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            -2147483648});
-            this.LightPosZ.Name = "LightPosZ";
-            this.LightPosZ.Size = new System.Drawing.Size(53, 20);
-            this.LightPosZ.TabIndex = 64;
-            this.LightPosZ.ValueChanged += new System.EventHandler(this.LightPosZ_ValueChanged);
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(121, 58);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(14, 13);
-            this.label71.TabIndex = 63;
-            this.label71.Text = "Y";
-            // 
-            // LightPosY
-            // 
-            this.LightPosY.DecimalPlaces = 2;
-            this.LightPosY.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.LightPosY.Location = new System.Drawing.Point(141, 56);
-            this.LightPosY.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.LightPosY.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            -2147483648});
-            this.LightPosY.Name = "LightPosY";
-            this.LightPosY.Size = new System.Drawing.Size(53, 20);
-            this.LightPosY.TabIndex = 62;
-            this.LightPosY.ValueChanged += new System.EventHandler(this.LightPosY_ValueChanged);
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(121, 32);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(14, 13);
-            this.label72.TabIndex = 61;
-            this.label72.Text = "X";
-            // 
-            // LightPosX
-            // 
-            this.LightPosX.DecimalPlaces = 2;
-            this.LightPosX.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.LightPosX.Location = new System.Drawing.Point(141, 30);
-            this.LightPosX.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.LightPosX.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            -2147483648});
-            this.LightPosX.Name = "LightPosX";
-            this.LightPosX.Size = new System.Drawing.Size(53, 20);
-            this.LightPosX.TabIndex = 60;
-            this.LightPosX.ValueChanged += new System.EventHandler(this.LightPosX_ValueChanged);
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(120, 13);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(44, 13);
-            this.label73.TabIndex = 59;
-            this.label73.Text = "Position";
-            // 
-            // LightRange
-            // 
-            this.LightRange.DecimalPlaces = 2;
-            this.LightRange.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.LightRange.Location = new System.Drawing.Point(61, 82);
-            this.LightRange.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.LightRange.Name = "LightRange";
-            this.LightRange.Size = new System.Drawing.Size(47, 20);
-            this.LightRange.TabIndex = 58;
-            this.LightRange.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.LightRange.ValueChanged += new System.EventHandler(this.LightRange_ValueChanged);
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(16, 84);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(39, 13);
-            this.label69.TabIndex = 57;
-            this.label69.Text = "Range";
-            // 
-            // LightIntensity
-            // 
-            this.LightIntensity.DecimalPlaces = 2;
-            this.LightIntensity.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.LightIntensity.Location = new System.Drawing.Point(61, 56);
-            this.LightIntensity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.LightIntensity.Name = "LightIntensity";
-            this.LightIntensity.Size = new System.Drawing.Size(47, 20);
-            this.LightIntensity.TabIndex = 56;
-            this.LightIntensity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.LightIntensity.ValueChanged += new System.EventHandler(this.LightIntensity_ValueChanged);
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(12, 58);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(46, 13);
-            this.label68.TabIndex = 55;
-            this.label68.Text = "Intensity";
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(27, 34);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(31, 13);
-            this.label67.TabIndex = 54;
-            this.label67.Text = "Color";
-            // 
-            // LightColor
-            // 
-            this.LightColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LightColor.Location = new System.Drawing.Point(62, 31);
-            this.LightColor.Name = "LightColor";
-            this.LightColor.Size = new System.Drawing.Size(20, 19);
-            this.LightColor.TabIndex = 53;
-            this.LightColor.TabStop = false;
-            this.LightColor.Click += new System.EventHandler(this.LightColor_Click);
-            // 
-            // LightListBox
-            // 
-            this.LightListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightListBox.FormattingEnabled = true;
-            this.LightListBox.Location = new System.Drawing.Point(0, 0);
-            this.LightListBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.LightListBox.Name = "LightListBox";
-            this.LightListBox.Size = new System.Drawing.Size(197, 53);
-            this.LightListBox.TabIndex = 1;
-            this.LightListBox.SelectedIndexChanged += new System.EventHandler(this.LightListBox_SelectedIndexChanged);
-            // 
-            // Visibility
-            // 
-            this.Visibility.DataPropertyName = "Visibility";
-            this.Visibility.FalseValue = "false";
-            this.Visibility.HeaderText = "Visibility";
-            this.Visibility.Name = "Visibility";
-            this.Visibility.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Visibility.TrueValue = "true";
-            this.Visibility.Width = 25;
-            // 
-            // displayNameDataGridViewTextBoxColumn
-            // 
-            this.displayNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
-            this.displayNameDataGridViewTextBoxColumn.HeaderText = "DisplayName";
-            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
-            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.displayNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // iFigureBindingSource
-            // 
-            this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3202,6 +3206,23 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.splitContainer8.Panel1.ResumeLayout(false);
+            this.splitContainer8.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).EndInit();
+            this.splitContainer8.ResumeLayout(false);
+            this.splitContainer9.Panel1.ResumeLayout(false);
+            this.splitContainer9.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).EndInit();
+            this.splitContainer9.ResumeLayout(false);
+            this.LightGroupBox.ResumeLayout(false);
+            this.LightGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightPosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightRange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightIntensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LightColor)).EndInit();
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
@@ -3212,6 +3233,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
             this.splitContainer7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ConeGroupBox.ResumeLayout(false);
             this.ConeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).EndInit();
@@ -3270,24 +3292,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).EndInit();
             this.AddFigureMenu.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.splitContainer8.Panel1.ResumeLayout(false);
-            this.splitContainer8.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer8)).EndInit();
-            this.splitContainer8.ResumeLayout(false);
-            this.splitContainer9.Panel1.ResumeLayout(false);
-            this.splitContainer9.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).EndInit();
-            this.splitContainer9.ResumeLayout(false);
-            this.LightGroupBox.ResumeLayout(false);
-            this.LightGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightPosX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightRange)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightIntensity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LightColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
