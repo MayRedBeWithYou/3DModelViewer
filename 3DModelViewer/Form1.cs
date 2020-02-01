@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace _3DModelViewer
 {
@@ -16,13 +19,15 @@ namespace _3DModelViewer
     {
         public Camera SelectedCamera { get; set; }
 
-        public readonly BindingList<Camera> Cameras = new BindingList<Camera>();
+        public BindingList<Camera> Cameras = new BindingList<Camera>();
+
+        public Light SelectedLight { get; set; }
+
+        public readonly BindingList<Light> Lights = new BindingList<Light>();
 
         Bitmap bitmap;
 
         Point LastMousePos = Point.Empty;
-
-        readonly List<Triangle> Triangles = new List<Triangle>();
 
         public readonly BindingList<IFigure> Figures = new BindingList<IFigure>();
 
@@ -43,13 +48,27 @@ namespace _3DModelViewer
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Render.Clear(bitmap);
             Canvas.Image = bitmap;
-            Figures.Add(new Cuboid());
-            SelectedCamera = new Camera();
+            Figures.Add(new Cuboid() { Center = new Point4(3, 0, 3) });
+            Figures.Add(new Sphere() { Center = new Point4(-3, 0, -3) });
+            Figures.Add(new Cone() { Center = new Point4(-3, 0, 3) });
+            Figures.Add(new Cylinder() { Center = new Point4(3, 0, -3) });
             FigureDataGrid.DataSource = Figures;
+
+            SelectedCamera = new Camera();
             Cameras.Add(SelectedCamera);
             CameraListBox.DataSource = Cameras;
             CameraListBox.DisplayMember = "DisplayName";
-            CameraListBox.SelectedItem = SelectedCamera;
+            CameraListBox.SelectedIndex = 0;
+
+            LightColor.Image = new Bitmap(LightColor.Width, LightColor.Height);
+            LightColor.Refresh();
+
+            SelectedLight = new Light();
+            Lights.Add(SelectedLight);
+            LightListBox.DataSource = Lights;
+            LightListBox.DisplayMember = "DisplayName";
+            LightListBox.SelectedIndex = 0;
+
             RefreshTimer.Tick += RefreshTimer_Tick;
             RefreshTimer.Interval = 8;
             RefreshTimer.Start();
@@ -120,7 +139,7 @@ namespace _3DModelViewer
                     foreach (Point4 p in t.Points)
                     {
                         Vector4 r = PVM * p.V;
-                        r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1);
+                        r = new Vector4(r.X / r.W, r.Y / r.W, r.Z / r.W, 1f);
                         r = new Vector4((r.X + 1) * Canvas.Width / 2f, (r.Y + 1) * Canvas.Height / 2f, (r.Z - 1f) / 2f, 1f);
                         points3.Add(new Point4((int)r.X, (int)r.Y, r.Z, r.W));
                     }
@@ -159,8 +178,7 @@ namespace _3DModelViewer
         private void FOVSlider_ValueChanged(object sender, EventArgs e)
         {
             SelectedCamera.FOV = FOVSlider.Value;
-            if (SelectedCamera.FOV == 120) FOVLabel.Text = "Quake\nPro";
-            else FOVLabel.Text = SelectedCamera.FOV.ToString();
+            FOVLabel.Text = SelectedCamera.FOV.ToString();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -211,14 +229,12 @@ namespace _3DModelViewer
             if (e.Button == MouseButtons.Middle || e.Button == MouseButtons.Right)
             {
                 LastMousePos = new Point(e.X, e.Y);
-                //Cursor.Hide();
             }
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             LastMousePos = Point.Empty;
-            //Cursor.Show();
         }
 
         private void Canvas_MouseWheel(object sender, MouseEventArgs e)
@@ -236,8 +252,6 @@ namespace _3DModelViewer
             Cameras.ResetBindings();
             CameraListBox.SelectedItem = SelectedCamera;
             if (Cameras.Count > 1) RemoveCameraButton.Enabled = true;
-
-
         }
 
         private void CameraListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -358,9 +372,9 @@ namespace _3DModelViewer
                     CuboidDimY.Value = (decimal)cube.DimY;
                     CuboidDimZ.Value = (decimal)cube.DimZ;
 
-                    CuboidRotX.Value = (decimal)cube.RotX;
-                    CuboidRotY.Value = (decimal)cube.RotY;
-                    CuboidRotZ.Value = (decimal)cube.RotZ;
+                    CuboidRotX.Value = (decimal)(cube.RotX * 180f / Math.PI);
+                    CuboidRotY.Value = (decimal)(cube.RotY * 180f / Math.PI);
+                    CuboidRotZ.Value = (decimal)(cube.RotZ * 180f / Math.PI);
 
                     using (FastBitmap fast = ((Bitmap)CuboidColor.Image).FastLock())
                     {
@@ -380,9 +394,9 @@ namespace _3DModelViewer
                     SphereDimY.Value = (decimal)sphere.DimY;
                     SphereDimZ.Value = (decimal)sphere.DimZ;
 
-                    SphereRotX.Value = (decimal)sphere.RotX;
-                    SphereRotY.Value = (decimal)sphere.RotY;
-                    SphereRotZ.Value = (decimal)sphere.RotZ;
+                    SphereRotX.Value = (decimal)(sphere.RotX * 180f / Math.PI);
+                    SphereRotY.Value = (decimal)(sphere.RotY * 180f / Math.PI);
+                    SphereRotZ.Value = (decimal)(sphere.RotZ * 180f / Math.PI);
 
                     SphereLat.Value = (decimal)sphere.Lat;
                     SphereLon.Value = (decimal)sphere.Lon;
@@ -406,15 +420,15 @@ namespace _3DModelViewer
                     CylinderDimY.Value = (decimal)cylinder.DimY;
                     CylinderDimZ.Value = (decimal)cylinder.DimZ;
 
-                    CylinderRotX.Value = (decimal)cylinder.RotX;
-                    CylinderRotY.Value = (decimal)cylinder.RotY;
-                    CylinderRotZ.Value = (decimal)cylinder.RotZ;
+                    CylinderRotX.Value = (decimal)(cylinder.RotX * 180f / Math.PI);
+                    CylinderRotY.Value = (decimal)(cylinder.RotY * 180f / Math.PI);
+                    CylinderRotZ.Value = (decimal)(cylinder.RotZ * 180f / Math.PI);
 
                     CylinderDiv.Value = (decimal)cylinder.Division;
                     CylinderHeight.Value = (decimal)cylinder.Height;
                     CylinderRadius.Value = (decimal)cylinder.Radius;
 
-                    using(FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
+                    using (FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
                     {
                         fast.Clear(cylinder.Color);
                     }
@@ -432,9 +446,9 @@ namespace _3DModelViewer
                     ConeDimY.Value = (decimal)cone.DimY;
                     ConeDimZ.Value = (decimal)cone.DimZ;
 
-                    ConeRotX.Value = (decimal)cone.RotX;
-                    ConeRotY.Value = (decimal)cone.RotY;
-                    ConeRotZ.Value = (decimal)cone.RotZ;
+                    ConeRotX.Value = (decimal)(cone.RotX * 180f / Math.PI);
+                    ConeRotY.Value = (decimal)(cone.RotY * 180f / Math.PI);
+                    ConeRotZ.Value = (decimal)(cone.RotZ * 180f / Math.PI);
 
                     ConeDiv.Value = (decimal)cone.Division;
                     ConeHeight.Value = (decimal)cone.Height;
@@ -810,10 +824,10 @@ namespace _3DModelViewer
         private void CylinderColor_Click(object sender, EventArgs e)
         {
             ColorDialog dialog = new ColorDialog();
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 SelectedFigure.Color = dialog.Color;
-                using(FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
+                using (FastBitmap fast = ((Bitmap)CylinderColor.Image).FastLock())
                 {
                     fast.Clear(dialog.Color);
                 }
@@ -860,6 +874,186 @@ namespace _3DModelViewer
                     fast.Clear(dialog.Color);
                 }
                 ConeColor.Refresh();
+            }
+        }
+
+        private void AddLightButton_Click(object sender, EventArgs e)
+        {
+            Lights.Add(new Light());
+            SelectedLight = Lights.Last();
+            LightListBox.SelectedItem = SelectedLight;
+            RemoveLightButton.Enabled = true;
+            LightGroupBox.Enabled = true;
+            Lights.ResetBindings();
+        }
+
+        private void LightListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Lights.Count == 0) return;
+            SelectedLight = (Light)LightListBox.SelectedItem;
+            using (FastBitmap fast = ((Bitmap)LightColor.Image).FastLock())
+            {
+                fast.Clear(SelectedLight.Color);
+            }
+            LightIntensity.Value = (decimal)SelectedLight.Intensity;
+            LightRange.Value = (decimal)SelectedLight.Range;
+            LightPosX.Value = (decimal)SelectedLight.Position.X;
+            LightPosY.Value = (decimal)SelectedLight.Position.Y;
+            LightPosZ.Value = (decimal)SelectedLight.Position.Z;
+
+            LightColor.Refresh();
+        }
+
+        private void RemoveLightButton_Click(object sender, EventArgs e)
+        {
+            int index = LightListBox.SelectedIndex;
+            Lights.Remove(SelectedLight);
+            if (index == Lights.Count)
+            {
+                if (Lights.Count == 0)
+                {
+                    SelectedLight = null;
+                    RemoveLightButton.Enabled = false;
+                    LightGroupBox.Enabled = false;
+                    using (FastBitmap fast = ((Bitmap)LightColor.Image).FastLock())
+                    {
+                        fast.Clear(Color.White);
+                    }
+                }
+                else SelectedLight = Lights.Last();
+            }
+            else SelectedLight = Lights[index == 0 ? index : index - 1];
+            Lights.ResetBindings();
+        }
+
+        private void LightPosX_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedLight.Position.X = (float)LightPosX.Value;
+            Lights.ResetBindings();
+        }
+
+        private void LightPosY_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedLight.Position.Y = (float)LightPosY.Value;
+            Lights.ResetBindings();
+        }
+
+        private void LightPosZ_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedLight.Position.Z = (float)LightPosZ.Value;
+            Lights.ResetBindings();
+        }
+
+        private void LightIntensity_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedLight.Intensity = (float)LightIntensity.Value;
+            Lights.ResetBindings();
+        }
+
+        private void LightRange_ValueChanged(object sender, EventArgs e)
+        {
+            SelectedLight.Range = (float)LightRange.Value;
+            Lights.ResetBindings();
+        }
+
+        private void LightColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedLight.Color = dialog.Color;
+                using (FastBitmap fast = ((Bitmap)LightColor.Image).FastLock())
+                {
+                    fast.Clear(dialog.Color);
+                }
+                LightColor.Refresh();
+            }
+        }
+
+        private void saveSceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "xml files (*.xml)|*.xml";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                List<CameraXML> cams = new List<CameraXML>();
+                foreach (Camera c in Cameras)
+                {
+                    cams.Add(new CameraXML(c));
+                }
+                List<LightXML> l = new List<LightXML>();
+                foreach (Light light in Lights)
+                {
+                    l.Add(new LightXML(light));
+                }
+
+                List<CuboidXML> cuboids = new List<CuboidXML>();
+                List<SphereXML> spheres = new List<SphereXML>();
+                List<CylinderXML> cylinders = new List<CylinderXML>();
+                List<ConeXML> cones = new List<ConeXML>();
+                foreach (IFigure f in Figures)
+                {
+                    if (f is Cuboid) cuboids.Add(new CuboidXML(f as Cuboid));
+                    else if (f is Sphere) spheres.Add(new SphereXML(f as Sphere));
+                    else if (f is Cylinder) cylinders.Add(new CylinderXML(f as Cylinder));
+                    else if (f is Cone) cones.Add(new ConeXML(f as Cone));
+                }
+                DummyXML xml = new DummyXML { Cameras = cams, Lights = l, Cuboids = cuboids, Spheres = spheres, Cylinders = cylinders, Cones = cones };
+                XmlSerializer ser = new XmlSerializer(typeof(DummyXML), new Type[] { typeof(CuboidXML), typeof(SphereXML), typeof(CylinderXML), typeof(ConeXML) });
+                TextWriter writer = new StreamWriter(dialog.FileName);
+                ser.Serialize(writer, xml);
+                writer.Close();
+            }
+        }
+
+        private void loadSceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "xml files (*.xml)|*.xml";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(DummyXML));
+                FileStream fs = new FileStream(dialog.FileName, FileMode.Open);
+                DummyXML xml = (DummyXML)ser.Deserialize(fs);
+                RefreshTimer.Stop();
+                BindingList<Camera> newCameras = new BindingList<Camera>();
+                Lights.Clear();
+                Figures.Clear();
+                xml.Cameras.ForEach(c => newCameras.Add(new Camera(c)));
+                xml.Lights.ForEach(l => Lights.Add(new Light(l)));
+                xml.Cuboids.ForEach(f => Figures.Add(new Cuboid(f)));
+                xml.Spheres.ForEach(f => Figures.Add(new Sphere(f)));
+                xml.Cylinders.ForEach(f => Figures.Add(new Cylinder(f)));
+                xml.Cones.ForEach(f => Figures.Add(new Cone(f)));
+                Cameras = newCameras;
+                CameraListBox.DataSource = Cameras;
+                CameraListBox.ClearSelected();
+                CameraListBox.SetSelected(0, true);
+                SelectedCamera = Cameras.First();
+                if (Cameras.Count == 1)
+                {
+                    RemoveCameraButton.Enabled = false;
+                }
+                else RemoveCameraButton.Enabled = true;
+                if (Lights.Count != 0)
+                {
+                    LightListBox.ClearSelected();
+                    LightListBox.SetSelected(0, true);
+                    SelectedLight = Lights[0];
+                    LightGroupBox.Enabled = true;
+                    RemoveLightButton.Enabled = true;
+                }
+                else
+                {
+                    SelectedLight = null;
+                    LightListBox.ClearSelected();
+                    LightGroupBox.Enabled = false;
+                    RemoveLightButton.Enabled = false;
+                }
+                Lights.ResetBindings();
+                CameraListBox.SelectedIndex = 0;
+                FigureDataGrid.Refresh();
+                RefreshTimer.Start();
             }
         }
     }

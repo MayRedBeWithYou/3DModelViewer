@@ -26,6 +26,7 @@ namespace _3DModelViewer
 
     public class Cuboid : IFigure
     {
+
         public List<Triangle> Triangles { get; } = new List<Triangle>();
 
         public Point4 Center { get; set; } = new Point4();
@@ -50,7 +51,9 @@ namespace _3DModelViewer
         }
 
         public float RotX { get; set; } = 0f;
+
         public float RotY { get; set; } = 0f;
+
         public float RotZ { get; set; } = 0f;
 
         public Vector4 Rotation
@@ -100,6 +103,16 @@ namespace _3DModelViewer
             CreateTriangles();
         }
 
+        public Cuboid(CuboidXML xml)
+        {
+            Center = xml.C;
+            Scale = xml.S.V;
+            Rotation = xml.R.V;
+            Color = xml.Col;
+            Visibility = xml.Visibility;
+            CreateTriangles();
+        }
+
         private void CreateTriangles()
         {
             Triangles.Clear();
@@ -128,7 +141,7 @@ namespace _3DModelViewer
             Triangles.Add(new Triangle(new Point4(P8), new Point4(P7), new Point4(P6)));
 
             ///Down
-            Triangles.Add(new Triangle(new Point4(P1), new Point4(P2), new Point4(P4)));
+            Triangles.Add(new Triangle(new Point4(P2), new Point4(P4), new Point4(P1)));
             Triangles.Add(new Triangle(new Point4(P2), new Point4(P3), new Point4(P4)));
 
             ///Left
@@ -138,14 +151,15 @@ namespace _3DModelViewer
             ///Right
             Triangles.Add(new Triangle(new Point4(P8), new Point4(P1), new Point4(P4)));
             Triangles.Add(new Triangle(new Point4(P8), new Point4(P5), new Point4(P1)));
-
         }
     }
 
     public class Sphere : IFigure
     {
         private float radius = 2f;
+
         private int lat = 12;
+
         private int lon = 12;
 
         public List<Triangle> Triangles { get; } = new List<Triangle>();
@@ -160,6 +174,19 @@ namespace _3DModelViewer
 
         public Sphere()
         {
+            CreateTriangles();
+        }
+
+        public Sphere(SphereXML xml)
+        {
+            Center = xml.C;
+            Scale = xml.S.V;
+            Rotation = xml.R.V;
+            Color = xml.Col;
+            Visibility = xml.Visibility;
+            radius = xml.Radius;
+            lat = xml.Lat;
+            lon = xml.Lon;
             CreateTriangles();
         }
 
@@ -223,7 +250,9 @@ namespace _3DModelViewer
         }
 
         public float RotX { get; set; } = 0f;
+
         public float RotY { get; set; } = 0f;
+
         public float RotZ { get; set; } = 0f;
 
         public Vector4 Rotation
@@ -286,7 +315,9 @@ namespace _3DModelViewer
     public class Cylinder : IFigure
     {
         private float radius = 2f;
+
         private float height = 2f;
+
         private int division = 12;
 
         public List<Triangle> Triangles { get; } = new List<Triangle>();
@@ -301,6 +332,18 @@ namespace _3DModelViewer
 
         public Cylinder()
         {
+            CreateTriangles();
+        }
+        public Cylinder(CylinderXML xml)
+        {
+            Center = xml.C;
+            Scale = xml.S.V;
+            Rotation = xml.R.V;
+            Color = xml.Col;
+            Visibility = xml.Visibility;
+            radius = xml.Radius;
+            division = xml.Division;
+            height = xml.Height;
             CreateTriangles();
         }
 
@@ -364,7 +407,9 @@ namespace _3DModelViewer
         }
 
         public float RotX { get; set; } = 0f;
+
         public float RotY { get; set; } = 0f;
+
         public float RotZ { get; set; } = 0f;
 
         public Vector4 Rotation
@@ -417,7 +462,9 @@ namespace _3DModelViewer
     public class Cone : IFigure
     {
         private float radius = 1f;
+
         private float height = 2f;
+
         private int division = 12;
 
         public List<Triangle> Triangles { get; } = new List<Triangle>();
@@ -432,6 +479,18 @@ namespace _3DModelViewer
 
         public Cone()
         {
+            CreateTriangles();
+        }
+        public Cone(ConeXML xml)
+        {
+            Center = xml.C;
+            Scale = xml.S.V;
+            Rotation = xml.R.V;
+            Color = xml.Col;
+            Visibility = xml.Visibility;
+            radius = xml.Radius;
+            division = xml.Division;
+            height = xml.Height;
             CreateTriangles();
         }
 
@@ -495,7 +554,9 @@ namespace _3DModelViewer
         }
 
         public float RotX { get; set; } = 0f;
+
         public float RotY { get; set; } = 0f;
+
         public float RotZ { get; set; } = 0f;
 
         public Vector4 Rotation

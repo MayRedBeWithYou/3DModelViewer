@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using FastBitmapLib;
@@ -10,87 +9,6 @@ using FastBitmapLib;
 
 namespace _3DModelViewer
 {
-    public interface ISceneElement
-    {
-        string DisplayName { get; }
-
-        Point4 Position { get; set; }
-    }
-
-    public class Camera
-    {
-        private Point4 defaultPosition = new Point4(6, 2, 3);
-
-        public Point4 Position { get; set; }
-
-        public string DisplayName => $"Camera (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
-
-        public Point4 Target = new Point4();
-
-        public int FOV = 60;
-
-        public float N = 0.1f;
-
-        public float F = 100f;
-
-        public Vector4 Normal
-        {
-            get
-            {
-                return Vector4.Normalize(Target.V - Position.V);
-            }
-        }
-
-        public Vector4 Tangent
-        {
-            get
-            {
-                return Vector4.Normalize(Vector.Cross(Normal, Vector4.UnitY));
-            }
-        }
-
-        public Vector4 Binormal
-        {
-            get
-            {
-                return Vector4.Normalize(Vector.Cross(Normal, Tangent));
-            }
-        }
-
-        public Camera()
-        {
-            Position = new Point4(defaultPosition);
-        }
-
-        public Camera(Point4 pos)
-        {
-            Position = pos;
-        }
-        public Camera(Point4 pos, Point4 target)
-        {
-            Position = pos;
-            Target = target;
-        }
-
-        public void Reset()
-        {
-            Position = new Point4(defaultPosition);
-            Target = new Point4();
-            FOV = 60;
-            N = 0.1f;
-            F = 100f;
-        }
-    }
-
-    public class Light : ISceneElement
-    {
-        public string DisplayName => $"Light (X:{Position.X.ToString("f2")}, Y:{Position.Y.ToString("f2")}, Z:{Position.Z.ToString("f2")})";
-
-        public Point4 Position { get; set; } = new Point4(7, 7, 7);
-
-        public Color Color { get; set; } = Color.Aquamarine;
-    }
-
     public class RenderInfo
     {
         public List<Triangle> triangles;
@@ -237,7 +155,7 @@ namespace _3DModelViewer
         }
 
         private static void FillFlatBottomTriangle(FastBitmap fast, Point4 v1, Point4 v2, Point4 v3, Color color)
-        {
+        {            
             float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
             float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
             float zslope1 = v2.Z - v1.Z / (v2.Y - v1.Y);
@@ -296,6 +214,7 @@ namespace _3DModelViewer
             Point4 v1 = points[0];
             Point4 v2 = points[1];
             Point4 v3 = points[2];
+
             if (v2.Y == v3.Y)
             {
                 FillFlatBottomTriangle(fast, v1, v2, v3, color);
