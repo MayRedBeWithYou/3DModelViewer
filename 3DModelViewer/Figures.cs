@@ -26,27 +26,62 @@ namespace _3DModelViewer
 
     public class Cuboid : IFigure
     {
+        private float x = 2f;
+
+        private float y = 2f;
+
+        private float z = 2f;
 
         public List<Triangle> Triangles { get; } = new List<Triangle>();
 
         public Point4 Center { get; set; } = new Point4();
 
-        public float DimX { get; set; } = 2f;
+        public float X
+        {
+            get => x;
+            set
+            {
+                x = value;
+                CreateTriangles();
+            }
+        }
 
-        public float DimY { get; set; } = 2f;
+        public float Y
+        {
+            get => y;
+            set
+            {
+                y = value;
+                CreateTriangles();
+            }
+        }
 
-        public float DimZ { get; set; } = 2f;
+        public float Z
+        {
+            get => z;
+            set
+            {
+                z = value;
+                CreateTriangles();
+            }
+        }
+
+        public float DimX { get; set; } = 1f;
+
+        public float DimY { get; set; } = 1f;
+
+        public float DimZ { get; set; } = 1f;
         public Vector4 Scale
         {
             get
             {
-                return new Vector4(DimX / 2f, DimY / 2f, DimZ / 2f, 0);
+                return new Vector4(DimX, DimY, DimZ, 0);
             }
             set
             {
-                DimX = value.X * 2f;
-                DimY = value.Y * 2f;
-                DimZ = value.Z * 2f;
+                DimX = value.X;
+                DimY = value.Y;
+                DimZ = value.Z;
             }
         }
 
@@ -88,24 +123,27 @@ namespace _3DModelViewer
 
         public Cuboid(float x = 2f, float y = 2f, float z = 2f)
         {
-            DimX = x;
-            DimY = y;
-            DimY = z;
+            X = x;
+            Y = y;
+            Z = z;
             CreateTriangles();
         }
 
         public Cuboid(Point4 C, float x = 2f, float y = 2f, float z = 2f)
         {
             Center = new Point4(C);
-            DimX = x;
-            DimY = y;
-            DimY = z;
+            X = x;
+            Y = y;
+            Z = z;
             CreateTriangles();
         }
 
         public Cuboid(CuboidXML xml)
         {
             Center = xml.C;
+            X = xml.X;
+            Y = xml.Y;
+            Z = xml.Z;
             Scale = xml.S.V;
             Rotation = xml.R.V;
             Color = xml.Col;
@@ -117,16 +155,16 @@ namespace _3DModelViewer
         {
             Triangles.Clear();
             ///Lower vertices
-            Point4 P1 = new Point4(DimX / 2f, -DimY / 2f, DimZ / 2f);
-            Point4 P2 = new Point4(-DimX / 2f, -DimY / 2f, DimZ / 2f);
-            Point4 P3 = new Point4(-DimX / 2f, -DimY / 2f, -DimZ / 2f);
-            Point4 P4 = new Point4(DimX / 2f, -DimY / 2f, -DimZ / 2f);
+            Point4 P1 = new Point4(X / 2f, -Y / 2f, Z / 2f);
+            Point4 P2 = new Point4(-X / 2f, -Y / 2f, Z / 2f);
+            Point4 P3 = new Point4(-X / 2f, -Y / 2f, -Z / 2f);
+            Point4 P4 = new Point4(X / 2f, -Y / 2f, -Z / 2f);
 
             ///Higher vertices
-            Point4 P5 = new Point4(DimX / 2f, DimY / 2f, DimZ / 2f);
-            Point4 P6 = new Point4(-DimX / 2f, DimY / 2f, DimZ / 2f);
-            Point4 P7 = new Point4(-DimX / 2f, DimY / 2f, -DimZ / 2f);
-            Point4 P8 = new Point4(DimX / 2f, DimY / 2f, -DimZ / 2f);
+            Point4 P5 = new Point4(X / 2f, Y / 2f, Z / 2f);
+            Point4 P6 = new Point4(-X / 2f, Y / 2f, Z / 2f);
+            Point4 P7 = new Point4(-X / 2f, Y / 2f, -Z / 2f);
+            Point4 P8 = new Point4(X / 2f, Y / 2f, -Z / 2f);
 
             ///Front
             Triangles.Add(new Triangle(new Point4(P5), new Point4(P2), new Point4(P1)));
@@ -324,7 +362,7 @@ namespace _3DModelViewer
 
         public Point4 Center { get; set; } = new Point4();
 
-        public Color Color { get; set; } = Color.Brown;
+        public Color Color { get; set; } = Color.PaleVioletRed;
 
         public string DisplayName => $"Cylinder (X:{Center.X.ToString("f2")}, Y:{Center.Y.ToString("f2")}, Z:{Center.Z.ToString("f2")})";
 

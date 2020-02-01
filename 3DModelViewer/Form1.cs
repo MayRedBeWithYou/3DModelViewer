@@ -34,9 +34,9 @@ namespace _3DModelViewer
         public IFigure SelectedFigure { get; set; }
 
         Point4 OC { get; } = new Point4();
-        Point4 OX { get; } = new Point4(5, 0, 0);
-        Point4 OY { get; } = new Point4(0, 5, 0);
-        Point4 OZ { get; } = new Point4(0, 0, 5);
+        Point4 OX { get; } = new Point4(2, 0, 0);
+        Point4 OY { get; } = new Point4(0, 2, 0);
+        Point4 OZ { get; } = new Point4(0, 0, 2);
 
         Timer RefreshTimer = new Timer();
 
@@ -157,21 +157,21 @@ namespace _3DModelViewer
         private void CalculateAndDrawAxes(Matrix PVM)
         {
             Vector4 tmp = PVM * OC.V;
-            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1);
-            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, (tmp.Z + 1) / 2f, 1);
-            Point PVMC = new Point((int)tmp.X, (int)tmp.Y);
+            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1f);
+            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, -(tmp.Z - 1f) / 2f, 1);
+            Point4 PVMC = new Point4(tmp);
             tmp = PVM * OX.V;
-            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1);
-            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, (tmp.Z + 1) / 2f, 1);
-            Point PVMX = new Point((int)tmp.X, (int)tmp.Y);
+            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1f);
+            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, -(tmp.Z - 1f) / 2f, 1);
+            Point4 PVMX = new Point4(tmp);
             tmp = PVM * OY.V;
-            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1);
-            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, (tmp.Z + 1) / 2f, 1);
-            Point PVMY = new Point((int)tmp.X, (int)tmp.Y);
+            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1f);
+            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, -(tmp.Z - 1f) / 2f, 1);
+            Point4 PVMY = new Point4(tmp);
             tmp = PVM * OZ.V;
-            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1);
-            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, (tmp.Z + 1) / 2f, 1);
-            Point PVMZ = new Point((int)tmp.X, (int)tmp.Y);
+            tmp = new Vector4(tmp.X / tmp.W, tmp.Y / tmp.W, tmp.Z / tmp.W, 1f);
+            tmp = new Vector4((tmp.X + 1) * Canvas.Width / 2f, (tmp.Y + 1) * Canvas.Height / 2f, -(tmp.Z - 1f) / 2f, 1);
+            Point4 PVMZ = new Point4(tmp);
             Render.DrawAxes(bitmap, PVMC, PVMX, PVMY, PVMZ);
         }
 
@@ -256,7 +256,8 @@ namespace _3DModelViewer
 
         private void CameraListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedCamera = (Camera)CameraListBox.SelectedItem;
+            if (CameraListBox.SelectedIndex == -1) return;
+            SelectedCamera = Cameras[CameraListBox.SelectedIndex];
             FOVSlider.Value = SelectedCamera.FOV;
             CameraN.Value = (decimal)SelectedCamera.N;
             CameraF.Value = (decimal)SelectedCamera.F;
@@ -375,6 +376,10 @@ namespace _3DModelViewer
                     CuboidRotX.Value = (decimal)(cube.RotX * 180f / Math.PI);
                     CuboidRotY.Value = (decimal)(cube.RotY * 180f / Math.PI);
                     CuboidRotZ.Value = (decimal)(cube.RotZ * 180f / Math.PI);
+
+                    CuboidX.Value = (decimal)cube.X;
+                    CuboidY.Value = (decimal)cube.Y;
+                    CuboidZ.Value = (decimal)cube.Z;
 
                     using (FastBitmap fast = ((Bitmap)CuboidColor.Image).FastLock())
                     {
@@ -531,6 +536,27 @@ namespace _3DModelViewer
             else if (CuboidRotZ.Value == 360) CuboidRotZ.Value = 0;
             Cuboid cube = SelectedFigure as Cuboid;
             cube.RotZ = (float)CuboidRotZ.Value * (float)Math.PI / 180f;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidX_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.X = (float)CuboidX.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidY_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.Y = (float)CuboidY.Value;
+            FigureDataGrid.Refresh();
+        }
+
+        private void CuboidZ_ValueChanged(object sender, EventArgs e)
+        {
+            Cuboid cube = SelectedFigure as Cuboid;
+            cube.Z = (float)CuboidZ.Value;
             FigureDataGrid.Refresh();
         }
 
@@ -889,8 +915,8 @@ namespace _3DModelViewer
 
         private void LightListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Lights.Count == 0) return;
-            SelectedLight = (Light)LightListBox.SelectedItem;
+            if (Lights.Count == 0 || LightListBox.SelectedIndex == -1) return;
+            SelectedLight = Lights[LightListBox.SelectedIndex];
             using (FastBitmap fast = ((Bitmap)LightColor.Image).FastLock())
             {
                 fast.Clear(SelectedLight.Color);

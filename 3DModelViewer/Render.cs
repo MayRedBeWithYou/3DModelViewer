@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using FastBitmapLib;
@@ -33,25 +34,31 @@ namespace _3DModelViewer
 
         private static float[][] Depth;
 
+        private static List<Light> Lights;
+
         public static void Clear(Bitmap bitmap)
         {
             using (FastBitmap fast = bitmap.FastLock())
             {
                 fast.Clear(Color.FromArgb(25, 25, 50));
             }
+            Depth = new float[bitmap.Width][];
+            Depth[0] = new float[bitmap.Height];
+            for (int i = 0; i < bitmap.Height; i++) Depth[0][i] = float.MaxValue;
+            for (int i = 1; i < bitmap.Width; i++)
+            {
+                Depth[i] = new float[bitmap.Height];
+                Array.Copy(Depth[0], 0, Depth[i], 0, bitmap.Height);
+            }
         }
 
-        public static void DrawAxes(Bitmap bitmap, Point center, Point OX, Point OY, Point OZ)
+        public static void DrawAxes(Bitmap bitmap, Point4 center, Point4 OX, Point4 OY, Point4 OZ)
         {
-            using (Graphics g = Graphics.FromImage(bitmap))
+            using (FastBitmap fast = bitmap.FastLock())
             {
-                try
-                {
-                    g.DrawLine(new Pen(Color.Red, 3), center, OX);
-                    g.DrawLine(new Pen(Color.Green, 3), center, OY);
-                    g.DrawLine(new Pen(Color.Blue, 3), center, OZ);
-                }
-                catch { }
+                DrawLine(fast, center, OX, Color.Red);
+                DrawLine(fast, center, OY, Color.Green);
+                DrawLine(fast, center, OZ, Color.Blue);
             }
         }
 
@@ -71,18 +78,7 @@ namespace _3DModelViewer
 
         public static void DrawObjects(Bitmap bitmap, List<RenderInfo> infos, List<Light> lights)
         {
-            if (ZBuffering)
-            {
-                Depth = new float[bitmap.Width][];
-                Depth[0] = new float[bitmap.Height];
-                for (int i = 0; i < bitmap.Height; i++) Depth[0][i] = float.MaxValue;
-                for (int i = 1; i < bitmap.Width; i++)
-                {
-                    Depth[i] = new float[bitmap.Height];
-                    Array.Copy(Depth[0], 0, Depth[i], 0, bitmap.Height);
-                }
-            }
-
+            Lights = lights;
             using (FastBitmap fast = bitmap.FastLock())
             {
                 foreach (RenderInfo info in infos)
@@ -91,7 +87,7 @@ namespace _3DModelViewer
                     {
                         if (FillTriangles)
                         {
-                            FillScanline(fast, t.Points.ToList(), info.color, lights);
+                            FillScanline(fast, t.Points.ToList(), info.color);
                         }
                         else Outlines(fast, t.Points.ToList(), info.color);
                     }
@@ -208,7 +204,7 @@ namespace _3DModelViewer
             }
         }
 
-        public static void FillScanline(FastBitmap fast, List<Point4> points, Color color, List<Light> lights)
+        public static void FillScanline(FastBitmap fast, List<Point4> points, Color color)
         {
             points.Sort((p, r) => p.Y.CompareTo(r.Y));
             Point4 v1 = points[0];
@@ -246,6 +242,11 @@ namespace _3DModelViewer
             int y0 = (int)v0.Y;
             int x1 = (int)v1.X;
             int y1 = (int)v1.Y;
+            float z0 = v0.Z;
+            float z1 = v1.Z;
+            float d = (v1.V - v0.V).Length();
+            float dz = (z1 - z0) / d;
+
             bool steep = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
             if (steep)
             {
@@ -256,6 +257,7 @@ namespace _3DModelViewer
             {
                 Swap(ref x0, ref x1);
                 Swap(ref y0, ref y1);
+                Swap(ref z0, ref z1);
             }
             int dX = (x1 - x0);
             int dY = Math.Abs(y1 - y0);
@@ -268,12 +270,20 @@ namespace _3DModelViewer
                 if (steep)
                 {
                     if (y > 0 && y < fast.Width && x > 0 && x < fast.Height)
-                        fast.SetPixel(y, x, color);
+                        if (z1 <= Depth[y][x])
+                        {
+                            fast.SetPixel(y, x, color);
+                            Depth[y][x] = z1;
+                        }
                 }
                 else
                 {
                     if (y > 0 && y < fast.Height && x > 0 && x < fast.Width)
-                        fast.SetPixel(x, y, color);
+                        if (z1 <= Depth[x][y])
+                        {
+                            fast.SetPixel(x, y, color);
+                            Depth[x][y] = z1;
+                        }
                 }
 
                 err -= dY;
@@ -282,7 +292,7 @@ namespace _3DModelViewer
                     y += ystep;
                     err += dX;
                 }
-
+                z1 += dz;
             }
         }
     }

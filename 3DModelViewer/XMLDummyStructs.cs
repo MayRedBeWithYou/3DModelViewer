@@ -141,6 +141,12 @@ namespace _3DModelViewer
         [XmlIgnore]
         public Color Col;
 
+        public float X;
+
+        public float Y;
+
+        public float Z;
+
         public bool Visibility { get; set; }
 
         public CuboidXML()
@@ -150,6 +156,9 @@ namespace _3DModelViewer
         public CuboidXML(Cuboid c)
         {
             C = c.Center;
+            X = c.X;
+            Y = c.Y;
+            Z = c.Z;
             S = new Point4();
             S.V = c.Scale;
             R = new Point4();

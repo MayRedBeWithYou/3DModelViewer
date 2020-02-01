@@ -215,6 +215,13 @@
             this.sphereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cylinderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.coneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label74 = new System.Windows.Forms.Label();
+            this.CuboidZ = new System.Windows.Forms.NumericUpDown();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.CuboidY = new System.Windows.Forms.NumericUpDown();
+            this.CuboidX = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -327,6 +334,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).BeginInit();
             this.AddFigureMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidX)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -2219,6 +2229,13 @@
             // 
             // CuboidGroupBox
             // 
+            this.CuboidGroupBox.Controls.Add(this.CuboidX);
+            this.CuboidGroupBox.Controls.Add(this.label74);
+            this.CuboidGroupBox.Controls.Add(this.CuboidZ);
+            this.CuboidGroupBox.Controls.Add(this.label75);
+            this.CuboidGroupBox.Controls.Add(this.label76);
+            this.CuboidGroupBox.Controls.Add(this.label77);
+            this.CuboidGroupBox.Controls.Add(this.CuboidY);
             this.CuboidGroupBox.Controls.Add(this.label65);
             this.CuboidGroupBox.Controls.Add(this.CuboidColor);
             this.CuboidGroupBox.Controls.Add(this.label9);
@@ -3157,6 +3174,129 @@
             this.coneToolStripMenuItem.Text = "Cone";
             this.coneToolStripMenuItem.Click += new System.EventHandler(this.coneToolStripMenuItem_Click);
             // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(100, 187);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(14, 13);
+            this.label74.TabIndex = 61;
+            this.label74.Text = "Z";
+            // 
+            // CuboidZ
+            // 
+            this.CuboidZ.DecimalPlaces = 2;
+            this.CuboidZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidZ.Location = new System.Drawing.Point(121, 185);
+            this.CuboidZ.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CuboidZ.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidZ.Name = "CuboidZ";
+            this.CuboidZ.Size = new System.Drawing.Size(53, 20);
+            this.CuboidZ.TabIndex = 60;
+            this.CuboidZ.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidZ.ValueChanged += new System.EventHandler(this.CuboidZ_ValueChanged);
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(100, 159);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(14, 13);
+            this.label75.TabIndex = 59;
+            this.label75.Text = "Y";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(100, 134);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(14, 13);
+            this.label76.TabIndex = 58;
+            this.label76.Text = "X";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(101, 115);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(60, 13);
+            this.label77.TabIndex = 57;
+            this.label77.Text = "Parameters";
+            // 
+            // CuboidY
+            // 
+            this.CuboidY.DecimalPlaces = 2;
+            this.CuboidY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidY.Location = new System.Drawing.Point(121, 157);
+            this.CuboidY.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CuboidY.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidY.Name = "CuboidY";
+            this.CuboidY.Size = new System.Drawing.Size(53, 20);
+            this.CuboidY.TabIndex = 56;
+            this.CuboidY.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CuboidY.ValueChanged += new System.EventHandler(this.CuboidY_ValueChanged);
+            // 
+            // CuboidX
+            // 
+            this.CuboidX.DecimalPlaces = 2;
+            this.CuboidX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidX.Location = new System.Drawing.Point(121, 132);
+            this.CuboidX.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.CuboidX.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.CuboidX.Name = "CuboidX";
+            this.CuboidX.Size = new System.Drawing.Size(53, 20);
+            this.CuboidX.TabIndex = 62;
+            this.CuboidX.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CuboidX.ValueChanged += new System.EventHandler(this.CuboidX_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3292,6 +3432,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpherePosX)).EndInit();
             this.AddFigureMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuboidX)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3484,6 +3627,13 @@
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.PictureBox LightColor;
         private System.Windows.Forms.ListBox LightListBox;
+        private System.Windows.Forms.NumericUpDown CuboidX;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.NumericUpDown CuboidZ;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.NumericUpDown CuboidY;
     }
 }
 

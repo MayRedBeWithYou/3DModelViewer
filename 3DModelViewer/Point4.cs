@@ -54,9 +54,18 @@ namespace _3DModelViewer
             X = A.X;
             Y = A.Y;
             Z = A.Z;
+            W = A.W;
             Normal = new Vector4(A.Normal.X, A.Normal.Y, A.Normal.Z, A.Normal.W);
             Binormal = new Vector4(A.Binormal.X, A.Binormal.Y, A.Binormal.Z, A.Binormal.W);
             Tangent = new Vector4(A.Tangent.X, A.Tangent.Y, A.Tangent.Z, A.Tangent.W);
+        }
+
+        public Point4(Vector4 v)
+        {
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
+            W = v.W;
         }
 
         public void FloorXY()
