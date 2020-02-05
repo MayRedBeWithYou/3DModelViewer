@@ -48,10 +48,10 @@ namespace _3DModelViewer
             bitmap = new Bitmap(Canvas.Width, Canvas.Height);
             Render.Clear(bitmap);
             Canvas.Image = bitmap;
-            Figures.Add(new Cuboid() { Center = new Point4(3, 0, 3) });
-            Figures.Add(new Sphere() { Center = new Point4(-3, 0, -3) });
-            Figures.Add(new Cone() { Center = new Point4(-3, 0, 3) });
-            Figures.Add(new Cylinder() { Center = new Point4(3, 0, -3) });
+            //Figures.Add(new Cuboid() { Center = new Point4(3, 0, 3) });
+            //Figures.Add(new Sphere() { Center = new Point4(-3, 0, -3) });
+            //Figures.Add(new Cone() { Center = new Point4(-3, 0, 3) });
+            //Figures.Add(new Cylinder() { Center = new Point4(3, 0, -3) });
             FigureDataGrid.DataSource = Figures;
 
             SelectedCamera = new Camera();
@@ -202,7 +202,6 @@ namespace _3DModelViewer
                 Vector4 b = SelectedCamera.Binormal;
 
                 SelectedCamera.Position.V -= dx * tan + dy * b;
-                //SelectedCamera.Target.V += dx * tan + dy * b;
                 LastMousePos = new Point(e.X, e.Y);
                 Cameras.ResetBindings();
             }

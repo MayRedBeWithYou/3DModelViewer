@@ -43,7 +43,6 @@
             this.backfaceCullingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zbufferingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perspectiveCorrectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cyrusBeckCullingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -90,9 +89,6 @@
             this.RemoveFigureButton = new System.Windows.Forms.Button();
             this.AddFigureButton = new System.Windows.Forms.Button();
             this.FigureDataGrid = new System.Windows.Forms.DataGridView();
-            this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ConeGroupBox = new System.Windows.Forms.GroupBox();
             this.label66 = new System.Windows.Forms.Label();
             this.ConeColor = new System.Windows.Forms.PictureBox();
@@ -222,6 +218,9 @@
             this.label77 = new System.Windows.Forms.Label();
             this.CuboidY = new System.Windows.Forms.NumericUpDown();
             this.CuboidX = new System.Windows.Forms.NumericUpDown();
+            this.Visibility = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iFigureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -279,7 +278,6 @@
             this.splitContainer7.Panel2.SuspendLayout();
             this.splitContainer7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.ConeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConeRadius)).BeginInit();
@@ -337,6 +335,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CuboidZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -438,8 +437,7 @@
             this.fillTrianglesToolStripMenuItem,
             this.backfaceCullingToolStripMenuItem,
             this.zbufferingToolStripMenuItem,
-            this.perspectiveCorrectionToolStripMenuItem,
-            this.cyrusBeckCullingToolStripMenuItem});
+            this.perspectiveCorrectionToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -477,13 +475,6 @@
             this.perspectiveCorrectionToolStripMenuItem.Name = "perspectiveCorrectionToolStripMenuItem";
             this.perspectiveCorrectionToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.perspectiveCorrectionToolStripMenuItem.Text = "Perspective correction";
-            // 
-            // cyrusBeckCullingToolStripMenuItem
-            // 
-            this.cyrusBeckCullingToolStripMenuItem.Enabled = false;
-            this.cyrusBeckCullingToolStripMenuItem.Name = "cyrusBeckCullingToolStripMenuItem";
-            this.cyrusBeckCullingToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.cyrusBeckCullingToolStripMenuItem.Text = "Cyrus-Beck culling";
             // 
             // Canvas
             // 
@@ -1171,29 +1162,6 @@
             this.FigureDataGrid.Size = new System.Drawing.Size(197, 147);
             this.FigureDataGrid.TabIndex = 1;
             this.FigureDataGrid.SelectionChanged += new System.EventHandler(this.FigureDataGrid_SelectionChanged);
-            // 
-            // Visibility
-            // 
-            this.Visibility.DataPropertyName = "Visibility";
-            this.Visibility.FalseValue = "false";
-            this.Visibility.HeaderText = "Visibility";
-            this.Visibility.Name = "Visibility";
-            this.Visibility.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Visibility.TrueValue = "true";
-            this.Visibility.Width = 25;
-            // 
-            // displayNameDataGridViewTextBoxColumn
-            // 
-            this.displayNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
-            this.displayNameDataGridViewTextBoxColumn.HeaderText = "DisplayName";
-            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
-            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.displayNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // iFigureBindingSource
-            // 
-            this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
             // 
             // ConeGroupBox
             // 
@@ -3297,6 +3265,29 @@
             0});
             this.CuboidX.ValueChanged += new System.EventHandler(this.CuboidX_ValueChanged);
             // 
+            // Visibility
+            // 
+            this.Visibility.DataPropertyName = "Visibility";
+            this.Visibility.FalseValue = "false";
+            this.Visibility.HeaderText = "Visibility";
+            this.Visibility.Name = "Visibility";
+            this.Visibility.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Visibility.TrueValue = "true";
+            this.Visibility.Width = 25;
+            // 
+            // displayNameDataGridViewTextBoxColumn
+            // 
+            this.displayNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.HeaderText = "DisplayName";
+            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
+            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.displayNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // iFigureBindingSource
+            // 
+            this.iFigureBindingSource.DataSource = typeof(_3DModelViewer.IFigure);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3373,7 +3364,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
             this.splitContainer7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FigureDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ConeGroupBox.ResumeLayout(false);
             this.ConeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConeColor)).EndInit();
@@ -3435,6 +3425,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CuboidZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CuboidX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iFigureBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3606,7 +3597,6 @@
         private System.Windows.Forms.NumericUpDown SpherePosX;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ToolStripMenuItem perspectiveCorrectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cyrusBeckCullingToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.SplitContainer splitContainer8;
         private System.Windows.Forms.Button RemoveLightButton;

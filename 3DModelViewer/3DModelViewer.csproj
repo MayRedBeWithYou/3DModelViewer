@@ -95,7 +95,7 @@
     <Compile Include="Render.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="Vector.cs" />
-    <Compile Include="XMLDummyStructs.cs" />
+    <Compile Include="XMLDummies.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,7 +108,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="3DModelViewer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
